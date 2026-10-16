@@ -61,6 +61,7 @@ for folder in (root,root.parent/'tools'):
     for path in folder.rglob('*'):
         if not path.is_file() or path.suffix not in ('.js','.mjs','.py','.html','.json','.webmanifest','.svg','.txt'):continue
         if path == root.parent/'tools/fonts/moul-text.txt':continue
+        if path == root.parent/'tools/km_review.json': continue  # review sheet quotes km.json strings for native reviewers
         if path in generated or root/'i18n' in path.parents or root/'js/vendor' in path.parents or root/'r' in path.parents or root/'d' in path.parents:continue
         if re.search(r'[\u1780-\u17ff]',path.read_text()):violations.append(str(path))
 assert not violations, 'Embedded Khmer outside i18n: '+', '.join(violations)

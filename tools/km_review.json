@@ -12,5 +12,61 @@
   ],
   "verbatim_from_marketer": [
     "quiz.r.kralan.blurb"
+  ],
+  "needs_native_review_2026_10_16": [
+    {
+      "key": "quiz.q4",
+      "km": "ក្នុងក្រុមជជែក អ្នកជាអ្នក…",
+      "en": "In the group chat, you're the one who…",
+      "context": "Quiz question 4. 'ក្រុមជជែក' chosen to replace the English 'group chat'. Is it natural, or would young users say ក្រុមឆាត / group chat?"
+    },
+    {
+      "key": "quiz.q4.a",
+      "km": "ផ្ញើរូបកំប្លែងមុនគេ",
+      "en": "Sends the first meme",
+      "context": "Answer to question 4. 'រូបកំប្លែង' (funny picture) replaces the English 'meme'."
+    },
+    {
+      "key": "holiday.citation",
+      "km": "អនុក្រឹត្យលេខ ១៦៧/១៩៨ អនក្រ.បក",
+      "en": "Sub-Decree 167/198 ANKr.BK",
+      "context": "Home page source link for the official holiday list (Sub-Decree PDF on nis.gov.kh). Check the official Khmer form of the number/abbreviation; '167/198' was copied from the English label and may be wrong."
+    },
+    {
+      "key": "ui.today.18",
+      "km": "ចុចចែករំលែក ⎋ រួចជ្រើស «បន្ថែមទៅអេក្រង់ដើម»",
+      "en": "Tap Share ⎋ then 'Add to Home Screen'",
+      "context": "iPhone-only hint for adding the site to the home screen. The quoted label should match the iOS Khmer menu item."
+    },
+    {
+      "key": "privacy.gcLink",
+      "km": "គោលការណ៍ឯកជនភាពរបស់ GoatCounter",
+      "en": "GoatCounter privacy",
+      "context": "Privacy page link to GoatCounter's privacy policy."
+    },
+    {
+      "key": "result.playAgain",
+      "km": "លេងម្តងទៀត",
+      "en": "Take the quiz again",
+      "context": "Secondary button on every quiz result page to retake the quiz."
+    },
+    {
+      "key": "result.saveStory",
+      "km": "រក្សាទុករូបភាព",
+      "en": "Save story image",
+      "context": "Result page button that saves or shares the 1080x1350 story image."
+    },
+    {
+      "key": "card.didYouKnow",
+      "km": "ដឹងទេ?",
+      "en": "Did you know?",
+      "context": "Label above the dish fact box on the result page."
+    },
+    {
+      "key": "result.storySaved",
+      "km": "បានរក្សាទុក!",
+      "en": "Saved!",
+      "context": "Short toast after the story image is saved or shared."
+    }
   ]
 }

@@ -30,7 +30,9 @@ function render() {
   document.querySelector('#telegram').href='https://t.me/share/url?'+new URLSearchParams({url:shareURL.href,text});
   document.querySelector('#native-share').textContent = local(result.cta || 'quiz.shareButton');
   document.querySelector('#copy-link').textContent = tr('ui.result.3');
-  document.querySelector('#retake').textContent = tr('ui.result.4');
+  document.querySelector('#retake').textContent = t('result.playAgain');
+  // Toasts belong to the language they were shown in: clear them on every (re)render / toggle.
+  for (const sel of ['#feedback', '#story-feedback']) { const n = document.querySelector(sel); if (n) n.textContent = ''; }
   const friend = results.find(item => item.id === vs && item.id !== id);
   const comparison = document.querySelector('#comparison');
   comparison.hidden = !friend;
