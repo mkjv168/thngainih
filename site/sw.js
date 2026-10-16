@@ -1,4 +1,4 @@
-const CACHE = 'v12-thngai-nih';
+const CACHE = 'v13-thngai-nih';
 const SHELL = ['./privacy/', './privacy/index.html', './js/privacy.js', './js/day.js', './js/lib/locale.js', './', './index.html', './quiz/', './quiz/index.html', './js/vendor/momentkh.js', './js/lib/khmercal.js', './js/modules/today.js', './data/holidays.json', './data/day-colors.json', './styles.css', './js/config.js', './js/app.js', './js/i18n.js', './js/analytics.js', './js/source.js', './js/modules/quiz.js', './js/modules/content.js', './js/result.js', './quiz/quiz.json', './r/index.json', './i18n/en.json', './i18n/km.json', './assets/fonts/inter-latin-var.woff2', './assets/fonts/kantumruy-khmer-var.woff2', './manifest.webmanifest', './favicon.svg', './icon-192.png', './icon-512.png', './icon-maskable-512.png', './apple-touch-icon.png', './assets/fonts/moul-subset.woff2', './assets/orn/kbach-border.svg', './assets/orn/kbach-divider.svg', './assets/orn/kbach-corner.svg', './assets/orn/kbach-frame.svg', './assets/orn/kbach-flame.svg'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL.map(url => new Request(url, {cache: 'reload'}))) /* bypass the HTTP cache so a new version never precaches stale files */));
@@ -25,7 +25,13 @@ self.addEventListener('fetch', event => {
       return cached || await update;
     }
     if (event.request.mode === 'navigate') {
-      try { return await network(); }
+      try {
+        const response = await fetch(event.request);
+        // Real pages are cached; a 404 is returned as-is so the 404 page (not a cached home page at a bogus URL) is shown.
+        if (response.ok) await cache.put(event.request, response.clone());
+        if (response.ok || response.status === 404) return response;
+        throw new Error('Navigation failed');
+      }
       catch {
         const exact = await cache.match(event.request, {ignoreSearch:true});
         const quiz = url.pathname.startsWith(new URL('quiz/',self.registration.scope).pathname);
