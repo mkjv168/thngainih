@@ -6,8 +6,8 @@
   "start_url": "/thngainih/?src=pwa",
   "scope": "/thngainih/",
   "display": "standalone",
-  "background_color": "#f5f4ed",
-  "theme_color": "#123d35",
+  "background_color": "#FBF6EC",
+  "theme_color": "#FBF6EC",
   "icons": [
     {
       "src": "./icon-192.png",

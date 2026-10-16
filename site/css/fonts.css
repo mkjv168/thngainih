@@ -1,5 +1,3 @@
 @font-face{font-family:Inter;src:url('./assets/fonts/inter-latin-var.woff2') format('woff2');font-weight:400 800;font-display:swap;unicode-range:U+0000-00FF,U+0100-024F,U+1E00-1EFF,U+2000-206F,U+20A0-20CF,U+2122,U+2190-21FF}
-@font-face{font-family:'Kantumruy Pro';src:url('./assets/fonts/kantumruy-khmer-var.woff2') format('woff2');font-weight:400 700;font-display:swap;unicode-range:U+1780-17FF,U+19E0-19FF,U+200B-200D,U+25CC}
-/* Inactive self-hosted Khmer font slots. URLs resolve from site/styles.css. */
-@font-face{font-family:'Thngai KM Display';src:url('./assets/fonts/km-display.woff2') format('woff2');font-weight:400 700;font-display:swap;unicode-range:U+1780-17FF,U+19E0-19FF,U+200B-200D,U+25CC}
-@font-face{font-family:'Thngai KM Body';src:url('./assets/fonts/km-body.woff2') format('woff2');font-weight:400 700;font-display:swap;unicode-range:U+1780-17FF,U+19E0-19FF,U+200B-200D,U+25CC}
+@font-face{font-family:'Kantumruy Pro';src:url('./assets/fonts/kantumruy-khmer-var.woff2') format('woff2');font-weight:100 700;font-display:swap;unicode-range:U+1780-17FF,U+19E0-19FF,U+200B-200D,U+25CC}
+@font-face{font-family:Moul;src:url('./assets/fonts/moul-subset.woff2') format('woff2');font-weight:400;font-display:swap}

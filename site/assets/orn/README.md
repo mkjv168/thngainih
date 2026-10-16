@@ -1,0 +1,1 @@
+Silk & Kbach single-colour SVG masks: kbach-border (repeating strip), kbach-frame (nine-slice frame), kbach-corner, kbach-divider and kbach-flame (quiz pips). CSS URLs resolve from site/styles.css. Gold on silk; accent on cream.

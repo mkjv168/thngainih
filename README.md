@@ -72,13 +72,8 @@ The initial source-asset ceiling is **190,000 bytes** (previously 170,000); the 
 
 ## Reskin
 
-Edit `site/css/theme.css` for palette, typography, spacing, borders, shadows, ornament and meta-colour tokens. Edit `site/css/fonts.css` for self-hosted faces. The inactive Khmer slots are activated by prepending `'Thngai KM Body',` to `--font-body-khmer` and `'Thngai KM Display',` to `--font-display-khmer`, after adding the files. Subset a display font with:
+Edit `site/css/theme.css` for the light Silk & Kbach palette and typography tokens, and `site/css/layout.css` for page layouts. `tools/build_css.py` concatenates these with `site/css/fonts.css` into `site/styles.css`; URLs resolve from `site/`. Moul is reserved for fixed Khmer display strings, weight 400 with no synthesis. Run `python3 tools/build_moul.py` after adding a display string. It combines the i18n display strings and designer character inventory, writes `tools/fonts/moul-text.txt`, and subsets the local OFL font. Ornaments are CSS masks in `site/assets/orn/`; see its README.
 
-```sh
-pyftsubset in.ttf --unicodes=U+1780-17FF,U+19E0-19FF,U+200B-200D,U+25CC --flavor=woff2 --layout-features='*' --output-file=site/assets/fonts/km-display.woff2
-```
-
-Use the same command with `km-body.woff2` for the body slot. Ornament filenames are documented in `site/assets/ornaments/README.md`; activate their URLs in the theme tokens. Edit `site/css/layout.css` for layout rules; its opening comment lists the semantic hooks. `tools/build_css.py` concatenates `CSS_ORDER` into the single generated `site/styles.css`; add extra CSS files to that constant when needed. Font and ornament URLs resolve from `site/`, not `site/css/`.
 
 ```sh
 python3 tools/build.py
@@ -91,6 +86,8 @@ tools/bump-sw.sh
 
 ## Cards
 
-Edit `tools/cards.json` to change card palettes, fonts (including display slots), background/ornament images, dish image boxes and ordered elements. Image paths are relative to the repo root; ornaments use a `path` and `[x, y, width, height]` box. Text supports field placeholders or i18n keys through `{"local": "key", "lang": "km"}`; keep Khmer copy in `site/i18n/km.json`. Drop dish photos at `site/assets/dishes/<id>.png` to replace monogram fallbacks with rounded, cover-fitted photos.
+Share PNGs use Pillow + RAQM only: `tools/cardlib.py` draws the Silk & Kbach layouts in `tools/cards.json`. Dish and weekday palettes come from the site JSON data. Khmer strings stay in i18n; Moul is used for display, Kantumruy Pro for Khmer UI, and Inter for Latin, with variable weights and TTF cmap coverage checks. Text fits down in 4px steps to a 60% floor; display line boxes reserve at least 1.5 times the font size.
 
-Run `python3 tools/build.py && python3 tools/build_daily.py`, then `python3 tools/preview_cards.py`. Check `/tmp/cards-preview.png` and `/tmp/stories-preview.png`. Result folders include 1080×1350 `story.png` cards; HTML continues to use the OG cards.
+Ornaments are gold-tinted alpha masks, with a nine-slice frame; dish art is transparent PNG. After changing source SVGs, run `tools/rasterize_card_assets.sh` locally (requires `rsvg-convert`) and include `tools/card-assets/` in the change. CI uses those checked-in PNGs and needs no SVG renderer or browser. Silk gradients and medallions are drawn with Pillow. If available, pngquant runs with quality 70–90, speed 1, and stripped metadata; otherwise optimized Pillow PNGs are retained. Files are published atomically.
+
+Run `python3 tools/build.py && python3 tools/build_daily.py && python3 tools/preview_cards.py`. Inspect `/tmp/cards-preview.png`, `/tmp/stories-preview.png`, and `/tmp/daily-cards-preview.png`. Pass `--references /workspace/startup24/design/png` to also generate side-by-side reference comparisons. OG cards are 1200×630 and story cards are 1080×1350. No network or browser is used.

@@ -12,20 +12,24 @@
 <link rel="stylesheet" href="../../styles.css"><link rel="icon" href="../../favicon.svg">
 <script src="../../js/config.js" defer></script><script type="module" src="../../js/result.js"></script>
 </head><body>
-<header class="container"><a class="brand" href="../../">$site_name</a><button id="language-toggle" type="button" aria-pressed="false">{{km:html.templates.result.1}}</button></header>
-<main class="container result" data-result="$id">
-<p class="emoji result-emoji" aria-hidden="true">$emoji</p>
-<h1 class="names result-names"><span lang="en" class="current" data-name="en">$name_en</span><span lang="km" data-name="km">$name_km</span></h1>
-<p id="tagline" class="result-tagline">$tagline</p><p id="description" class="result-fact">$description</p><p id="comparison" hidden></p>
-<img class="result-card" src="og.png" width="1200" height="630" alt="$alt">
-<p data-i18n="result.saveHint" id="save-hint">{{km:html.templates.result.2}}</p>
-<div class="actions result-share">
-<button data-i18n="quiz.shareButton" id="native-share" hidden>Share</button>
-<a id="facebook" data-channel="facebook" target="_blank" rel="noopener" href="$facebook">Facebook</a>
-<a id="messenger" data-channel="messenger" hidden href="fb-messenger://share/?link=$encoded">Messenger</a>
-<a id="telegram" data-channel="telegram" target="_blank" rel="noopener" href="$telegram">Telegram</a>
-<button id="copy-link">Copy link</button>
+<header class="container"><a class="brand" href="../../"><span class="mark" data-logo data-i18n="name">{{km:name}}</span></a><button id="language-toggle" type="button" aria-pressed="false" data-i18n-attr="aria-label:toggleLabel">{{km:html.templates.result.1}}</button></header>
+<a class="skip" href="#content" data-i18n="skip">Skip to content</a>
+<main id="content" class="container result" data-result="$id">
+<div class="result-card silk" style="$silk_style">
+<div class="band t orn orn-border"></div><div class="band b orn orn-border"></div><div class="frame"></div>
+<div class="result-in"><div class="result-kicker" data-i18n="quiz.title">{{en:quiz.title}}</div>
+<div class="medallion"><div class="ring"></div><img src="../../assets/dish/$id.svg" width="134" height="134" alt=""></div>
+<div class="result-iam" lang="km">{{km:card.iam}}</div>
+<h1 class="result-name" lang="km">$name_km</h1><div class="result-en" lang="en">$name_en</div>
+</div></div>
+<a id="save-story" href="story.png" download="thngainih-$id-story.png" data-i18n="result.saveStory">{{en:result.saveStory}}</a><p id="story-feedback" class="feedback" role="status"></p>
+<p id="tagline" class="result-body">$tagline</p>
+<div class="result-fact"><div class="t13" data-i18n="card.didYouKnow">{{en:card.didYouKnow}}</div><p id="description">$description</p></div><p id="comparison" hidden></p>
+<div class="result-actions result-share">
+<button class="primary" data-i18n="quiz.shareButton" id="native-share">Share</button>
+<div class="row"><a id="telegram" data-channel="telegram" target="_blank" rel="noopener" href="$telegram">Telegram</a><a id="facebook" data-channel="facebook" target="_blank" rel="noopener" href="$facebook">Facebook</a><button id="copy-link">Copy link</button><a id="messenger" data-channel="messenger" hidden href="fb-messenger://share/?link=$encoded">Messenger</a></div>
 </div><p class="feedback" id="feedback" role="status"></p>
-<a class="primary result-retake" id="retake" href="../../quiz/">{{en:html.templates.result.3}}</a>
-<p><a class="primary" data-i18n="quiz.bridge" id="today-link" href="../../">{{en:quiz.bridge}}</a></p>
-</main><footer class="container"><a href="../../privacy/" data-i18n="privacy">Privacy</a></footer></body></html>
+<div class="orn orn-divider rule"></div>
+<a data-i18n="quiz.bridge" id="today-link" href="../../">{{en:quiz.bridge}}</a>
+<a id="retake" href="../../quiz/">{{en:html.templates.result.3}}</a>
+</main><footer class="container"><p data-i18n="quiz.footer">{{en:quiz.footer}}</p><a href="../../privacy/" data-i18n="privacy">Privacy</a></footer></body></html>

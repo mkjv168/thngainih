@@ -9,6 +9,8 @@ export function chooseWinner(quiz,answers) {
   }
   return tied[0];
 }
+import {km} from '../lib/locale.js';
+const khmerDigits=n=>String(n).replace(/\d/g,d=>km['static.khmercal.3'][Number(d)]);
 const base = new URL('../../', import.meta.url);
 export async function mount(root, {t,getLang, onLangChange, track, source}) {
   const tr=(key,...args)=>t(key).replace(/\{(\d+)\}/g,(_,i)=>args[i]);
@@ -48,17 +50,24 @@ export async function mount(root, {t,getLang, onLangChange, track, source}) {
       button(local(quiz.start || 'quiz.start'), () => { track('quiz_started'); step = 0; render(true); }, true);
     } else {
       const question = quiz.questions[step];
-      root.append(el('p', `${step + 1} / ${quiz.questions.length}`,'quiz-counter'));
-      const progress = document.createElement('progress'); progress.className='quiz-progress'; progress.max = quiz.questions.length; progress.value = step + 1;
-      progress.setAttribute('aria-label', tr('ui.quiz.3')); root.append(progress);
-      root.append(el('h2', local(question.text),'quiz-question'));
-      question.answers.forEach(answer => button(local(answer.text), () => {
-        answers[step] = answer;
-        if (step + 1 === quiz.questions.length) finish();
-        else { step++; render(true); }
-      }));
-      button(tr('ui.quiz.4'), () => { step--; render(true); }, false, 'quiz-back');
+      const progress=el('div','','quiz-progress');const pips=el('div','','pips');
+      for(let i=0;i<quiz.questions.length;i++)pips.append(el('i','',i<=step?'on':''));
+      pips.setAttribute('role','progressbar');pips.setAttribute('aria-valuemin','0');pips.setAttribute('aria-valuemax',quiz.questions.length);pips.setAttribute('aria-valuenow',step+1);pips.setAttribute('aria-label',tr('ui.quiz.3'));
+      const number=n=>getLang()==='km'?khmerDigits(n):n;
+      const back=el('button','← '+tr('ui.quiz.4'),'quiz-back');back.type='button';back.onclick=()=>{if(!busy){step--;render(true);}};
+      progress.append(pips,el('span',`${number(step+1)} / ${number(quiz.questions.length)}`,'t13 quiz-counter'),back);root.append(progress);
+      root.append(el('h2',local(question.text),'quiz-question t24'));
+      const list=el('div','','quiz-answers');root.append(list);
+      question.answers.forEach((answer,index)=>{
+        const option=el('button','','answer quiz-option');option.type='button';
+        option.append(el('span',km['quiz.letters'][index],'letter'),el('span',local(answer.text),'t17'));
+        option.onclick=()=>{
+          if(busy)return;busy=true;option.classList.add('selected');option.setAttribute('aria-pressed','true');
+          setTimeout(()=>{answers[step]=answer;busy=false;if(step+1===quiz.questions.length)finish();else{step++;render(true);}},250);
+        };list.append(option);
+      });
     }
+    root.append(el('div','','orn orn-divider rule'),el('p',t('quiz.footer'),'quiz-hint t13'));
     const heading = root.querySelector('h1,h2');
     if (focus && heading) { heading.tabIndex = -1; heading.focus(); }
   }

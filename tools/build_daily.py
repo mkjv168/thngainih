@@ -29,17 +29,21 @@ def holiday_line(record,lang='en'):
     return text+(' · '+local(h['note'],lang) if h.get('note') else '')
 
 def render(path, record, base):
-    fields = dict(stripe=record['colour']['hex'] if record else 'accent',
-                  heading=local('name')+' / '+local('name','km'),
-                  brand_km=local('name','km'), features_en=local('daily.features'),
-                  features_km=local('daily.features','km'),
-                  footer=urlsplit(base).netloc+urlsplit(base).path.rstrip('/')+' · '+local('name')+' / '+local('name','km'))
+    weekdays = json.loads((SITE/'data/day-colors.json').read_text())['weekdays']
+    dow = (date.fromisoformat(record['date']).weekday()+1)%7 if record else 5
+    palette = weekdays[dow]
+    fields = dict(url=urlsplit(base).netloc+urlsplit(base).path.rstrip('/'),
+                  features_en=local('daily.features','en'), features_km=local('daily.features','km'))
+    fields.update({key: palette[key] for key in ('silk', 'sheen', 'deep', 'fg', 'gold')})
     if record:
-        fields.update(formatted_km=record['formattedKm'], gregorian_en=record['gregorianEn'],
-                      gregorian_km=record['gregorianKm'], is_sil=record['isSil'],
-                      sil_label=local('static.build_daily.2','km'),
-                      colour_label=local('colour.label')+': '+local(record['colour']['color'])+' / '+local(record['colour']['color'],'km'),
-                      holiday=holiday_line(record))
+        digits = ''.join(chr(0x17e0+i) for i in range(10))
+        day = str(date.fromisoformat(record['date']).day).translate(str.maketrans('0123456789', digits))
+        gregorian = record['gregorianKm']
+        month_year = gregorian.split(day, 1)[-1].strip(' ,')
+        fields.update(dow=dow, day=day, month_year=month_year,
+                      weekday=local(palette['day'],'km'), formatted_km=record['formattedKm'],
+                      colour_short=local(palette['colorShort'],'km'), is_sil=record['isSil'],
+                      sil_label=local('static.build_daily.2','km'))
     render_card('daily_og' if record else 'default_og', fields, path)
 
 def build():

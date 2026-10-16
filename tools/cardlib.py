@@ -1,142 +1,179 @@
-"""Shared RAQM font fitting; quiz rendering retains its original metrics."""
+"""Offline Silk & Kbach cards: Pillow/RAQM only; declarative CSS-like flow."""
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont, ImageOps, ImageColor
-import json
 from functools import lru_cache
+import json
+import math
+import shutil
+import struct
+import subprocess
+import tempfile
+import os
+from PIL import Image, ImageDraw, ImageFont, ImageColor, ImageOps
 
 ROOT = Path(__file__).resolve().parent.parent
-FONTS = Path(__file__).resolve().parent / "fonts"
+ASSETS = ROOT / 'tools/card-assets'
 
-def font(size, bold=False, path=None):
-    return ImageFont.truetype(str(ROOT / path if path else FONTS / ('NotoSansKhmer-Bold.ttf' if bold else 'NotoSansKhmer-Regular.ttf')), size, layout_engine=ImageFont.Layout.RAQM)
+@lru_cache(None)
+def cmap(path):
+    """Read Unicode cmap formats 4/12 without an extra CI dependency."""
+    data = (ROOT / path).read_bytes()
+    u16 = lambda p: struct.unpack_from('>H', data, p)[0]
+    u32 = lambda p: struct.unpack_from('>I', data, p)[0]
+    table = next(u32(p+8) for p in range(12, 12+16*u16(4), 16) if data[p:p+4] == b'cmap')
+    chars = set()
+    for p in range(table+4, table+4+8*u16(table+2), 8):
+        sub = table+u32(p+4)
+        if u16(sub) == 12:
+            for q in range(sub+16, sub+16+12*u32(sub+12), 12):
+                start, end, glyph = struct.unpack_from('>III', data, q)
+                chars.update(c for c in range(start, end+1) if glyph+c-start)
+        elif u16(sub) == 4:
+            n = u16(sub+6)//2
+            for i in range(n):
+                end, start = u16(sub+14+2*i), u16(sub+16+2*n+2*i)
+                delta = u16(sub+16+4*n+2*i)
+                offpos = sub+16+6*n+2*i
+                off = u16(offpos)
+                for c in range(start, min(end, 65534)+1):
+                    glyph = u16(offpos+off+2*(c-start)) if off else c
+                    if glyph and (glyph+delta)%65536: chars.add(c)
+    return chars
 
-def wrap(draw, text, face, width, language):
-    # Prefer spaces; Khmer names may have no spaces, so shrink before wrapping clusters.
-    lines, line = [], ''
-    for word in text.split():
-        candidate = (line + ' ' + word).strip()
-        if line and draw.textlength(candidate, font=face, language=language) > width:
-            lines.append(line)
-            line = word
-        else:
-            line = candidate
-    return lines + [line]
+@lru_cache(None)
+def font(path, size, weight=400):
+    face = ImageFont.truetype(str(ROOT/path), size, layout_engine=ImageFont.Layout.RAQM)
+    axes = face.get_variation_axes() if 'Moul' not in path else []
+    if axes:
+        face.set_variation_by_axes([weight if a['name'] == b'Weight' else a['default'] for a in axes])
+    return face
 
-def fitted(draw, text, size, width, language, bold=False, max_lines=2, font_path=None, min_size=18):
-    for value in range(size, min_size - 1, -1):
-        face = font(value, bold, font_path)
-        lines = wrap(draw, text, face, width, language)
-        if len(lines) <= max_lines and all(draw.textlength(line, font=face, language=language) <= width for line in lines):
-            return face, lines, value
-    raise ValueError('Text cannot fit safely: ' + text)
-
-
-
-@lru_cache(maxsize=1)
+@lru_cache(None)
 def layouts():
-    """Read the declarative layouts once per build process."""
-    return json.loads((ROOT / 'tools/cards.json').read_text())
+    return json.loads((ROOT/'tools/cards.json').read_text())
+
+@lru_cache(None)
+def asset(name):
+    return Image.open(ASSETS/name).convert('RGBA')
+
+@lru_cache(None)
+def silk(size, deep, main, sheen):
+    w,h=size
+    dx,dy=math.sin(math.radians(118)), -math.cos(math.radians(118))
+    length=w*dx+h*dy
+    stops=[(-.1,deep),(.3,main),(.48,sheen),(.64,main),(1.2,deep)]
+    stops=[(p,ImageColor.getrgb(c)) for p,c in stops]
+    colors=[]
+    for i in range(4096):
+        t=i/4095
+        a,b=next((a,b) for a,b in zip(stops,stops[1:]) if a[0]<=t<=b[0])
+        f=(t-a[0])/(b[0]-a[0]); colors.append(tuple(round(x+(y-x)*f) for x,y in zip(a[1],b[1])))
+    lut=Image.new('RGB',(4096,1));lut.putdata(colors)
+    im=lut.transform(size,Image.Transform.AFFINE,(4095*dx/length,4095*dy/length,0,0,0,0),Image.Resampling.BILINEAR)
+    weave=Image.new('RGBA',size); d=ImageDraw.Draw(weave)
+    for x in range(0,w,3): d.line((x,0,x,h),fill=(255,255,255,9))
+    return Image.alpha_composite(im.convert('RGBA'),weave).convert('RGB')
+
+@lru_cache(None)
+def radial(size, story):
+    im=Image.new('RGBA',(size,size)); pixels=[]
+    for y in range(size):
+        for x in range(size):
+            if math.hypot(x-size/2,y-size/2)>size/2: pixels.append((0,0,0,0));continue
+            t=min(1,math.hypot(x-size*.5,y-size*.42)/(math.hypot(size*.5,size*.58)*.7))
+            white=(.24 if story else .22)*(1-t)
+            black=(.20 if story else .18)*t
+            alpha=white+black
+            color=round(255*white/alpha)
+            pixels.append((color,color,color,round(alpha*255)))
+    im.putdata(pixels);return im
+
+
+@lru_cache(None)
+def ring_mask(size, outer, inner):
+    scale = 3
+    mask = Image.new('L', (size*scale, size*scale))
+    painter = ImageDraw.Draw(mask)
+    for inset, width in [(0, outer), (outer, inner)]:
+        lo = inset*scale
+        hi = (size-inset)*scale-1
+        painter.ellipse((lo, lo, hi, hi), outline=255, width=width*scale)
+    return mask.resize((size, size), Image.Resampling.LANCZOS)
 
 
 def render_card(layout_name, fields, out_path):
-    """Draw a layout in order; all coordinates and styling live in cards.json.
-
-    Image layers precede elements. Dish fallbacks occupy the same layer as a
-    photo. Colours resolve palette names or field templates; text may also use
-    an i18n key via {"local": "key", "lang": "km"} instead of a template.
-    """
     from siteconfig import local
-    layout = layouts()[layout_name]
-    palette = layout['palette']
-
-    def value(item):
-        if item is None:
-            return None
-        item = item.format_map(fields)
-        return palette.get(item, item)
-
-    background = layout['background']
-    if 'from' in background:
-        rgb = ImageColor.getrgb(fields[background['from']])
-        def luminance(colour):
-            def linear(x):
-                x /= 255
-                return x / 12.92 if x <= .04045 else ((x + .055) / 1.055) ** 2.4
-            return sum(w * linear(c) for w, c in zip((.2126, .7152, .0722), colour))
-        target = luminance(ImageColor.getrgb(value(background['min_contrast_vs'])))
-        while ((max(target, luminance(rgb)) + .05) /
-               (min(target, luminance(rgb)) + .05)) < background['ratio']:
-            darker = tuple(int(c * background['darken_step']) for c in rgb)
-            if darker == rgb:
-                raise ValueError('Background cannot reach requested contrast')
-            rgb = darker
-        colour = rgb
-    else:
-        colour = value(background['colour'])
-    im = Image.new('RGB', tuple(layout['size']), colour)
-
-    def paste_image(path, box, radius=0, cover=True):
-        x, y, w, h = box
-        with Image.open(ROOT / path) as source:
-            source = source.convert('RGBA')
-            source = (ImageOps.fit(source, (w, h)) if cover else source.resize((w, h)))
-            if radius:
-                mask = Image.new('L', (w, h))
-                ImageDraw.Draw(mask).rounded_rectangle((0, 0, w-1, h-1), radius=radius, fill=255)
-                from PIL import ImageChops
-                source.putalpha(ImageChops.multiply(source.getchannel('A'), mask))
-            im.paste(source, (x, y), source)
-
-    if layout.get('background_image'):
-        paste_image(value(layout['background_image']), (0, 0, *im.size))
-    ornament = layout.get('ornament_image')
-    if ornament:
-        paste_image(value(ornament['path']), ornament['box'], cover=False)
-    draw = ImageDraw.Draw(im)
-
-    def element(item):
-        if item.get('if') and not fields.get(item['if']):
-            return
-        kind = item['type']
-        if kind == 'text':
-            content = item.get('text', '')
-            content = (local(content['local'], content.get('lang', item.get('lang', 'en')))
-                       if isinstance(content, dict) else content.format_map(fields))
-            style = item.get('font', 'bold' if item.get('bold') else 'regular')
-            path = layout['fonts'][style]
-            size = item['size']
-            lang = item.get('lang', 'en')
-            if 'width' in item:
-                face, lines, size = fitted(draw, content, size, item['width'], lang,
-                                          max_lines=item.get('max_lines', 2), font_path=path,
-                                          min_size=layout['fonts'].get('min_size', 18))
-            else:
-                face, lines = font(size, path=path), [content]
-            y = item['y']
-            for line in lines:
-                draw.text((item['x'], y), line, font=face, fill=value(item.get('fill')),
-                          language=lang, anchor=item.get('anchor', 'lt'))
-                y += int(size * item.get('line_height', 1.5))
-        elif kind in ('rect', 'rounded_rect'):
-            options = dict(fill=value(item.get('fill')), outline=value(item.get('outline')),
-                           width=item.get('width', 1))
-            if kind == 'rounded_rect':
-                draw.rounded_rectangle(item['box'], radius=item.get('radius', 0), **options)
-            else:
-                draw.rectangle(item['box'], **options)
-        elif kind == 'line':
-            draw.line(item['xy'], fill=value(item.get('fill')), width=item.get('width', 1))
-        else:
-            raise ValueError('Unknown card element: ' + kind)
-
-    dish = layout.get('dish_image')
-    if dish:
-        path = value(dish['source'])
-        if (ROOT / path).is_file():
-            paste_image(path, tuple(dish[k] for k in ('x', 'y', 'w', 'h')), dish.get('radius', 0))
-        else:
-            for item in dish.get('fallback', []):
-                element(item)
+    layout=layouts()[layout_name]; w,h=layout['size']
+    im=silk((w,h),fields['deep'],fields['silk'],fields['sheen']).copy()
+    draw=ImageDraw.Draw(im); fg=fields['fg'];gold=fields['gold']
+    def mask(source,xy): im.paste(gold,xy,source.getchannel('A'))
+    def text(item,y=None):
+        content=item.get('text','')
+        content=local(content['local'],item.get('lang','km')) if isinstance(content,dict) else content.format_map(fields)
+        path=layout['fonts'][item.get('font','ui')];size=item['size'];lang=item.get('lang','km')
+        missing=[c for c in content if not c.isspace() and ord(c) not in cmap(path)]
+        if missing: raise ValueError(f'Missing glyphs in {path}: {missing!r}')
+        face=font(path,size,item.get('weight',400))
+        while item.get('width') and draw.textlength(content,font=face,language=lang)>item['width'] and size-4>=item['size']*.6:
+            size-=4;face=font(path,size,item.get('weight',400))
+        if item.get('width') and draw.textlength(content,font=face,language=lang)>item['width']: raise ValueError('Card text exceeds fit floor: '+content)
+        # Centre glyphs in the CSS line box using font ascent/descent metrics.
+        height=size*item.get('lh',1.6); ascent,descent=face.getmetrics()
+        baseline=(y if y is not None else item['y'])+(height-ascent-descent)/2+ascent
+        draw.text((item.get('x',w/2),baseline),content,font=face,fill=tuple(round(a*item.get('opacity',1)+b*(1-item.get('opacity',1))) for a,b in zip(ImageColor.getrgb(fg),im.getpixel((int(item.get('x',w/2)),min(h-1,max(0,int(baseline))))))),language=lang,anchor='ms' if item.get('center') else 'ls',stroke_width=0)
+        return height
+    def divider(item,y): mask(asset('divider-'+str(item['width'])+'.png'),(item.get('x',(w-item['width'])//2),round(y)))
     for item in layout['elements']:
-        element(item)
-    im.save(out_path, optimize=True)
+        kind=item['type']
+        if kind=='orn_strip':
+            strip=asset(f"border-{item['height']}.png")
+            for x in range(0,w,strip.width):
+                mask(strip,(x,0));mask(ImageOps.flip(strip),(x,h-strip.height))
+        elif kind=='orn_frame':
+            s=item['width']; inset=item['inset']; src=asset(f'frame-{s*3}.png');tw,th=w-inset*2,h-inset*2
+            for row in range(3):
+                for col in range(3):
+                    if row==col==1: continue
+                    ww=s if col!=1 else tw-2*s;hh=s if row!=1 else th-2*s
+                    tile=src.crop((col*s,row*s,(col+1)*s,(row+1)*s)).resize((ww,hh))
+                    mask(tile,(inset+[0,s,tw-s][col],inset+[0,s,th-s][row]))
+        elif kind=='medallion':
+            x,y=item['x'],item['y'];s=item['size'];im.paste(radial(s,layout_name=='quiz_story'),(x,y),radial(s,layout_name=='quiz_story'))
+            im.paste(gold, (x,y), ring_mask(s,item['ring_width'],item['inner_width']))
+            if item.get('dish'):
+                art=asset(fields['id']+'.png');im.paste(art,(x+50,y+40),art)
+        elif kind=='text': text(item)
+        elif kind=='flow':
+            y=item['y']
+            for child in item['children']:
+                y+=child.get('mt',0)
+                if child['type']=='text': y+=text(child,y)
+                elif child['type']=='orn_divider': divider(child,y);y+=child['width']/10
+                elif child['type']=='runs':
+                    runs=child['runs']; widths=[]
+                    for r in runs:
+                        content=r['text'].format_map(fields);face=font(layout['fonts'][r['font']],child['size'],600)
+                        if any(ord(c) not in cmap(layout['fonts'][r['font']]) for c in content if not c.isspace()): raise ValueError('Missing run glyph')
+                        widths.append(draw.textlength(content,font=face,language=r['lang']))
+                    x=(w-sum(widths))/2
+                    for r,ww in zip(runs,widths): text(dict(r,x=x,size=child['size'],weight=600),y);x+=ww
+                    y+=child['size']*1.5
+        elif kind=='orn_divider': divider(item,item['y'])
+        elif kind=='week_strip':
+            colors=json.loads((ROOT/'site/data/day-colors.json').read_text())['weekdays'];x=item['x'];y=item['y']
+            for i,c in enumerate(colors):
+                ww=70 if i==fields['dow'] else 30
+                draw.rounded_rectangle((x,y,x+ww,y+30),radius=15,fill=fg if i==fields['dow'] else c['silk'],outline=fg,width=2);x+=ww+14
+        elif kind=='pill' and fields.get('is_sil'):
+            draw.rounded_rectangle(item['box'],radius=22,outline=gold,width=2);text(item)
+    # Publish atomically so concurrent page builds/previews never see partial PNGs.
+    with tempfile.NamedTemporaryFile(suffix='.png', dir=Path(out_path).parent, delete=False) as tmp:
+        temporary = Path(tmp.name)
+    try:
+        im.save(temporary, optimize=True)
+        if shutil.which('pngquant'):
+            result = subprocess.run(['pngquant','--quality','70-90','--speed','1','--strip','--force','--output',str(temporary),str(temporary)])
+            if result.returncode not in (0, 99):
+                raise RuntimeError('pngquant failed: '+str(result.returncode))
+        os.replace(temporary, out_path)
+    finally:
+        temporary.unlink(missing_ok=True)

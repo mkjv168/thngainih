@@ -252,5 +252,6 @@
   "card.didYouKnow": "Did you know?",
   "card.storyAsk": "What about you?",
   "result.saveStory": "Save story image",
-  "result.storySaved": "Saved!"
+  "result.storySaved": "Saved!",
+  "quiz.letters": "ABCD"
 }

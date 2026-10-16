@@ -70,10 +70,9 @@ def measure(page, runtime):
                 if match and match[1].strip().strip('\'"').lower() in active:
                     for url in URLS.findall(face):
                         add(resolve(path, url))
-            # All literal ornament URLs in token values count, including dark overrides.
-            for value in re.findall(r'--ornament-[\w-]+\s*:\s*([^;{}]+)', declarations):
-                for url in URLS.findall(value):
-                    add(resolve(path, url))
+            for url in URLS.findall(declarations):
+                add(resolve(path, url))
+
 
     html = page.lstrip('/') + 'index.html'
     add(html)

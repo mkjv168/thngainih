@@ -22,9 +22,7 @@ const local=v=>typeof v==='string'?t(v):v?.[getLang()] || v?.en || '';
 let result, results;
 function render() {
   if (!result) return;
-  const lang = getLang();
   document.title = t('quiz.resultHeadline').replace('{dish}',local(result.name));
-  document.querySelectorAll('[data-name]').forEach(node => node.classList.toggle('current', node.dataset.name === lang));
   document.querySelector('#tagline').textContent=local(result.blurb || result.tagline);
   document.querySelector('#description').textContent=local(result.fact || result.description);
   document.querySelector('#today-link').textContent=t('quiz.bridge');
@@ -62,9 +60,10 @@ if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
   const messenger = document.querySelector('#messenger'); messenger.hidden = false;
   messenger.href = 'fb-messenger://share/?link='+encodeURIComponent(shareURL.href);
 }
-if (navigator.share) {
+if (true) {
   const native = document.querySelector('#native-share'); native.hidden = false;
   native.onclick = async () => {
+    if(!navigator.share){await copy();return;}
     track('share_tapped', {channel: 'native'});
     try { await navigator.share({title: document.title, url: shareURL.href,text:local(result.share || `quiz.r.${id}.share`).replace('{dish}',local(result.name))}); }
     catch (error) { if (error.name !== 'AbortError') await copy(); }
@@ -76,3 +75,20 @@ try {
   ({results} = await response.json()); result = results.find(item => item.id === id);
   await initI18n(); render();
 } catch { /* The static English result remains usable. */ }
+
+function fitName(){
+  const node=document.querySelector('.result-name');node.style.fontSize='46px';
+  const max=Math.min(300,root.clientWidth-80);let size=46;
+  while(node.scrollWidth>max&&size>46*.6){size-=2;node.style.fontSize=size+'px';}
+}
+document.fonts.ready.then(fitName);window.addEventListener('resize',fitName);
+document.querySelector('#save-story').onclick=async event=>{
+  event.preventDefault();
+  const download=()=>{const a=document.createElement('a');a.href='story.png';a.download=`thngainih-${id}-story.png`;document.body.append(a);a.click();a.remove();track('story_saved',{channel:'download'});};
+  try{
+    const response=await fetch('story.png');if(!response.ok)throw new Error('Story unavailable');
+    const file=new File([await response.blob()],`thngainih-${id}-story.png`,{type:'image/png'});
+    if(navigator.canShare?.({files:[file]})){await navigator.share({files:[file],title:document.title});track('story_saved',{channel:'share'});}else download();
+    document.querySelector('#story-feedback').textContent=t('result.storySaved');
+  }catch(error){if(error.name!=='AbortError'){download();document.querySelector('#story-feedback').textContent=t('result.storySaved');}}
+};

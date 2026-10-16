@@ -17,7 +17,7 @@ export async function setLang(next, report = true) {
   lang = next;
   document.documentElement.lang = lang;
   try { localStorage.setItem('lang', lang); } catch { /* Storage may be disabled. */ }
-  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = el.hasAttribute('data-logo') ? km.name : t(el.dataset.i18n); });
   document.querySelectorAll('[data-i18n-attr]').forEach(el => {
     el.dataset.i18nAttr.split(';').forEach(binding => {
       const [attribute, key] = binding.split(':');

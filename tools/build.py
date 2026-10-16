@@ -18,11 +18,14 @@ from cardlib import render_card
 
 def card(path, result, quiz, base, layout_name='quiz_og'):
     from siteconfig import local
-    fields = dict(id=result['id'], result_color=result['color'],
-                  initial=result['name']['en'][0], quiz_title=local(quiz['title'], 'km'),
-                  name_km=local(result['name'], 'km'), name_en=local(result['name'], 'en'),
-                  share_line=local(result['tagline'], 'en'), brand_km=local('name', 'km'),
+    palette = next(r for r in json.loads((SITE/'quiz/quiz.json').read_text())['results'] if r['id'] == result['id'])
+    fields = dict(id=result['id'], quiz_title=local('quiz.title', 'km'),
+                  name_km=local('quiz.r.'+result['id']+'.name', 'km'),
+                  name_en=local('quiz.r.'+result['id']+'.name', 'en'),
+                  share_line=local('quiz.r.'+result['id']+'.share', 'en'),
+                  story_ask=local('card.storyAsk', 'km'), brand_km=local('name', 'km'),
                   url=urlsplit(base).netloc + urlsplit(base).path.rstrip('/'))
+    fields.update({key: palette[key] for key in ('silk', 'sheen', 'deep', 'fg', 'gold')})
     render_card(layout_name, fields, path)
 
 def build():
@@ -87,7 +90,7 @@ def build():
         tagline=local(result.get('blurb',result.get('tagline','')))
         title=local('quiz.resultHeadline').replace('{dish}',name)
         shareline=local(result.get('share',f"quiz.r.{result['id']}.share")).replace('{dish}',name)
-        fields=dict(title=title,tagline=tagline,url=url,image=url+'og.png',alt=name+' / '+name_km,site_name=local('name'),id=result['id'],emoji=result['emoji'],name_en=name,name_km=name_km,description=local(result.get('fact',result.get('description',''))),encoded=quote(share,safe=''),facebook='https://www.facebook.com/sharer/sharer.php?'+urlencode({'u':share}),telegram='https://t.me/share/url?'+urlencode({'url':share,'text':shareline}))
+        fields=dict(title=title,tagline=tagline,url=url,image=url+'og.png',alt=name+' / '+name_km,site_name=local('name'),id=result['id'],silk_style=';'.join('--'+key+':'+result[key] for key in ('silk','sheen','deep','fg','gold')),name_en=name,name_km=name_km,description=local(result.get('fact',result.get('description',''))),encoded=quote(share,safe=''),facebook='https://www.facebook.com/sharer/sharer.php?'+urlencode({'u':share}),telegram='https://t.me/share/url?'+urlencode({'url':share,'text':shareline}))
         (folder/'index.html').write_text(page.substitute({k:html.escape(v,quote=True) for k,v in fields.items()}))
         display=dict(result,name={'en':name,'km':name_km},tagline={'en':shareline})
         card(folder/'og.png',display,dict(title={'km':local(quiz['title'],'km')}),base)
