@@ -5,49 +5,98 @@
       "day": "weekday.day.0",
       "color": "weekday.color.0",
       "hex": "#FF0000",
-      "needsNativeCheck": false
+      "needsNativeCheck": false,
+      "silk": "#D3122B",
+      "sheen": "#F04A4F",
+      "deep": "#6E0717",
+      "tint": "#FBE2DF",
+      "fg": "#FFF6EA",
+      "gold": "#E9C46A",
+      "colorShort": "weekday.colorShort.0"
     },
     {
       "dow": 1,
       "day": "weekday.day.1",
       "color": "weekday.color.1",
       "hex": "#FFAA1D",
-      "needsNativeCheck": false
+      "needsNativeCheck": false,
+      "silk": "#F39A12",
+      "sheen": "#FFC24A",
+      "deep": "#9A4A00",
+      "tint": "#FDEFD3",
+      "fg": "#3A1E00",
+      "gold": "#7A3E00",
+      "colorShort": "weekday.colorShort.1"
     },
     {
       "dow": 2,
       "day": "weekday.day.2",
       "color": "weekday.color.2",
       "hex": "#7851A9",
-      "needsNativeCheck": false
+      "needsNativeCheck": false,
+      "silk": "#7A35B4",
+      "sheen": "#A766DB",
+      "deep": "#331060",
+      "tint": "#EFE3F8",
+      "fg": "#FFF6EA",
+      "gold": "#E9C46A",
+      "colorShort": "weekday.colorShort.2"
     },
     {
       "dow": 3,
       "day": "weekday.day.3",
       "color": "weekday.color.3",
       "hex": "#808000",
-      "needsNativeCheck": true
+      "needsNativeCheck": true,
+      "silk": "#8C9A12",
+      "sheen": "#B8C53C",
+      "deep": "#3B4505",
+      "tint": "#F1F3D6",
+      "fg": "#FFFBEA",
+      "gold": "#E9C46A",
+      "colorShort": "weekday.colorShort.3"
     },
     {
       "dow": 4,
       "day": "weekday.day.4",
       "color": "weekday.color.4",
       "hex": "#008000",
-      "needsNativeCheck": true
+      "needsNativeCheck": true,
+      "silk": "#0E9156",
+      "sheen": "#3CC481",
+      "deep": "#03452A",
+      "tint": "#DCF3E6",
+      "fg": "#FFF6EA",
+      "gold": "#E9C46A",
+      "colorShort": "weekday.colorShort.4"
     },
     {
       "dow": 5,
       "day": "weekday.day.5",
       "color": "weekday.color.5",
       "hex": "#0000A0",
-      "needsNativeCheck": false
+      "needsNativeCheck": false,
+      "silk": "#1E4FD0",
+      "sheen": "#4F80F0",
+      "deep": "#0A1F6E",
+      "tint": "#E0E8FB",
+      "fg": "#FFF6EA",
+      "gold": "#E9C46A",
+      "colorShort": "weekday.colorShort.5"
     },
     {
       "dow": 6,
       "day": "weekday.day.6",
       "color": "weekday.color.6",
       "hex": "#301934",
-      "needsNativeCheck": true
+      "needsNativeCheck": true,
+      "silk": "#6F1F67",
+      "sheen": "#9C4692",
+      "deep": "#2A0827",
+      "tint": "#F3E2EF",
+      "fg": "#FFF6EA",
+      "gold": "#E9C46A",
+      "colorShort": "weekday.colorShort.6"
     }
   ],
   "sources": [

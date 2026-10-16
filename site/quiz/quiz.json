@@ -1,297 +1,329 @@
 {
- "id": "khmer-dish",
- "version": 2,
- "_contentSource": "Marketer launch kit 2026-10-16 (/home/box/research/24h-startup-launch-kit-2026-10-16.md); dish facts: Research dish-facts.md. All Khmer needs native review.",
- "title": "quiz.title",
- "intro": "quiz.intro",
- "questions": [
-  {
-   "id": "q1",
-   "text": "quiz.q1",
-   "answers": [
+  "id": "khmer-dish",
+  "version": 2,
+  "_contentSource": "Marketer launch kit 2026-10-16 (/home/box/research/24h-startup-launch-kit-2026-10-16.md); dish facts: Research dish-facts.md. All Khmer needs native review.",
+  "title": "quiz.title",
+  "intro": "quiz.intro",
+  "questions": [
     {
-     "id": "a",
-     "text": "quiz.q1.a",
-     "scores": {
-      "num-banh-chok": 1,
-      "kuy-teav": 1
-     }
+      "id": "q1",
+      "text": "quiz.q1",
+      "answers": [
+        {
+          "id": "a",
+          "text": "quiz.q1.a",
+          "scores": {
+            "num-banh-chok": 1,
+            "kuy-teav": 1
+          }
+        },
+        {
+          "id": "b",
+          "text": "quiz.q1.b",
+          "scores": {
+            "amok": 1,
+            "samlor-korko": 1
+          }
+        },
+        {
+          "id": "c",
+          "text": "quiz.q1.c",
+          "scores": {
+            "lok-lak": 1,
+            "kralan": 1
+          }
+        },
+        {
+          "id": "d",
+          "text": "quiz.q1.d",
+          "scores": {
+            "bai-sach-chrouk": 1,
+            "prahok-ktis": 1
+          }
+        }
+      ]
     },
     {
-     "id": "b",
-     "text": "quiz.q1.b",
-     "scores": {
-      "amok": 1,
-      "samlor-korko": 1
-     }
+      "id": "q2",
+      "text": "quiz.q2",
+      "answers": [
+        {
+          "id": "a",
+          "text": "quiz.q2.a",
+          "scores": {
+            "amok": 1,
+            "num-banh-chok": 1
+          }
+        },
+        {
+          "id": "b",
+          "text": "quiz.q2.b",
+          "scores": {
+            "lok-lak": 1,
+            "kralan": 1
+          }
+        },
+        {
+          "id": "c",
+          "text": "quiz.q2.c",
+          "scores": {
+            "prahok-ktis": 1,
+            "bai-sach-chrouk": 1
+          }
+        },
+        {
+          "id": "d",
+          "text": "quiz.q2.d",
+          "scores": {
+            "samlor-korko": 1,
+            "kuy-teav": 1
+          }
+        }
+      ]
     },
     {
-     "id": "c",
-     "text": "quiz.q1.c",
-     "scores": {
-      "lok-lak": 1,
-      "kralan": 1
-     }
+      "id": "q3",
+      "text": "quiz.q3",
+      "answers": [
+        {
+          "id": "a",
+          "text": "quiz.q3.a",
+          "scores": {
+            "amok": 1,
+            "lok-lak": 1
+          }
+        },
+        {
+          "id": "b",
+          "text": "quiz.q3.b",
+          "scores": {
+            "samlor-korko": 1,
+            "prahok-ktis": 1
+          }
+        },
+        {
+          "id": "c",
+          "text": "quiz.q3.c",
+          "scores": {
+            "kralan": 1,
+            "kuy-teav": 1
+          }
+        },
+        {
+          "id": "d",
+          "text": "quiz.q3.d",
+          "scores": {
+            "bai-sach-chrouk": 1,
+            "num-banh-chok": 1
+          }
+        }
+      ]
     },
     {
-     "id": "d",
-     "text": "quiz.q1.d",
-     "scores": {
-      "bai-sach-chrouk": 1,
-      "prahok-ktis": 1
-     }
+      "id": "q4",
+      "text": "quiz.q4",
+      "answers": [
+        {
+          "id": "a",
+          "text": "quiz.q4.a",
+          "scores": {
+            "kralan": 1,
+            "lok-lak": 1
+          }
+        },
+        {
+          "id": "b",
+          "text": "quiz.q4.b",
+          "scores": {
+            "amok": 1,
+            "prahok-ktis": 1
+          }
+        },
+        {
+          "id": "c",
+          "text": "quiz.q4.c",
+          "scores": {
+            "samlor-korko": 1,
+            "bai-sach-chrouk": 1
+          }
+        },
+        {
+          "id": "d",
+          "text": "quiz.q4.d",
+          "scores": {
+            "kuy-teav": 1,
+            "num-banh-chok": 1
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "text": "quiz.q5",
+      "answers": [
+        {
+          "id": "a",
+          "text": "quiz.q5.a",
+          "scores": {
+            "samlor-korko": 1,
+            "bai-sach-chrouk": 1
+          }
+        },
+        {
+          "id": "b",
+          "text": "quiz.q5.b",
+          "scores": {
+            "lok-lak": 1,
+            "kuy-teav": 1
+          }
+        },
+        {
+          "id": "c",
+          "text": "quiz.q5.c",
+          "scores": {
+            "amok": 1,
+            "prahok-ktis": 1
+          }
+        },
+        {
+          "id": "d",
+          "text": "quiz.q5.d",
+          "scores": {
+            "kralan": 1,
+            "num-banh-chok": 1
+          }
+        }
+      ]
     }
-   ]
-  },
-  {
-   "id": "q2",
-   "text": "quiz.q2",
-   "answers": [
+  ],
+  "results": [
     {
-     "id": "a",
-     "text": "quiz.q2.a",
-     "scores": {
-      "amok": 1,
-      "num-banh-chok": 1
-     }
+      "id": "amok",
+      "color": "#178A4A",
+      "name": "quiz.r.amok.name",
+      "blurb": "quiz.r.amok.blurb",
+      "fact": "quiz.r.amok.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.amok.share",
+      "silk": "#178A4A",
+      "sheen": "#3DBA6E",
+      "deep": "#06401F",
+      "fg": "#FFF6EA",
+      "gold": "#E9C46A"
     },
     {
-     "id": "b",
-     "text": "quiz.q2.b",
-     "scores": {
-      "lok-lak": 1,
-      "kralan": 1
-     }
+      "id": "lok-lak",
+      "color": "#C62A1C",
+      "name": "quiz.r.lok-lak.name",
+      "blurb": "quiz.r.lok-lak.blurb",
+      "fact": "quiz.r.lok-lak.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.lok-lak.share",
+      "silk": "#C62A1C",
+      "sheen": "#EE5636",
+      "deep": "#5E0C05",
+      "fg": "#FFF6EA",
+      "gold": "#E9C46A"
     },
     {
-     "id": "c",
-     "text": "quiz.q2.c",
-     "scores": {
-      "prahok-ktis": 1,
-      "bai-sach-chrouk": 1
-     }
+      "id": "num-banh-chok",
+      "color": "#0B8F8A",
+      "name": "quiz.r.num-banh-chok.name",
+      "blurb": "quiz.r.num-banh-chok.blurb",
+      "fact": "quiz.r.num-banh-chok.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.num-banh-chok.share",
+      "silk": "#0B8F8A",
+      "sheen": "#2FC2B8",
+      "deep": "#033F3E",
+      "fg": "#FFF6EA",
+      "gold": "#E9C46A"
     },
     {
-     "id": "d",
-     "text": "quiz.q2.d",
-     "scores": {
-      "samlor-korko": 1,
-      "kuy-teav": 1
-     }
+      "id": "kuy-teav",
+      "color": "#F2A516",
+      "name": "quiz.r.kuy-teav.name",
+      "blurb": "quiz.r.kuy-teav.blurb",
+      "fact": "quiz.r.kuy-teav.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.kuy-teav.share",
+      "silk": "#F2A516",
+      "sheen": "#FFCB52",
+      "deep": "#A65A00",
+      "fg": "#3A1E00",
+      "gold": "#7A3E00"
+    },
+    {
+      "id": "samlor-korko",
+      "color": "#5E8C12",
+      "name": "quiz.r.samlor-korko.name",
+      "blurb": "quiz.r.samlor-korko.blurb",
+      "fact": "quiz.r.samlor-korko.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.samlor-korko.share",
+      "silk": "#5E8C12",
+      "sheen": "#8DBA34",
+      "deep": "#243C02",
+      "fg": "#FFFBEA",
+      "gold": "#E9C46A"
+    },
+    {
+      "id": "bai-sach-chrouk",
+      "color": "#E2582A",
+      "name": "quiz.r.bai-sach-chrouk.name",
+      "blurb": "quiz.r.bai-sach-chrouk.blurb",
+      "fact": "quiz.r.bai-sach-chrouk.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.bai-sach-chrouk.share",
+      "silk": "#E2582A",
+      "sheen": "#FF8650",
+      "deep": "#7A2208",
+      "fg": "#FFF6EA",
+      "gold": "#E9C46A"
+    },
+    {
+      "id": "kralan",
+      "color": "#C21F6E",
+      "name": "quiz.r.kralan.name",
+      "blurb": "quiz.r.kralan.blurb",
+      "fact": "quiz.r.kralan.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.kralan.share",
+      "silk": "#C21F6E",
+      "sheen": "#EC4F97",
+      "deep": "#560833",
+      "fg": "#FFF6EA",
+      "gold": "#E9C46A"
+    },
+    {
+      "id": "prahok-ktis",
+      "color": "#43289A",
+      "name": "quiz.r.prahok-ktis.name",
+      "blurb": "quiz.r.prahok-ktis.blurb",
+      "fact": "quiz.r.prahok-ktis.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.prahok-ktis.share",
+      "silk": "#43289A",
+      "sheen": "#6E52CC",
+      "deep": "#170A48",
+      "fg": "#FFF6EA",
+      "gold": "#E9C46A"
     }
-   ]
+  ],
+  "tiebreak": {
+    "mode": "latest-answer",
+    "fallback": [
+      "amok",
+      "lok-lak",
+      "num-banh-chok",
+      "kuy-teav",
+      "samlor-korko",
+      "bai-sach-chrouk",
+      "kralan",
+      "prahok-ktis"
+    ]
   },
-  {
-   "id": "q3",
-   "text": "quiz.q3",
-   "answers": [
-    {
-     "id": "a",
-     "text": "quiz.q3.a",
-     "scores": {
-      "amok": 1,
-      "lok-lak": 1
-     }
-    },
-    {
-     "id": "b",
-     "text": "quiz.q3.b",
-     "scores": {
-      "samlor-korko": 1,
-      "prahok-ktis": 1
-     }
-    },
-    {
-     "id": "c",
-     "text": "quiz.q3.c",
-     "scores": {
-      "kralan": 1,
-      "kuy-teav": 1
-     }
-    },
-    {
-     "id": "d",
-     "text": "quiz.q3.d",
-     "scores": {
-      "bai-sach-chrouk": 1,
-      "num-banh-chok": 1
-     }
-    }
-   ]
-  },
-  {
-   "id": "q4",
-   "text": "quiz.q4",
-   "answers": [
-    {
-     "id": "a",
-     "text": "quiz.q4.a",
-     "scores": {
-      "kralan": 1,
-      "lok-lak": 1
-     }
-    },
-    {
-     "id": "b",
-     "text": "quiz.q4.b",
-     "scores": {
-      "amok": 1,
-      "prahok-ktis": 1
-     }
-    },
-    {
-     "id": "c",
-     "text": "quiz.q4.c",
-     "scores": {
-      "samlor-korko": 1,
-      "bai-sach-chrouk": 1
-     }
-    },
-    {
-     "id": "d",
-     "text": "quiz.q4.d",
-     "scores": {
-      "kuy-teav": 1,
-      "num-banh-chok": 1
-     }
-    }
-   ]
-  },
-  {
-   "id": "q5",
-   "text": "quiz.q5",
-   "answers": [
-    {
-     "id": "a",
-     "text": "quiz.q5.a",
-     "scores": {
-      "samlor-korko": 1,
-      "bai-sach-chrouk": 1
-     }
-    },
-    {
-     "id": "b",
-     "text": "quiz.q5.b",
-     "scores": {
-      "lok-lak": 1,
-      "kuy-teav": 1
-     }
-    },
-    {
-     "id": "c",
-     "text": "quiz.q5.c",
-     "scores": {
-      "amok": 1,
-      "prahok-ktis": 1
-     }
-    },
-    {
-     "id": "d",
-     "text": "quiz.q5.d",
-     "scores": {
-      "kralan": 1,
-      "num-banh-chok": 1
-     }
-    }
-   ]
-  }
- ],
- "results": [
-  {
-   "id": "amok",
-   "emoji": "🐟",
-   "color": "#2F6B4F",
-   "name": "quiz.r.amok.name",
-   "blurb": "quiz.r.amok.blurb",
-   "fact": "quiz.r.amok.fact",
-   "kmNameVerified": true,
-   "share": "quiz.r.amok.share"
-  },
-  {
-   "id": "lok-lak",
-   "emoji": "🥩",
-   "color": "#9A3B26",
-   "name": "quiz.r.lok-lak.name",
-   "blurb": "quiz.r.lok-lak.blurb",
-   "fact": "quiz.r.lok-lak.fact",
-   "kmNameVerified": true,
-   "share": "quiz.r.lok-lak.share"
-  },
-  {
-   "id": "num-banh-chok",
-   "emoji": "🌿",
-   "color": "#3E6E8E",
-   "name": "quiz.r.num-banh-chok.name",
-   "blurb": "quiz.r.num-banh-chok.blurb",
-   "fact": "quiz.r.num-banh-chok.fact",
-   "kmNameVerified": true,
-   "share": "quiz.r.num-banh-chok.share"
-  },
-  {
-   "id": "kuy-teav",
-   "emoji": "🍜",
-   "color": "#8A6D1F",
-   "name": "quiz.r.kuy-teav.name",
-   "blurb": "quiz.r.kuy-teav.blurb",
-   "fact": "quiz.r.kuy-teav.fact",
-   "kmNameVerified": true,
-   "share": "quiz.r.kuy-teav.share"
-  },
-  {
-   "id": "samlor-korko",
-   "emoji": "🥘",
-   "color": "#4F6B2A",
-   "name": "quiz.r.samlor-korko.name",
-   "blurb": "quiz.r.samlor-korko.blurb",
-   "fact": "quiz.r.samlor-korko.fact",
-   "kmNameVerified": true,
-   "share": "quiz.r.samlor-korko.share"
-  },
-  {
-   "id": "bai-sach-chrouk",
-   "emoji": "🍚",
-   "color": "#A0522D",
-   "name": "quiz.r.bai-sach-chrouk.name",
-   "blurb": "quiz.r.bai-sach-chrouk.blurb",
-   "fact": "quiz.r.bai-sach-chrouk.fact",
-   "kmNameVerified": true,
-   "share": "quiz.r.bai-sach-chrouk.share"
-  },
-  {
-   "id": "kralan",
-   "emoji": "🌾",
-   "color": "#7A5C2E",
-   "name": "quiz.r.kralan.name",
-   "blurb": "quiz.r.kralan.blurb",
-   "fact": "quiz.r.kralan.fact",
-   "kmNameVerified": true,
-   "share": "quiz.r.kralan.share"
-  },
-  {
-   "id": "prahok-ktis",
-   "emoji": "🥬",
-   "color": "#6B3E5E",
-   "name": "quiz.r.prahok-ktis.name",
-   "blurb": "quiz.r.prahok-ktis.blurb",
-   "fact": "quiz.r.prahok-ktis.fact",
-   "kmNameVerified": true,
-   "share": "quiz.r.prahok-ktis.share"
-  }
- ],
- "tiebreak": {
-  "mode": "latest-answer",
-  "fallback": [
-   "amok",
-   "lok-lak",
-   "num-banh-chok",
-   "kuy-teav",
-   "samlor-korko",
-   "bai-sach-chrouk",
-   "kralan",
-   "prahok-ktis"
-  ]
- },
- "start": "quiz.start",
- "cta": "quiz.shareButton",
- "bridge": "quiz.bridge"
+  "start": "quiz.start",
+  "cta": "quiz.shareButton",
+  "bridge": "quiz.bridge"
 }

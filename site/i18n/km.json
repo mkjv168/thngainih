@@ -239,5 +239,18 @@
   "quiz.r.bai-sach-chrouk.share": "ខ្ញុំជាបាយសាច់ជ្រូក! ចុះអ្នកវិញ?",
   "quiz.r.kralan.share": "ខ្ញុំជាក្រឡាន! ចុះអ្នកវិញ?",
   "quiz.r.prahok-ktis.share": "ខ្ញុំជាប្រហុកខ្ទិះ! ចុះអ្នកវិញ?",
-  "result.saveHint": "ចុចឱ្យជាប់លើរូបភាពដើម្បីរក្សាទុក។"
+  "result.saveHint": "ចុចឱ្យជាប់លើរូបភាពដើម្បីរក្សាទុក។",
+  "weekday.colorShort.0": "ពណ៌ក្រហម",
+  "weekday.colorShort.1": "ពណ៌លឿងទុំ",
+  "weekday.colorShort.2": "ពណ៌ស្វាយ",
+  "weekday.colorShort.3": "ពណ៌ស៊ីលៀប",
+  "weekday.colorShort.4": "ពណ៌បៃតង",
+  "weekday.colorShort.5": "ពណ៌ខៀវ",
+  "weekday.colorShort.6": "ពណ៌ព្រីងទុំ",
+  "weekday.colorNote.6": "ប្រភពខ្លះ៖ ខ្មៅ និល ឬត្នោតចាស់",
+  "card.iam": "ខ្ញុំជា",
+  "card.didYouKnow": "ដឹងទេ?",
+  "card.storyAsk": "ចុះអ្នកវិញ?",
+  "result.saveStory": "រក្សាទុករូបភាព",
+  "result.storySaved": "បានរក្សាទុក!"
 }

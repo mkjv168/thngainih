@@ -239,5 +239,18 @@
   "quiz.r.bai-sach-chrouk.share": "I'm Bai Sach Chrouk! What are you?",
   "quiz.r.kralan.share": "I'm Kralan! What are you?",
   "quiz.r.prahok-ktis.share": "I'm Prahok Ktis! What are you?",
-  "result.saveHint": "Long-press the card to save it."
+  "result.saveHint": "Long-press the card to save it.",
+  "weekday.colorShort.0": "Red",
+  "weekday.colorShort.1": "Yellow-orange",
+  "weekday.colorShort.2": "Purple",
+  "weekday.colorShort.3": "Olive green",
+  "weekday.colorShort.4": "Green",
+  "weekday.colorShort.5": "Blue",
+  "weekday.colorShort.6": "Dark purple (plum)",
+  "weekday.colorNote.6": "Some sources: black, indigo or dark brown",
+  "card.iam": "I'm",
+  "card.didYouKnow": "Did you know?",
+  "card.storyAsk": "What about you?",
+  "result.saveStory": "Save story image",
+  "result.storySaved": "Saved!"
 }
