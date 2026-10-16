@@ -1,0 +1,34 @@
+name: Daily card
+on:
+  schedule:
+    - cron: '5 17 * * *'
+    - cron: '35 22 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+jobs:
+  deploy:
+    uses: ./.github/workflows/deploy-pages.yml
+  keepalive:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Monthly repository heartbeat
+        shell: bash
+        run: |
+          if [ "$(date -u +%d)" != 01 ]; then exit 0; fi
+          python - <<'PY'
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+          Path('site/data/heartbeat.json').write_text(json.dumps({'updated': datetime.now(timezone.utc).isoformat()})+'\n')
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add site/data/heartbeat.json
+          git commit -m 'Monthly schedule heartbeat' || exit 0
+          git push

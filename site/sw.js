@@ -1,5 +1,5 @@
-const CACHE = 'v2-quiz';
-const SHELL = ['./', './index.html', './styles.css', './js/config.js', './js/app.js', './js/i18n.js', './js/analytics.js', './js/source.js', './js/modules/quiz.js', './js/modules/content.js', './js/result.js', './quiz/quiz.json', './r/index.json', './i18n/en.json', './i18n/km.json', './assets/fonts/inter-latin-var.woff2', './assets/fonts/kantumruy-khmer-var.woff2', './manifest.webmanifest', './favicon.svg', './icon-192.png', './icon-512.png', './icon-maskable-512.png', './apple-touch-icon.png'];
+const CACHE = 'v3-today';
+const SHELL = ['./', './index.html', './quiz/', './quiz/index.html', './js/vendor/momentkh.js', './js/lib/khmercal.js', './js/modules/today.js', './data/holidays.json', './data/day-colors.json', './styles.css', './js/config.js', './js/app.js', './js/i18n.js', './js/analytics.js', './js/source.js', './js/modules/quiz.js', './js/modules/content.js', './js/result.js', './quiz/quiz.json', './r/index.json', './i18n/en.json', './i18n/km.json', './assets/fonts/inter-latin-var.woff2', './assets/fonts/kantumruy-khmer-var.woff2', './manifest.webmanifest', './favicon.svg', './icon-192.png', './icon-512.png', './icon-maskable-512.png', './apple-touch-icon.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)));
 });
@@ -9,7 +9,6 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
   if (event.request.method !== 'GET' || url.origin !== self.location.origin) return;
-  const dataURL = new URL('./data/content.json', self.registration.scope);
   event.respondWith((async () => {
     const cache = await caches.open(CACHE);
     const network = async () => {
@@ -18,9 +17,20 @@ self.addEventListener('fetch', event => {
       await cache.put(event.request, response.clone());
       return response;
     };
-    if (url.pathname === dataURL.pathname || url.pathname === new URL('./quiz/quiz.json', self.registration.scope).pathname) {
+    const dataPaths = ['data/holidays.json', 'data/day-colors.json'].map(path => new URL(path, self.registration.scope).pathname);
+    if (dataPaths.includes(url.pathname)) {
+      const cached = await cache.match(event.request);
+      const update = network().catch(() => cached || Response.error());
+      event.waitUntil(update.then(() => {}));
+      return cached || await update;
+    }
+    if (event.request.mode === 'navigate') {
       try { return await network(); }
-      catch { return await cache.match(event.request) || Response.error(); }
+      catch {
+        const exact = await cache.match(event.request, {ignoreSearch:true});
+        const quiz = url.pathname.startsWith(new URL('quiz/',self.registration.scope).pathname);
+        return exact || await cache.match(quiz ? './quiz/index.html' : './index.html') || Response.error();
+      }
     }
     const cached = await cache.match(event.request);
     if (cached) return cached;

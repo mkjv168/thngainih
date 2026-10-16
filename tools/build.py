@@ -13,28 +13,7 @@ ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / 'site'
 FONTS = ROOT / 'tools/fonts'
 
-def font(size, bold=False):
-    return ImageFont.truetype(str(FONTS / ('NotoSansKhmer-Bold.ttf' if bold else 'NotoSansKhmer-Regular.ttf')), size, layout_engine=ImageFont.Layout.RAQM)
-
-def wrap(draw, text, face, width, language):
-    # Prefer spaces; Khmer names may have no spaces, so shrink before wrapping clusters.
-    lines, line = [], ''
-    for word in text.split():
-        candidate = (line + ' ' + word).strip()
-        if line and draw.textlength(candidate, font=face, language=language) > width:
-            lines.append(line)
-            line = word
-        else:
-            line = candidate
-    return lines + [line]
-
-def fitted(draw, text, size, width, language, bold=False, max_lines=2):
-    for value in range(size, 17, -1):
-        face = font(value, bold)
-        lines = wrap(draw, text, face, width, language)
-        if len(lines) <= max_lines and all(draw.textlength(line, font=face, language=language) <= width for line in lines):
-            return face, lines, value
-    raise ValueError('Text cannot fit safely: ' + text)
+from cardlib import font, wrap, fitted
 
 def card(path, result, quiz, base):
     color = result['color']
@@ -92,13 +71,14 @@ def build():
         card(folder / 'og.png', result, quiz, base)
     (SITE / 'r/index.json').write_text(json.dumps({'results': quiz['results']}, ensure_ascii=False, indent=2)+'\n')
     generic = dict(name={'en': 'Which Khmer dish are you?', 'km': 'តើអ្នកជាម្ហូបខ្មែរមួយណា?'}, color='#123d35', tagline=quiz['intro'])
-    card(SITE / 'og-image.png', generic, quiz, base)
+    from build_daily import render
+    render(SITE / 'og-image.png', None, base)
     esc = lambda value: html.escape(value, quote=True)
     tags = f'''<!-- og:start -->
 <link rel="canonical" href="{esc(base)}">
-<meta property="og:title" content="{esc(quiz['title']['en'])}"><meta property="og:description" content="{esc(quiz['intro']['en'])}">
+<meta property="og:title" content="{esc('Today in Khmer / ប្រតិទិនខ្មែរថ្ងៃនេះ')}"><meta property="og:description" content="{esc('Your lunar date, holy day and weekday colour.')}">
 <meta property="og:url" content="{esc(base)}"><meta property="og:type" content="website">
-<meta property="og:image" content="{esc(base)}og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="{esc(quiz['title']['en'])}">
+<meta property="og:image" content="{esc(base)}og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="{esc('Today in Khmer / ប្រតិទិនខ្មែរថ្ងៃនេះ')}">
 <meta property="og:locale" content="en_US"><meta property="og:locale:alternate" content="km_KH"><meta name="twitter:card" content="summary_large_image">
 <!-- og:end -->'''
     index = SITE / 'index.html'

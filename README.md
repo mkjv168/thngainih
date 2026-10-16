@@ -75,7 +75,7 @@ keep their prior timestamp and produce no commit. With no source, deterministic
 sample items are written with the current UTC timestamp. Failed fetches leave
 existing content untouched and fail the job. Run `python3 tools/refresh_content.py`.
 
-Refresh runs at minute 17 every six hours and commits changed content as
+The manual refresh workflow commits changed content as
 `github-actions[bot]`. Branch protection must permit that bot commit. A token's
 push does **not** start other workflows, so a second job explicitly calls the
 reusable Pages workflow with the new commit SHA. A keepalive reminder step notes
@@ -107,12 +107,12 @@ a skip link, live status, dark mode, safe-area padding and reduced motion are in
 
 ## Performance and offline behavior
 
-Initial HTML + CSS + all app JS + preloaded Inter font must be <=150,000 bytes.
+Initial HTML + CSS + all app JS + preloaded Inter font must be <=170,000 bytes.
 The quiz module must stay below 6,000 bytes. Checks use
 uncompressed file sizes, so the budget is conservative. Only Inter is preloaded;
 Khmer is not preloaded; the offline worker caches both fonts after registration. Share art and icons are outside the initial-page budget.
-The worker is versioned `v2-quiz`: cache-first shell, network-first `data/content.json`
-with cached fallback. Offline content is available after a successful content fetch.
+The worker is versioned `v3-today`: precached shell, network-first navigation,
+and stale-while-revalidate holiday and colour data.
 Browser UI and live GoatCounter integration require manual verification before publishing.
 
 ## Font licenses
@@ -123,7 +123,7 @@ code. Choose a code license before redistributing a fork.
 
 ## Quiz module
 
-The default `SITE_CONFIG.module = 'quiz'` is a five-question bilingual example.
+`/quiz/` selects the generic five-question bilingual quiz; home defaults to `today`.
 Replace example copy before launch. Scores sum across answers; ties use the
 `tiebreak` order. Back changes answers, and language changes preserve progress.
 Finish waits at most 300ms for counting before navigating; GoatCounter uses its
@@ -165,8 +165,8 @@ Run `python3 tools/preview_cards.py` for `/tmp/cards-preview.png` visual QA.
 rerun the build with the intended URL afterward. Where sockets are forbidden, run
 build and `python3 tools/validate.py` with matching SITE_URL instead. Validate JS
 with `node --input-type=module --check < file.js`. The initial page budget stays
-150KB; the quiz module stays below 6KB. The previous 10KB total-JS limit is replaced
-by these budgets. The worker version is `v2-quiz` and precaches quiz modules/data.
+170KB; the quiz module stays below 6KB. The previous 10KB total-JS limit is replaced
+by these budgets. The worker version is `v3-today` and precaches home and quiz modules/data.
 
 Result pages remain readable without JS and offer plain Facebook/Telegram links.
 JS adds native sharing, mobile Messenger, clipboard fallback, bilingual display,
@@ -209,3 +209,79 @@ Use lowercase letters, digits, and hyphens for module names. Set SITE_CONFIG.mod
 add assets to the worker precache, and bump CACHE. `content` preserves the old
 content.json feed renderer and SITE_CONFIG.contentUrl. Card building is quiz-specific;
 a daily game or utility can replace that build stage while reusing the shell.
+
+## Today in Khmer (home)
+
+The home page is a daily bilingual card; the generic dish quiz lives at `/quiz/`.
+Pages select their module with `data-module`. Result pages link to both the quiz
+and home, preserving source attribution. `?date=2026-10-17` overrides the home
+card for QA. Normal dates use Asia/Phnom_Penh regardless of the device timezone;
+open tabs check for rollover every minute and when becoming visible.
+
+## Lunar calendar: MomentKH v3.0.3 (MIT, vendored, notice in site/js/vendor/momentkh.LICENSE.txt)
+
+`site/js/lib/khmercal.js` wraps the existing UMD library for browsers and Node.
+No calendar service or runtime package installation is needed. Load the classic
+vendor script before the home module. `tools/daily_data.mjs` uses the same wrapper.
+
+## Thngai Sil rule
+
+Holy days are 8 waxing, 15 waxing, 8 waning, and the last waning day. The last
+waning day is 14 in a 29-day month and 15 in a 30-day month. We detect it by
+checking whether tomorrow is 1 waxing, without hardcoded month lengths.
+The rule is cross-checked against khmer-calendar.com fixtures by
+`tests/compare_khmer_calendar.test.mjs`; unknown names and every mismatch are
+reported, and mismatches fail the test. Missing fixtures skip explicitly.
+The current 60-day fixture has four holy-day flags inconsistent with this rule
+and five unknown `Mikh` month names; these remain visible failures pending review.
+`tests/sil_rule.test.mjs` checks every complete lunar half across 2026–2028.
+
+## Weekday colours
+
+`site/data/day-colors.json` stores traditional Khmer weekday dress colours,
+with approximate display hex values and source notes. Sources include
+[Leisure Cambodia: A Color For Each Day](https://leisurecambodia.com/news/detail.php?id=182)
+and [The Better Cambodia: The Seven Colors of Cambodian Tradition](https://thebettercambodia.com/the-seven-colors-of-cambodian-tradition/).
+These folk conventions can differ from astrology lucky colours. Fixture colour
+comparisons are informational and never fail the calendar test.
+
+## Holidays data (placeholder; how to drop in the official list)
+
+Replace `site/data/holidays.json` with the official list using the same schema:
+`holidays` is an array of `{date: "YYYY-MM-DD", name: {en, km}, kind, verified}`.
+Set `verified=true` only for confirmed dates; provide the official citation in
+`source` and update `updated`. Unverified entries have a visible bilingual marker.
+The UI handles dates beyond the available list without inventing holidays.
+
+## Daily cards & cron
+
+Run `python3 tools/build.py` then `python3 tools/build_daily.py`. The latter defaults
+to ICT yesterday through today+7; `--start YYYY-MM-DD --days N` selects a window.
+It calls Node, renders RAQM-shaped 1200×630 PNGs and readable pages under
+`site/d/YYYY-MM-DD/`, updates `d/latest.json` and `og-today.png` when today is in
+the window, and prunes folders older than 14 days before ICT today.
+`SITE_URL` overrides `tools/site.json` for absolute OG URLs. Home always advertises
+the generic `og-image.png`; the share button uses the dated URL with `src=share`.
+Both Python builders use `tools/cardlib.py`; quiz card metrics remain unchanged.
+
+The daily workflow calls reusable Pages deployment at 00:05 ICT and 05:35 ICT;
+each deployment runs both builders with Node 20. It generates artifacts without
+committing daily images. A monthly heartbeat job updates `site/data/heartbeat.json`
+on the first UTC day of the month; monitor GitHub schedule inactivity and delays.
+The old content refresh schedule is disabled; its manual workflow remains.
+These workflow files are definitions only: this local task does not publish them.
+
+## PWA install
+
+The manifest identifies Today in Khmer and opens `./?src=pwa`. Supported browsers
+show the install button after `beforeinstallprompt`; iOS Safari gets a Share →
+Add to Home Screen hint. Standalone installs hide the prompt. Worker `v3-today`
+precaches home, quiz, calendar, data and fonts; navigation is network-first and
+weekday colours/holidays use stale-while-revalidate. Native sharing and install
+prompts still require device/browser QA.
+
+Offline verification: `bash tests/run.sh` runs calendar tests and the validator;
+run `node --input-type=module --check < path.js` for JS syntax. HTTP checks in
+`tools/check.sh` also build daily pages but require local sockets. The current
+initial transfer budget, including MomentKH, is 170,000 uncompressed bytes;
+quiz engine remains below 6,000 bytes. No push, deploy or commit is needed locally.

@@ -21,8 +21,10 @@ if ! read -r port <&"${SERVER[0]}"; then
 fi
 export SITE_URL="http://127.0.0.1:$port/"
 python3 tools/build.py
+python3 tools/build_daily.py
 python3 tools/validate.py
-for resource in '' quiz/quiz.json styles.css js/config.js js/app.js js/source.js js/modules/quiz.js js/modules/content.js js/result.js js/i18n.js js/analytics.js sw.js i18n/en.json i18n/km.json data/content.json assets/fonts/inter-latin-var.woff2 assets/fonts/kantumruy-khmer-var.woff2 manifest.webmanifest og-image.png favicon.svg icon-192.png icon-512.png icon-maskable-512.png apple-touch-icon.png 404.html robots.txt r/index.json; do
+today=$(python3 -c 'from datetime import datetime; from zoneinfo import ZoneInfo; print(datetime.now(ZoneInfo("Asia/Phnom_Penh")).date())')
+for resource in '' quiz/ "d/$today/" "d/$today/og.png" data/holidays.json js/vendor/momentkh.js quiz/quiz.json styles.css js/config.js js/app.js js/source.js js/modules/quiz.js js/modules/content.js js/result.js js/i18n.js js/analytics.js sw.js i18n/en.json i18n/km.json data/content.json assets/fonts/inter-latin-var.woff2 assets/fonts/kantumruy-khmer-var.woff2 manifest.webmanifest og-image.png favicon.svg icon-192.png icon-512.png icon-maskable-512.png apple-touch-icon.png 404.html robots.txt r/index.json; do
   curl --silent --show-error --fail "$SITE_URL$resource" -o /dev/null
  done
 while read -r id; do

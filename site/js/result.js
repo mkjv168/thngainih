@@ -8,7 +8,10 @@ const source = getSource();
 pageview();
 const shareURL = new URL(`r/${id}/`, base);
 shareURL.search = new URLSearchParams({src: 'share', vs: id}).toString();
-const retake = new URL(base);
+const today = new URL(base);
+if (source) today.searchParams.set('src', source);
+document.querySelector('#today-link').href = today.href;
+const retake = new URL('quiz/', base);
 if (source) retake.searchParams.set('src', source);
 // Preserve the challenge when a friend follows a shared result page.
 const vs = new URLSearchParams(location.search).get('vs');

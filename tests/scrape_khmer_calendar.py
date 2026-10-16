@@ -12,7 +12,8 @@ def text(url):
     s = re.sub(r'<script.*?</script>|<style.*?</style>', '', s, flags=re.S)
     s = re.sub(r'<[^>]+>', ' ', s)
     return html.unescape(re.sub(r'\s+', ' ', s))
-EN = re.compile(r'Weekday (\w+) Lunar (?:\S+ )?(\d+) (Koeut|Roach) (.+?) Year of (.+?) Lunar month (.+?) B\.E\. (\d+) Sak Era (\S+)( Thngai Sil \((\d+) (Waxing|Waning)\))?')
+EN = re.compile(r'Weekday (\w+) Lunar (?:\S+ )?(\d+) (Koeut|Roach) (.+?) Year of (.+?) Lunar month (.+?) B\.E\. (\d+) Sak Era (\S+)')
+SIL = re.compile(r'Thngai Sil \((\d+) (Waxing|Waning)\)')
 COLOR_EN = re.compile(r'Lucky colou?r (.+?), face')
 COLOR_KM = re.compile(r'ពណ៌នាំសំណាង(\S+?) ទិស')
 def main():
@@ -26,7 +27,10 @@ def main():
             raise SystemExit(f'parse failed for {url}: {t[:400]}')
         rec = {'date': d.isoformat(), 'url': url, 'weekday': m[1], 'lunarDay': int(m[2]),
                'phase': 'waxing' if m[3] == 'Koeut' else 'waning', 'lunarMonth': m[6].strip(),
-               'animalYear': m[5].strip(), 'beYear': int(m[7]), 'sak': m[8], 'thngaiSil': bool(m[9])}
+               'animalYear': m[5].strip(), 'beYear': int(m[7]), 'sak': m[8]}
+        sm = SIL.search(t)  # event blocks may sit between 'Sak Era' and the Sil badge
+        rec['thngaiSil'] = bool(sm) or 'This is a Thngai Sil holy day' in t
+        rec['silLabel'] = f'{sm[1]} {sm[2]}' if sm else None
         c = COLOR_EN.search(t); rec['luckyColorEn'] = c[1] if c else None
         tk = text(f'https://khmer-calendar.com/km/{d.year}/{d.month}/{d.day}')
         c = COLOR_KM.search(tk); rec['luckyColorKm'] = c[1] if c else None

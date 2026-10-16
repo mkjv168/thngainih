@@ -1,9 +1,18 @@
 {
-  "name": "Seed", "title": "Seed — Start something good", "skip": "Skip to content",
-  "toggleLabel": "Switch to Khmer", "eyebrow": "A little idea. A fresh start.",
-  "headline": "Start something good.", "subtext": "A simple space for your next idea to take root. Made for the things that matter to you.",
-  "cta": "Explore the latest", "note": "Small beginnings. Room to grow.", "latest": "Fresh from the garden",
-  "loading": "Loading the latest updates…", "empty": "Nothing here yet. Check back soon.",
-  "error": "Updates could not be loaded. Please try again later.", "languageError": "Language could not be loaded. Please try again.",
-  "footer": "Built with care. Ready for what’s next.", "updated": "Last updated"
+  "name": "Today in Khmer",
+  "title": "Today in Khmer",
+  "skip": "Skip to content",
+  "toggleLabel": "Switch to Khmer",
+  "eyebrow": "A little idea. A fresh start.",
+  "headline": "Start something good.",
+  "subtext": "A simple space for your next idea to take root. Made for the things that matter to you.",
+  "cta": "Explore the latest",
+  "note": "Small beginnings. Room to grow.",
+  "latest": "Fresh from the garden",
+  "loading": "Loading the latest updates…",
+  "empty": "Nothing here yet. Check back soon.",
+  "error": "Updates could not be loaded. Please try again later.",
+  "languageError": "Language could not be loaded. Please try again.",
+  "footer": "Today in Khmer · ថ្ងៃនេះជាភាសាខ្មែរ",
+  "updated": "Last updated"
 }

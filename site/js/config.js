@@ -7,8 +7,8 @@ window.ANALYTICS_CONFIG = {
   debug: false
 };
 window.SITE_CONFIG = {
-  name: 'Seed',
-  module: 'quiz',
+  name: 'Today in Khmer',
+  module: 'today',
   siteUrl: 'https://example.github.io/REPO/',
   url: 'https://SITE_URL/',
   contentUrl: './data/content.json'
