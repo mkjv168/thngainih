@@ -1,0 +1,54 @@
+name: Refresh content
+on:
+  schedule:
+    - cron: '17 */6 * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+concurrency:
+  group: refresh-content
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    outputs:
+      changed: ${{ steps.commit.outputs.changed }}
+      sha: ${{ steps.commit.outputs.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Refresh source
+        env:
+          CONTENT_SOURCE_URL: ${{ vars.CONTENT_SOURCE_URL }}
+        run: python3 tools/refresh_content.py
+      - name: Commit changed content
+        id: commit
+        run: |
+          git add site/data/content.json
+          if git diff --cached --quiet; then
+            echo 'changed=false' >> "$GITHUB_OUTPUT"
+          else
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git commit -m 'Refresh content'
+            git push origin HEAD:main
+            echo 'changed=true' >> "$GITHUB_OUTPUT"
+            echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          fi
+      # Keepalive: public-repo schedules disable after 60 days without repository
+      # activity. Monitor and re-enable schedules; unchanged feeds create no commit.
+      - name: Keepalive reminder
+        run: echo 'Monitor repository activity and scheduled-workflow status.'
+  deploy:
+    needs: refresh
+    if: needs.refresh.outputs.changed == 'true'
+    # GITHUB_TOKEN pushes do not trigger push workflows; explicitly call deployment.
+    uses: ./.github/workflows/deploy-pages.yml
+    with:
+      ref: ${{ needs.refresh.outputs.sha }}

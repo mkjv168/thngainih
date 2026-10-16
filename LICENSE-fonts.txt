@@ -1,0 +1,20 @@
+Font license notes
+
+Inter and Kantumruy Pro are distributed under the SIL Open Font License, Version 1.1.
+The bundled variable WOFF2 files are supplied subsets of these font families.
+Copyright and reserved font names remain with their respective owners.
+
+Upstream license and copyright notices:
+Inter: https://github.com/rsms/inter/blob/master/LICENSE.txt
+Kantumruy Pro: https://github.com/google/fonts/blob/main/ofl/kantumruypro/OFL.txt
+SIL OFL reference: https://openfontlicense.org/open-font-license-official-text/
+
+The OFL permits use, embedding, redistribution and modification subject to its
+terms, including preservation of notices, reserved font names and the license.
+The fonts may not be sold on their own. The OFL does not apply to documents
+created using the fonts. Retain the full upstream copyright/license notices
+when redistributing the fonts; verify the exact subset's source before release.
+
+Bundled font copyright records:
+Copyright 2016 The Inter Project Authors (https://github.com/rsms/inter)
+Copyright 2022 The Kantumruy Project Authors (https://www.github.com/sovichet/kantumruy-pro)
