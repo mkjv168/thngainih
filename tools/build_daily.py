@@ -13,8 +13,8 @@ from pathlib import Path
 KM = json.loads((Path(__file__).resolve().parent.parent / "site/i18n/km.json").read_text())
 from string import Template
 from urllib.parse import urlsplit
-from PIL import Image, ImageDraw, features
-from cardlib import fitted
+from PIL import features
+from cardlib import render_card
 from siteconfig import base_url, local, template, STRINGS
 ROOT=Path(__file__).resolve().parent.parent
 SITE=ROOT/'site'
@@ -29,27 +29,18 @@ def holiday_line(record,lang='en'):
     return text+(' · '+local(h['note'],lang) if h.get('note') else '')
 
 def render(path, record, base):
-    im=Image.new('RGB',(1200,630),'#f5f4ed');draw=ImageDraw.Draw(im)
-    draw.rectangle((0,0,1200,24),fill=record['colour']['hex'] if record else '#123d35')
-    def line(text,y,size=32,lang='km',bold=False):
-        face,lines,actual=fitted(draw,text,size,1080,lang,bold,max_lines=1)
-        draw.text((60,y),lines[0],font=face,fill='#123d35',language=lang,anchor='lt')
-    line(local('name')+' / '+local('name','km'),52,36,bold=True)
+    fields = dict(stripe=record['colour']['hex'] if record else 'accent',
+                  heading=local('name')+' / '+local('name','km'),
+                  brand_km=local('name','km'), features_en=local('daily.features'),
+                  features_km=local('daily.features','km'),
+                  footer=urlsplit(base).netloc+urlsplit(base).path.rstrip('/')+' · '+local('name')+' / '+local('name','km'))
     if record:
-        line(record['formattedKm'],136,54,bold=True)
-        line(record['gregorianEn'],235,36,'en')
-        line(record['gregorianKm'],293,32)
-        if record['isSil']:
-            draw.rounded_rectangle((60,351,700,404),radius=12,fill='#e1d5a1')
-            line(KM['static.build_daily.2'],358,26,bold=True)
-        line(local('colour.label')+': '+local(record['colour']['color'])+' / '+local(record['colour']['color'],'km'),425,30)
-        line(holiday_line(record),480,25,'en')
-    else:
-        line(local('name','km'),165,76,bold=True)
-        line(local('daily.features'),310,36,'en')
-        line(local('daily.features','km'),390,36)
-    line(urlsplit(base).netloc+urlsplit(base).path.rstrip('/')+' · '+local('name')+' / '+local('name','km'),570,23)
-    im.save(path,optimize=True)
+        fields.update(formatted_km=record['formattedKm'], gregorian_en=record['gregorianEn'],
+                      gregorian_km=record['gregorianKm'], is_sil=record['isSil'],
+                      sil_label=local('static.build_daily.2','km'),
+                      colour_label=local('colour.label')+': '+local(record['colour']['color'])+' / '+local(record['colour']['color'],'km'),
+                      holiday=holiday_line(record))
+    render_card('daily_og' if record else 'default_og', fields, path)
 
 def build():
     if not features.check('raqm'): raise SystemExit('Pillow RAQM is required for Khmer shaping')

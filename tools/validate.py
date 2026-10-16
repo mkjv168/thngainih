@@ -40,6 +40,10 @@ for folder in (root/'d').iterdir():
 for path in [root/'og-image.png', root/'og-today.png', *root.glob('r/*/og.png'), *root.glob('d/*/og.png')]:
     with Image.open(path) as image:
         assert image.format == 'PNG' and image.size == (1200, 630), path
+for result in quiz['results']:
+    path = root/'r'/result['id']/'story.png'
+    with Image.open(path) as image:
+        assert image.format == 'PNG' and image.size == (1080, 1350), path
 initial = [root/'index.html', root/'styles.css', *(root/'js').glob('*.js'), *(root/'js/modules').glob('*.js'), *(root/'js/lib').glob('*.js'), root/'js/vendor/momentkh.js', root/'assets/fonts/inter-latin-var.woff2']
 initial += [root/'i18n/en.json',root/'i18n/km.json',root/'assets/fonts/kantumruy-khmer-var.woff2']
 total = sum(path.stat().st_size for path in initial)

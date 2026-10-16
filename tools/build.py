@@ -8,40 +8,22 @@ from pathlib import Path
 KM = json.loads((Path(__file__).resolve().parent.parent / "site/i18n/km.json").read_text())
 from string import Template
 from urllib.parse import quote, urlencode, urlsplit
-from PIL import Image, ImageDraw, ImageFont, features
+from PIL import features
 
 ROOT = Path(__file__).resolve().parent.parent
 SITE = ROOT / 'site'
 FONTS = ROOT / 'tools/fonts'
 
-from cardlib import font, wrap, fitted
+from cardlib import render_card
 
-def card(path, result, quiz, base):
-    color = result['color']
-    rgb = tuple(int(color[i:i+2], 16) for i in (1, 3, 5))
-    def linear(x):
-        x /= 255
-        return x / 12.92 if x <= .04045 else ((x + .055) / 1.055) ** 2.4
-    while (1.05 / (sum(w * linear(c) for w, c in zip((.2126, .7152, .0722), rgb)) + .05)) < 4.5:
-        rgb = tuple(int(c * .94) for c in rgb)
-    im = Image.new('RGB', (1200, 630), rgb)
-    draw = ImageDraw.Draw(im)
-    draw.rounded_rectangle((1005, 55, 1145, 195), radius=42, outline='white', width=4)
-    draw.text((1075, 125), result['name']['en'][0], font=font(70, True), fill='white', anchor='mm', language='en')
-    def text(text, y, size, lang, bold=False, width=1070, max_lines=2):
-        face, lines, size = fitted(draw, text, size, width, lang, bold, max_lines)
-        for line in lines:
-            draw.text((65, y), line, font=face, fill='white', language=lang, anchor='lt')
-            y += int(size * 1.5)
-        return y
-    text(quiz['title']['km'], 48, 25, 'km', width=900, max_lines=1)
-    text(result['name']['km'], 170, 88, 'km', True, max_lines=2)
-    text(result['name']['en'], 385, 39, 'en', True, max_lines=1)
-    text(result['tagline']['en'], 451, 27, 'en', max_lines=1)
-    draw.line((65, 523, 1135, 523), fill='white', width=1)
-    text(urlsplit(base).netloc + urlsplit(base).path.rstrip('/'), 542, 19, 'en', max_lines=1)
-    text(KM['name'], 579, 22, 'km', max_lines=1)
-    im.save(path, optimize=True)
+def card(path, result, quiz, base, layout_name='quiz_og'):
+    from siteconfig import local
+    fields = dict(id=result['id'], result_color=result['color'],
+                  initial=result['name']['en'][0], quiz_title=local(quiz['title'], 'km'),
+                  name_km=local(result['name'], 'km'), name_en=local(result['name'], 'en'),
+                  share_line=local(result['tagline'], 'en'), brand_km=local('name', 'km'),
+                  url=urlsplit(base).netloc + urlsplit(base).path.rstrip('/'))
+    render_card(layout_name, fields, path)
 
 def build():
     from build_css import build as build_css
@@ -109,6 +91,7 @@ def build():
         (folder/'index.html').write_text(page.substitute({k:html.escape(v,quote=True) for k,v in fields.items()}))
         display=dict(result,name={'en':name,'km':name_km},tagline={'en':shareline})
         card(folder/'og.png',display,dict(title={'km':local(quiz['title'],'km')}),base)
+        card(folder/'story.png',display,dict(title={'km':local(quiz['title'],'km')}),base,'quiz_story')
     (SITE/'r/index.json').write_text(json.dumps({'results':quiz['results']},ensure_ascii=False,indent=2)+'\n')
     from build_daily import render
     render(SITE/'og-image.png',None,base)

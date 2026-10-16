@@ -88,3 +88,9 @@ tools/bump-sw.sh
 ```
 
 `tools/budget.json` records per-page runtime fetches and the 250,000-byte first-load limit. The budget command reports deduplicated raw and gzip totals (`--json` is available). Both totals must fit; GitHub Pages serves gzip. Keep runtime lists current when adding dynamic resources. The bump script increments the cache version in `tools/site.json` and rebuilds; existing CSS URL assets are automatically appended to the service-worker shell.
+
+## Cards
+
+Edit `tools/cards.json` to change card palettes, fonts (including display slots), background/ornament images, dish image boxes and ordered elements. Image paths are relative to the repo root; ornaments use a `path` and `[x, y, width, height]` box. Text supports field placeholders or i18n keys through `{"local": "key", "lang": "km"}`; keep Khmer copy in `site/i18n/km.json`. Drop dish photos at `site/assets/dishes/<id>.png` to replace monogram fallbacks with rounded, cover-fitted photos.
+
+Run `python3 tools/build.py && python3 tools/build_daily.py`, then `python3 tools/preview_cards.py`. Check `/tmp/cards-preview.png` and `/tmp/stories-preview.png`. Result folders include 1080×1350 `story.png` cards; HTML continues to use the OG cards.

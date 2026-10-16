@@ -1,0 +1,579 @@
+{
+  "quiz_og": {
+    "size": [
+      1200,
+      630
+    ],
+    "background": {
+      "from": "result_color",
+      "min_contrast_vs": "#ffffff",
+      "ratio": 4.5,
+      "darken_step": 0.94
+    },
+    "background_image": null,
+    "ornament_image": null,
+    "palette": {
+      "ink": "#ffffff"
+    },
+    "fonts": {
+      "regular": "tools/fonts/NotoSansKhmer-Regular.ttf",
+      "bold": "tools/fonts/NotoSansKhmer-Bold.ttf",
+      "display": "tools/fonts/NotoSansKhmer-Regular.ttf",
+      "display_bold": "tools/fonts/NotoSansKhmer-Bold.ttf",
+      "min_size": 18
+    },
+    "dish_image": {
+      "x": 1005,
+      "y": 55,
+      "w": 140,
+      "h": 140,
+      "radius": 42,
+      "source": "site/assets/dishes/{id}.png",
+      "fallback": [
+        {
+          "type": "rounded_rect",
+          "box": [
+            1005,
+            55,
+            1145,
+            195
+          ],
+          "radius": 42,
+          "outline": "ink",
+          "width": 4
+        },
+        {
+          "type": "text",
+          "text": "{initial}",
+          "x": 1075,
+          "y": 125,
+          "size": 70,
+          "lang": "en",
+          "font": "bold",
+          "fill": "ink",
+          "anchor": "mm"
+        }
+      ]
+    },
+    "elements": [
+      {
+        "type": "text",
+        "text": "{quiz_title}",
+        "x": 65,
+        "y": 48,
+        "size": 25,
+        "lang": "km",
+        "font": "display",
+        "width": 900,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{name_km}",
+        "x": 65,
+        "y": 170,
+        "size": 88,
+        "lang": "km",
+        "font": "display_bold",
+        "width": 1070,
+        "max_lines": 2,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{name_en}",
+        "x": 65,
+        "y": 385,
+        "size": 39,
+        "lang": "en",
+        "font": "display_bold",
+        "width": 1070,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{share_line}",
+        "x": 65,
+        "y": 451,
+        "size": 27,
+        "lang": "en",
+        "font": "display",
+        "width": 1070,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "line",
+        "xy": [
+          65,
+          523,
+          1135,
+          523
+        ],
+        "fill": "ink",
+        "width": 1
+      },
+      {
+        "type": "text",
+        "text": "{url}",
+        "x": 65,
+        "y": 542,
+        "size": 19,
+        "lang": "en",
+        "font": "display",
+        "width": 1070,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{brand_km}",
+        "x": 65,
+        "y": 579,
+        "size": 22,
+        "lang": "km",
+        "font": "display",
+        "width": 1070,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      }
+    ]
+  },
+  "daily_og": {
+    "size": [
+      1200,
+      630
+    ],
+    "background": {
+      "colour": "paper"
+    },
+    "background_image": null,
+    "ornament_image": null,
+    "palette": {
+      "ink": "#123d35",
+      "paper": "#f5f4ed",
+      "sil_badge": "#e1d5a1",
+      "accent": "#123d35"
+    },
+    "fonts": {
+      "regular": "tools/fonts/NotoSansKhmer-Regular.ttf",
+      "bold": "tools/fonts/NotoSansKhmer-Bold.ttf",
+      "display": "tools/fonts/NotoSansKhmer-Regular.ttf",
+      "display_bold": "tools/fonts/NotoSansKhmer-Bold.ttf",
+      "min_size": 18
+    },
+    "dish_image": null,
+    "elements": [
+      {
+        "type": "rect",
+        "box": [
+          0,
+          0,
+          1200,
+          24
+        ],
+        "fill": "{stripe}"
+      },
+      {
+        "type": "text",
+        "text": "{heading}",
+        "x": 60,
+        "y": 52,
+        "size": 36,
+        "lang": "km",
+        "font": "display_bold",
+        "width": 1080,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{formatted_km}",
+        "x": 60,
+        "y": 136,
+        "size": 54,
+        "lang": "km",
+        "font": "display_bold",
+        "width": 1080,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{gregorian_en}",
+        "x": 60,
+        "y": 235,
+        "size": 36,
+        "lang": "en",
+        "font": "display",
+        "width": 1080,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{gregorian_km}",
+        "x": 60,
+        "y": 293,
+        "size": 32,
+        "lang": "km",
+        "font": "display",
+        "width": 1080,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "rounded_rect",
+        "box": [
+          60,
+          351,
+          700,
+          404
+        ],
+        "radius": 12,
+        "fill": "sil_badge",
+        "if": "is_sil"
+      },
+      {
+        "type": "text",
+        "text": "{sil_label}",
+        "x": 60,
+        "y": 358,
+        "size": 26,
+        "lang": "km",
+        "font": "display_bold",
+        "width": 1080,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt",
+        "if": "is_sil"
+      },
+      {
+        "type": "text",
+        "text": "{colour_label}",
+        "x": 60,
+        "y": 425,
+        "size": 30,
+        "lang": "km",
+        "font": "display",
+        "width": 1080,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{holiday}",
+        "x": 60,
+        "y": 480,
+        "size": 25,
+        "lang": "en",
+        "font": "display",
+        "width": 1080,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{footer}",
+        "x": 60,
+        "y": 570,
+        "size": 23,
+        "lang": "km",
+        "font": "display",
+        "width": 1080,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      }
+    ]
+  },
+  "default_og": {
+    "size": [
+      1200,
+      630
+    ],
+    "background": {
+      "colour": "paper"
+    },
+    "background_image": null,
+    "ornament_image": null,
+    "palette": {
+      "ink": "#123d35",
+      "paper": "#f5f4ed",
+      "sil_badge": "#e1d5a1",
+      "accent": "#123d35"
+    },
+    "fonts": {
+      "regular": "tools/fonts/NotoSansKhmer-Regular.ttf",
+      "bold": "tools/fonts/NotoSansKhmer-Bold.ttf",
+      "display": "tools/fonts/NotoSansKhmer-Regular.ttf",
+      "display_bold": "tools/fonts/NotoSansKhmer-Bold.ttf",
+      "min_size": 18
+    },
+    "dish_image": null,
+    "elements": [
+      {
+        "type": "rect",
+        "box": [
+          0,
+          0,
+          1200,
+          24
+        ],
+        "fill": "{stripe}"
+      },
+      {
+        "type": "text",
+        "text": "{heading}",
+        "x": 60,
+        "y": 52,
+        "size": 36,
+        "lang": "km",
+        "font": "display_bold",
+        "width": 1080,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{brand_km}",
+        "x": 60,
+        "y": 165,
+        "size": 76,
+        "lang": "km",
+        "font": "display_bold",
+        "width": 1080,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{features_en}",
+        "x": 60,
+        "y": 310,
+        "size": 36,
+        "lang": "en",
+        "font": "display",
+        "width": 1080,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{features_km}",
+        "x": 60,
+        "y": 390,
+        "size": 36,
+        "lang": "km",
+        "font": "display",
+        "width": 1080,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{footer}",
+        "x": 60,
+        "y": 570,
+        "size": 23,
+        "lang": "km",
+        "font": "display",
+        "width": 1080,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      }
+    ]
+  },
+  "quiz_story": {
+    "size": [
+      1080,
+      1350
+    ],
+    "background": {
+      "from": "result_color",
+      "min_contrast_vs": "#ffffff",
+      "ratio": 4.5,
+      "darken_step": 0.94
+    },
+    "background_image": null,
+    "ornament_image": null,
+    "palette": {
+      "ink": "#ffffff"
+    },
+    "fonts": {
+      "regular": "tools/fonts/NotoSansKhmer-Regular.ttf",
+      "bold": "tools/fonts/NotoSansKhmer-Bold.ttf",
+      "display": "tools/fonts/NotoSansKhmer-Regular.ttf",
+      "display_bold": "tools/fonts/NotoSansKhmer-Bold.ttf",
+      "min_size": 18
+    },
+    "dish_image": {
+      "x": 160,
+      "y": 210,
+      "w": 760,
+      "h": 760,
+      "radius": 80,
+      "source": "site/assets/dishes/{id}.png",
+      "fallback": [
+        {
+          "type": "rounded_rect",
+          "box": [
+            160,
+            210,
+            920,
+            970
+          ],
+          "radius": 80,
+          "outline": "ink",
+          "width": 4
+        },
+        {
+          "type": "text",
+          "text": "{initial}",
+          "x": 540,
+          "y": 590,
+          "size": 300,
+          "lang": "en",
+          "font": "bold",
+          "fill": "ink",
+          "anchor": "mm"
+        }
+      ]
+    },
+    "elements": [
+      {
+        "type": "text",
+        "text": "{quiz_title}",
+        "x": 90,
+        "y": 90,
+        "size": 30,
+        "lang": "km",
+        "font": "display",
+        "width": 900,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{name_km}",
+        "x": 90,
+        "y": 980,
+        "size": 60,
+        "lang": "km",
+        "font": "display_bold",
+        "width": 900,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{name_en}",
+        "x": 90,
+        "y": 1070,
+        "size": 34,
+        "lang": "en",
+        "font": "display_bold",
+        "width": 900,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{share_line}",
+        "x": 90,
+        "y": 1125,
+        "size": 24,
+        "lang": "en",
+        "font": "display",
+        "width": 900,
+        "max_lines": 3,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "line",
+        "xy": [
+          90,
+          1230,
+          990,
+          1230
+        ],
+        "fill": "ink",
+        "width": 1
+      },
+      {
+        "type": "text",
+        "text": "{url}",
+        "x": 90,
+        "y": 1250,
+        "size": 19,
+        "lang": "en",
+        "font": "display",
+        "width": 560,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      },
+      {
+        "type": "text",
+        "text": "{brand_km}",
+        "x": 700,
+        "y": 1245,
+        "size": 22,
+        "lang": "km",
+        "font": "display",
+        "width": 290,
+        "max_lines": 1,
+        "line_height": 1.5,
+        "fill": "ink",
+        "anchor": "lt"
+      }
+    ]
+  }
+}
