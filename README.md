@@ -25,7 +25,7 @@ The 14 lunar month names initially follow MomentKH, with **កត្តិក** 
 
 The phase 2 content contains amok, lok-lak, num-banh-chok, kuy-teav, samlor-korko, bai-sach-chrouk, kralan and prahok-ktis. The generic engine accepts translation keys or inline language objects and supports legacy ordered ties plus `latest-answer` with a fallback order. Ties are narrowed by answer scores from newest to oldest, then fallback order. Every result is reachable. Result names, blurbs, facts, share lines, CTA and daily-card bridge use dictionary keys. Each result links home and carries its incoming source tag; shares link directly to the result and preserve the comparison ID.
 
-TODO from supplied copy: all Khmer needs native review; Kralan's EN/KM blurb is a draft pending final marketer copy. Missing Khmer dish facts currently fall back to the supplied English facts. These editorial notes belong here/data, never in the UI.
+Editorial status: all Khmer needs native review (see km_review below). Kralan's EN/KM blurb is Marketer's final copy, used verbatim.
 
 ## Calendar and data sources
 
@@ -64,3 +64,8 @@ Generated analytics configuration defaults to `provider: 'none'` until deploymen
 `bash tests/run.sh` runs all `*.test.mjs` files and `tools/validate.py`. Checks cover the 2026–2028 Sil rule, the holy-day window, every JSON fixture under `tests/fixtures/khmer-calendar-com/`, generic latest-answer ties, all eight reachable results, holiday grouping/notes, dictionary keys, corrected month display, result/day metadata, 1200×630 PNGs, privacy links/precache, JSON and embedded Khmer. Fixture output reports field counts separately per file. Month aliases include Mikh/Migasir, Jais/Jesth, Srapon/Srap and Asadh/Asath/Pathamasath/Tutiyasath. All fixtures present are tested, including leap-month and 2027 New Year fixtures. Daily animal-year labels use the whole civil New Year date, independently of the Buddhist-year rollover, avoiding a vendor double increment on the Visakha boundary.
 
 The initial source-asset ceiling is **190,000 bytes** (previously 170,000); the **6,000-byte** quiz-engine ceiling is unchanged. The check now includes both translation dictionaries and the Khmer font, which the previous accounting omitted. Centralized bilingual content is loaded by the shared browser/Node calendar helpers, and the Khmer font is used on the initial bilingual card, so including them gives a more honest budget. The expanded asset total stays below 190 KB. Service worker cache version is bumped for this release. Add new runtime modules to the precache list when introducing them.
+
+## km_review (native Khmer check needed)
+- **Machine-translated, unverified:** `quiz.r.*.fact` for all 8 dishes in `site/i18n/km.json` (amok, lok-lak, num-banh-chok, kuy-teav, samlor-korko, bai-sach-chrouk, kralan, prahok-ktis). I translated them from the English facts and added no new claims. Also listed in `tools/km_review.json`.
+- **Verbatim from Marketer's launch kit (still marked [needs native check] there):** all quiz/UI Khmer, including `quiz.r.kralan.blurb`.
+- **Holiday names:** `km_verified=false` (Research Bot).
