@@ -1,5 +1,5 @@
-const CACHE = 'v1';
-const SHELL = ['./', './index.html', './styles.css', './js/config.js', './js/app.js', './js/i18n.js', './js/analytics.js', './i18n/en.json', './i18n/km.json', './assets/fonts/inter-latin-var.woff2', './assets/fonts/kantumruy-khmer-var.woff2', './manifest.webmanifest', './favicon.svg', './icon-192.png', './icon-512.png', './icon-maskable-512.png', './apple-touch-icon.png'];
+const CACHE = 'v2-quiz';
+const SHELL = ['./', './index.html', './styles.css', './js/config.js', './js/app.js', './js/i18n.js', './js/analytics.js', './js/source.js', './js/modules/quiz.js', './js/modules/content.js', './js/result.js', './quiz/quiz.json', './r/index.json', './i18n/en.json', './i18n/km.json', './assets/fonts/inter-latin-var.woff2', './assets/fonts/kantumruy-khmer-var.woff2', './manifest.webmanifest', './favicon.svg', './icon-192.png', './icon-512.png', './icon-maskable-512.png', './apple-touch-icon.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)));
 });
@@ -18,7 +18,7 @@ self.addEventListener('fetch', event => {
       await cache.put(event.request, response.clone());
       return response;
     };
-    if (url.pathname === dataURL.pathname) {
+    if (url.pathname === dataURL.pathname || url.pathname === new URL('./quiz/quiz.json', self.registration.scope).pathname) {
       try { return await network(); }
       catch { return await cache.match(event.request) || Response.error(); }
     }

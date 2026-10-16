@@ -3,10 +3,13 @@ window.ANALYTICS_CONFIG = {
   provider: 'none', // 'goatcounter' or 'none'
   goatcounterCode: '', // Site code, not a URL.
   respectDNT: true,
+  allowLocal: false,
   debug: false
 };
 window.SITE_CONFIG = {
   name: 'Seed',
+  module: 'quiz',
+  siteUrl: 'https://example.github.io/REPO/',
   url: 'https://SITE_URL/',
   contentUrl: './data/content.json'
 };

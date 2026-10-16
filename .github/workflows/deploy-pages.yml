@@ -2,7 +2,7 @@ name: Deploy Pages
 on:
   push:
     branches: [main]
-    paths: ['site/**']
+    paths: ['site/**', 'tools/**', '.github/workflows/deploy-pages.yml']
   workflow_dispatch:
   workflow_call:
     inputs:
@@ -29,6 +29,15 @@ jobs:
         with:
           ref: ${{ inputs.ref || github.sha }}
       - uses: actions/configure-pages@v5
+        id: pages
+      - name: Build quiz pages and shaped cards
+        env:
+          SITE_URL: ${{ steps.pages.outputs.base_url }}/
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libraqm0 libfribidi0 libharfbuzz0b
+          python -m pip install pillow
+          python tools/build.py
       - uses: actions/upload-pages-artifact@v3
         with:
           path: site

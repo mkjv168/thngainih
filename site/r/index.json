@@ -1,0 +1,55 @@
+{
+  "results": [
+    {
+      "id": "amok",
+      "emoji": "🍲",
+      "color": "#236659",
+      "name": {
+        "en": "Fish Amok",
+        "km": "អាម៉ុកត្រី"
+      },
+      "tagline": {
+        "en": "Calm, warm, and quietly creative.",
+        "km": "ស្ងប់ស្ងាត់ កក់ក្ដៅ និងមានគំនិតច្នៃប្រឌិត។"
+      },
+      "description": {
+        "en": "[Example] You bring comfort and a thoughtful touch to your circle.",
+        "km": "អត្ថបទគំរូ៖ អ្នកនាំមកនូវភាពកក់ក្ដៅ និងការយកចិត្តទុកដាក់ដល់មិត្តភក្ដិ។"
+      }
+    },
+    {
+      "id": "lok-lak",
+      "emoji": "🥩",
+      "color": "#863d34",
+      "name": {
+        "en": "Beef Lok Lak",
+        "km": "ឡុកឡាក់សាច់គោ"
+      },
+      "tagline": {
+        "en": "Bold energy with a generous heart.",
+        "km": "ស្វាហាប់ ក្លាហាន និងមានចិត្តទូលាយ។"
+      },
+      "description": {
+        "en": "[Example] You jump into new adventures and bring friends along.",
+        "km": "អត្ថបទគំរូ៖ អ្នកចូលចិត្តសាកល្បងអ្វីថ្មីៗ ហើយតែងហៅមិត្តភក្ដិទៅជាមួយ។"
+      }
+    },
+    {
+      "id": "num-banh-chok",
+      "emoji": "🍜",
+      "color": "#385d87",
+      "name": {
+        "en": "Num Banh Chok",
+        "km": "នំបញ្ចុក"
+      },
+      "tagline": {
+        "en": "Fresh ideas and easy company.",
+        "km": "គំនិតថ្មីៗ និងភាពរួសរាយរាក់ទាក់។"
+      },
+      "description": {
+        "en": "[Example] You connect people and find joy in everyday moments.",
+        "km": "អត្ថបទគំរូ៖ អ្នកចូលចិត្តភ្ជាប់ទំនាក់ទំនង និងរកឃើញភាពរីករាយក្នុងជីវិតប្រចាំថ្ងៃ។"
+      }
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "_note": "EXAMPLE DATA - placeholder quiz, replace before launch",
+  "id": "khmer-dish",
+  "version": 1,
+  "title": {
+    "en": "Which Khmer dish are you? (EXAMPLE)",
+    "km": "តើអ្នកជាម្ហូបខ្មែរមួយណា? (គំរូ)"
+  },
+  "intro": {
+    "en": "Five playful questions. Pick what feels like you. Example quiz, just for fun!",
+    "km": "ឆ្លើយសំណួរសប្បាយៗចំនួនប្រាំ។ ជ្រើសរើសចម្លើយដែលសមនឹងអ្នក។ នេះជាកម្រងសំណួរគំរូសម្រាប់កម្សាន្ត!"
+  },
+  "questions": [
+    {
+      "id": "q1",
+      "text": {
+        "en": "A free afternoon! What sounds best?",
+        "km": "ពេលរសៀលទំនេរ តើអ្នកចង់ធ្វើអ្វី?"
+      },
+      "answers": [
+        {
+          "id": "a1",
+          "text": {
+            "en": "Read somewhere quiet",
+            "km": "អានសៀវភៅនៅកន្លែងស្ងាត់"
+          },
+          "scores": {
+            "amok": 2
+          }
+        },
+        {
+          "id": "a2",
+          "text": {
+            "en": "Try a new activity",
+            "km": "សាកល្បងសកម្មភាពថ្មី"
+          },
+          "scores": {
+            "lok-lak": 2
+          }
+        },
+        {
+          "id": "a3",
+          "text": {
+            "en": "Meet friends",
+            "km": "ជួបមិត្តភក្ដិ"
+          },
+          "scores": {
+            "num-banh-chok": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q2",
+      "text": {
+        "en": "What do friends count on you for?",
+        "km": "តើមិត្តភក្ដិពឹងអ្នកលើរឿងអ្វី?"
+      },
+      "answers": [
+        {
+          "id": "a1",
+          "text": {
+            "en": "A patient listener",
+            "km": "ស្ដាប់ដោយអត់ធ្មត់"
+          },
+          "scores": {
+            "amok": 2
+          }
+        },
+        {
+          "id": "a2",
+          "text": {
+            "en": "Making a plan happen",
+            "km": "ធ្វើឱ្យផែនការក្លាយជាការពិត"
+          },
+          "scores": {
+            "lok-lak": 2
+          }
+        },
+        {
+          "id": "a3",
+          "text": {
+            "en": "Bringing everyone together",
+            "km": "ប្រមូលផ្ដុំមិត្តភក្ដិឱ្យជួបជុំគ្នា"
+          },
+          "scores": {
+            "num-banh-chok": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "text": {
+        "en": "Pick a weekend outing.",
+        "km": "ជ្រើសរើសដំណើរកម្សាន្តចុងសប្ដាហ៍។"
+      },
+      "answers": [
+        {
+          "id": "a1",
+          "text": {
+            "en": "A peaceful riverside",
+            "km": "មាត់ទន្លេស្ងប់ស្ងាត់"
+          },
+          "scores": {
+            "amok": 2
+          }
+        },
+        {
+          "id": "a2",
+          "text": {
+            "en": "An adventurous hike",
+            "km": "ដើរឡើងភ្នំផ្សងព្រេង"
+          },
+          "scores": {
+            "lok-lak": 2
+          }
+        },
+        {
+          "id": "a3",
+          "text": {
+            "en": "A lively local market",
+            "km": "ផ្សារដ៏អ៊ូអរ"
+          },
+          "scores": {
+            "num-banh-chok": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "text": {
+        "en": "How do you approach a new project?",
+        "km": "តើអ្នកចាប់ផ្ដើមគម្រោងថ្មីយ៉ាងដូចម្ដេច?"
+      },
+      "answers": [
+        {
+          "id": "a1",
+          "text": {
+            "en": "Think it through first",
+            "km": "គិតឱ្យបានល្អជាមុន"
+          },
+          "scores": {
+            "amok": 2
+          }
+        },
+        {
+          "id": "a2",
+          "text": {
+            "en": "Start and learn as I go",
+            "km": "ចាប់ផ្ដើម ហើយរៀនបណ្ដើរ"
+          },
+          "scores": {
+            "lok-lak": 2
+          }
+        },
+        {
+          "id": "a3",
+          "text": {
+            "en": "Exchange ideas with others",
+            "km": "ចែករំលែកគំនិតជាមួយអ្នកដទៃ"
+          },
+          "scores": {
+            "num-banh-chok": 2
+          }
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "text": {
+        "en": "What makes a meal special?",
+        "km": "តើអ្វីធ្វើឱ្យអាហារមួយពេលពិសេស?"
+      },
+      "answers": [
+        {
+          "id": "a1",
+          "text": {
+            "en": "A comforting familiar taste",
+            "km": "រសជាតិដែលធ្លាប់ស្គាល់ និងធ្វើឱ្យកក់ក្ដៅ"
+          },
+          "scores": {
+            "amok": 2
+          }
+        },
+        {
+          "id": "a2",
+          "text": {
+            "en": "An exciting new flavour",
+            "km": "រសជាតិថ្មីគួរឱ្យចាប់អារម្មណ៍"
+          },
+          "scores": {
+            "lok-lak": 2
+          }
+        },
+        {
+          "id": "a3",
+          "text": {
+            "en": "Sharing it with good company",
+            "km": "ញ៉ាំជាមួយមនុស្សជាទីស្រឡាញ់"
+          },
+          "scores": {
+            "num-banh-chok": 2
+          }
+        }
+      ]
+    }
+  ],
+  "results": [
+    {
+      "id": "amok",
+      "emoji": "🍲",
+      "color": "#236659",
+      "name": {
+        "en": "Fish Amok",
+        "km": "អាម៉ុកត្រី"
+      },
+      "tagline": {
+        "en": "Calm, warm, and quietly creative.",
+        "km": "ស្ងប់ស្ងាត់ កក់ក្ដៅ និងមានគំនិតច្នៃប្រឌិត។"
+      },
+      "description": {
+        "en": "[Example] You bring comfort and a thoughtful touch to your circle.",
+        "km": "អត្ថបទគំរូ៖ អ្នកនាំមកនូវភាពកក់ក្ដៅ និងការយកចិត្តទុកដាក់ដល់មិត្តភក្ដិ។"
+      }
+    },
+    {
+      "id": "lok-lak",
+      "emoji": "🥩",
+      "color": "#863d34",
+      "name": {
+        "en": "Beef Lok Lak",
+        "km": "ឡុកឡាក់សាច់គោ"
+      },
+      "tagline": {
+        "en": "Bold energy with a generous heart.",
+        "km": "ស្វាហាប់ ក្លាហាន និងមានចិត្តទូលាយ។"
+      },
+      "description": {
+        "en": "[Example] You jump into new adventures and bring friends along.",
+        "km": "អត្ថបទគំរូ៖ អ្នកចូលចិត្តសាកល្បងអ្វីថ្មីៗ ហើយតែងហៅមិត្តភក្ដិទៅជាមួយ។"
+      }
+    },
+    {
+      "id": "num-banh-chok",
+      "emoji": "🍜",
+      "color": "#385d87",
+      "name": {
+        "en": "Num Banh Chok",
+        "km": "នំបញ្ចុក"
+      },
+      "tagline": {
+        "en": "Fresh ideas and easy company.",
+        "km": "គំនិតថ្មីៗ និងភាពរួសរាយរាក់ទាក់។"
+      },
+      "description": {
+        "en": "[Example] You connect people and find joy in everyday moments.",
+        "km": "អត្ថបទគំរូ៖ អ្នកចូលចិត្តភ្ជាប់ទំនាក់ទំនង និងរកឃើញភាពរីករាយក្នុងជីវិតប្រចាំថ្ងៃ។"
+      }
+    }
+  ],
+  "tiebreak": [
+    "amok",
+    "lok-lak",
+    "num-banh-chok"
+  ]
+}
