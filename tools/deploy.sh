@@ -18,6 +18,7 @@ git diff --quiet || { echo "Build changed tracked files; commit them first"; exi
 ! rg -q 'example\.github\.io' site || { echo "placeholder origin still in site/"; exit 1; }
 
 echo "== repo"
+gh auth setup-git   # use gh as the git credential helper (no token printed)
 if gh repo view "$FULL" >/dev/null 2>&1; then
   echo "$FULL exists"
   git remote get-url origin >/dev/null 2>&1 || git remote add origin "https://github.com/$FULL.git"
