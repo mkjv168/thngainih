@@ -1,0 +1,12 @@
+{
+ "_note": "Traditional Khmer weekday dress colours. Sources: Leisure Cambodia, 'A Color For Each Day, A Day For Each Color' (leisurecambodia.com/news/detail.php?id=182, quoting Ministry of Culture researcher Keo Narom and a 1960s Buddhist Institute text); The Better Cambodia, 'The Seven Colors of Cambodian Tradition' (thebettercambodia.com/the-seven-colors-of-cambodian-tradition/). Hex values are display approximations. Khmer colour names need native review.",
+ "weekdays": [
+  {"dow": 0, "day": {"en": "Sunday", "km": "ថ្ងៃអាទិត្យ"}, "color": {"en": "Red", "km": "ក្រហម"}, "hex": "#C8102E"},
+  {"dow": 1, "day": {"en": "Monday", "km": "ថ្ងៃច័ន្ទ"}, "color": {"en": "Orange-yellow", "km": "លឿងទុំ"}, "hex": "#F28C28"},
+  {"dow": 2, "day": {"en": "Tuesday", "km": "ថ្ងៃអង្គារ"}, "color": {"en": "Violet", "km": "ស្វាយ"}, "hex": "#7851A9"},
+  {"dow": 3, "day": {"en": "Wednesday", "km": "ថ្ងៃពុធ"}, "color": {"en": "Light green", "km": "បៃតងខ្ចី"}, "hex": "#8DB600"},
+  {"dow": 4, "day": {"en": "Thursday", "km": "ថ្ងៃព្រហស្បតិ៍"}, "color": {"en": "Green", "km": "បៃតង"}, "hex": "#2E8B3E"},
+  {"dow": 5, "day": {"en": "Friday", "km": "ថ្ងៃសុក្រ"}, "color": {"en": "Blue", "km": "ខៀវ"}, "hex": "#1F5FBF"},
+  {"dow": 6, "day": {"en": "Saturday", "km": "ថ្ងៃសៅរ៍"}, "color": {"en": "Dark purple", "km": "ស្វាយចាស់"}, "hex": "#4B1D52"}
+ ]
+}

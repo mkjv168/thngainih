@@ -1,0 +1,286 @@
+{
+ "_status": "PLACEHOLDER: unverified draft. 2027 dates are NOT from the official sub-decree (No. 198 ANKr.BK, signed 16 Sep 2026); lunar dates computed with MomentKH, fixed dates from prior-year patterns. Replace with Research Bot's official list before launch. Only entries with verified=true are confirmed.",
+ "schemaVersion": 1,
+ "source": null,
+ "updated": "2026-10-16",
+ "schema": {
+  "date": "YYYY-MM-DD (ICT)",
+  "name": {
+   "en": "string",
+   "km": "string"
+  },
+  "kind": "fixed|lunar|solar",
+  "verified": "bool",
+  "lunarRule": "optional",
+  "note": "optional"
+ },
+ "holidays": [
+  {
+   "date": "2026-10-29",
+   "name": {
+    "en": "Coronation Day of King Norodom Sihamoni",
+    "km": "ព្រះរាជពិធីគ្រងព្រះបរមរាជសម្បត្តិ"
+   },
+   "kind": "fixed",
+   "verified": false
+  },
+  {
+   "date": "2026-11-09",
+   "name": {
+    "en": "Independence Day",
+    "km": "ទិវាបុណ្យឯករាជ្យជាតិ"
+   },
+   "kind": "fixed",
+   "verified": false
+  },
+  {
+   "date": "2026-11-23",
+   "name": {
+    "en": "Water Festival (Day 1)",
+    "km": "ព្រះរាជពិធីបុណ្យអុំទូក (ថ្ងៃទី១)"
+   },
+   "kind": "lunar",
+   "verified": true,
+   "lunarRule": "14 waxing Kadeuk",
+   "note": "Public holiday kept; Phnom Penh celebrations suspended (AKP, 30 Jun 2026, akp.gov.kh/post/detail/374510)"
+  },
+  {
+   "date": "2026-11-24",
+   "name": {
+    "en": "Water Festival (Day 2)",
+    "km": "ព្រះរាជពិធីបុណ្យអុំទូក (ថ្ងៃទី២)"
+   },
+   "kind": "lunar",
+   "verified": true,
+   "lunarRule": "15 waxing Kadeuk",
+   "note": "See Day 1"
+  },
+  {
+   "date": "2026-11-25",
+   "name": {
+    "en": "Water Festival (Day 3)",
+    "km": "ព្រះរាជពិធីបុណ្យអុំទូក (ថ្ងៃទី៣)"
+   },
+   "kind": "lunar",
+   "verified": true,
+   "lunarRule": "1 waning Kadeuk",
+   "note": "See Day 1"
+  },
+  {
+   "date": "2026-12-29",
+   "name": {
+    "en": "Peace Day in Cambodia",
+    "km": "ទិវាសន្តិភាពនៅកម្ពុជា"
+   },
+   "kind": "fixed",
+   "verified": false
+  },
+  {
+   "date": "2027-01-01",
+   "name": {
+    "en": "International New Year's Day",
+    "km": "ទិវាចូលឆ្នាំសកល"
+   },
+   "kind": "fixed",
+   "verified": false
+  },
+  {
+   "date": "2027-01-07",
+   "name": {
+    "en": "Victory over Genocide Day",
+    "km": "ទិវាជ័យជម្នះលើរបបប្រល័យពូជសាសន៍"
+   },
+   "kind": "fixed",
+   "verified": false
+  },
+  {
+   "date": "2027-03-08",
+   "name": {
+    "en": "International Women's Day",
+    "km": "ទិវានារីអន្តរជាតិ"
+   },
+   "kind": "fixed",
+   "verified": false
+  },
+  {
+   "date": "2027-04-14",
+   "name": {
+    "en": "Khmer New Year (Day 1)",
+    "km": "ពិធីបុណ្យចូលឆ្នាំថ្មីប្រពៃណីជាតិ (ថ្ងៃទី១)"
+   },
+   "kind": "solar",
+   "verified": false,
+   "lunarRule": "Moha Songkran per momentkh.getNewYear(2027) = 14 Apr 16:48"
+  },
+  {
+   "date": "2027-04-15",
+   "name": {
+    "en": "Khmer New Year (Day 2)",
+    "km": "ពិធីបុណ្យចូលឆ្នាំថ្មីប្រពៃណីជាតិ (ថ្ងៃទី២)"
+   },
+   "kind": "solar",
+   "verified": false
+  },
+  {
+   "date": "2027-04-16",
+   "name": {
+    "en": "Khmer New Year (Day 3)",
+    "km": "ពិធីបុណ្យចូលឆ្នាំថ្មីប្រពៃណីជាតិ (ថ្ងៃទី៣)"
+   },
+   "kind": "solar",
+   "verified": false
+  },
+  {
+   "date": "2027-05-01",
+   "name": {
+    "en": "International Labour Day",
+    "km": "ទិវាពលកម្មអន្តរជាតិ"
+   },
+   "kind": "fixed",
+   "verified": false
+  },
+  {
+   "date": "2027-05-14",
+   "name": {
+    "en": "King Norodom Sihamoni's Birthday",
+    "km": "ព្រះរាជពិធីបុណ្យចម្រើនព្រះជន្ម ព្រះករុណាព្រះបាទសម្តេចព្រះបរមនាថ នរោត្តម សីហមុនី"
+   },
+   "kind": "fixed",
+   "verified": false
+  },
+  {
+   "date": "2027-05-20",
+   "name": {
+    "en": "Visak Bochea Day",
+    "km": "ពិធីបុណ្យវិសាខបូជា"
+   },
+   "kind": "lunar",
+   "verified": false,
+   "lunarRule": "15 waxing Pisakh"
+  },
+  {
+   "date": "2027-05-24",
+   "name": {
+    "en": "Royal Ploughing Ceremony",
+    "km": "ព្រះរាជពិធីច្រត់ព្រះនង្គ័ល"
+   },
+   "kind": "lunar",
+   "verified": false,
+   "lunarRule": "4 waning Pisakh"
+  },
+  {
+   "date": "2027-06-18",
+   "name": {
+    "en": "Queen Mother Norodom Monineath Sihanouk's Birthday",
+    "km": "ព្រះរាជពិធីបុណ្យចម្រើនព្រះជន្ម សម្តេចព្រះមហាក្សត្រី នរោត្តម មុនិនាថ សីហនុ"
+   },
+   "kind": "fixed",
+   "verified": false
+  },
+  {
+   "date": "2027-09-24",
+   "name": {
+    "en": "Constitution Day",
+    "km": "ទិវាប្រកាសរដ្ឋធម្មនុញ្ញ"
+   },
+   "kind": "fixed",
+   "verified": false
+  },
+  {
+   "date": "2027-09-29",
+   "name": {
+    "en": "Pchum Ben (Day 1)",
+    "km": "ពិធីបុណ្យភ្ជុំបិណ្ឌ (ថ្ងៃទី១)"
+   },
+   "kind": "lunar",
+   "verified": false,
+   "lunarRule": "14 waning Phatrabot"
+  },
+  {
+   "date": "2027-09-30",
+   "name": {
+    "en": "Pchum Ben (Day 2)",
+    "km": "ពិធីបុណ្យភ្ជុំបិណ្ឌ (ថ្ងៃទី២)"
+   },
+   "kind": "lunar",
+   "verified": false,
+   "lunarRule": "15 waning Phatrabot"
+  },
+  {
+   "date": "2027-10-01",
+   "name": {
+    "en": "Pchum Ben (Day 3)",
+    "km": "ពិធីបុណ្យភ្ជុំបិណ្ឌ (ថ្ងៃទី៣)"
+   },
+   "kind": "lunar",
+   "verified": false,
+   "lunarRule": "1 waxing Assoch"
+  },
+  {
+   "date": "2027-10-15",
+   "name": {
+    "en": "Commemoration Day of King Father Norodom Sihanouk",
+    "km": "ទិវាប្រារព្ធពិធីគោរពព្រះវិញ្ញាណក្ខន្ធ ព្រះករុណាព្រះបាទសម្តេចព្រះនរោត្តម សីហនុ"
+   },
+   "kind": "fixed",
+   "verified": false
+  },
+  {
+   "date": "2027-10-29",
+   "name": {
+    "en": "Coronation Day of King Norodom Sihamoni",
+    "km": "ព្រះរាជពិធីគ្រងព្រះបរមរាជសម្បត្តិ"
+   },
+   "kind": "fixed",
+   "verified": false
+  },
+  {
+   "date": "2027-11-09",
+   "name": {
+    "en": "Independence Day",
+    "km": "ទិវាបុណ្យឯករាជ្យជាតិ"
+   },
+   "kind": "fixed",
+   "verified": false
+  },
+  {
+   "date": "2027-11-12",
+   "name": {
+    "en": "Water Festival (Day 1)",
+    "km": "ព្រះរាជពិធីបុណ្យអុំទូក (ថ្ងៃទី១)"
+   },
+   "kind": "lunar",
+   "verified": false,
+   "lunarRule": "14 waxing Kadeuk"
+  },
+  {
+   "date": "2027-11-13",
+   "name": {
+    "en": "Water Festival (Day 2)",
+    "km": "ព្រះរាជពិធីបុណ្យអុំទូក (ថ្ងៃទី២)"
+   },
+   "kind": "lunar",
+   "verified": false,
+   "lunarRule": "15 waxing Kadeuk"
+  },
+  {
+   "date": "2027-11-14",
+   "name": {
+    "en": "Water Festival (Day 3)",
+    "km": "ព្រះរាជពិធីបុណ្យអុំទូក (ថ្ងៃទី៣)"
+   },
+   "kind": "lunar",
+   "verified": false,
+   "lunarRule": "1 waning Kadeuk"
+  },
+  {
+   "date": "2027-12-29",
+   "name": {
+    "en": "Peace Day in Cambodia",
+    "km": "ទិវាសន្តិភាពនៅកម្ពុជា"
+   },
+   "kind": "fixed",
+   "verified": false
+  }
+ ]
+}
