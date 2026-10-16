@@ -1,8 +1,9 @@
 {
+  "id": "/thngainih/",
   "name": "Thngai Nih",
   "short_name": "Thngai Nih",
   "lang": "en",
-  "start_url": "/thngainih/?s=pwa",
+  "start_url": "/thngainih/?src=pwa",
   "scope": "/thngainih/",
   "display": "standalone",
   "background_color": "#f5f4ed",
@@ -27,6 +28,5 @@
       "purpose": "maskable"
     }
   ],
-  "id": "./",
   "description": "Your daily Khmer lunar date, holy days, weekday colour and public holidays."
 }

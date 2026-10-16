@@ -6,7 +6,7 @@ const root = document.querySelector('[data-result]');
 const id = root.dataset.result;
 const source = getSource();
 pageview();
-const shareURL = new URL(`r/${id}/`, base);
+const shareURL = new URL(`r/${id}/`, (window.SITE_CONFIG && window.SITE_CONFIG.siteUrl) || base);
 shareURL.search = new URLSearchParams({src: 'share', vs: id}).toString();
 const today = new URL(base);
 if (source) today.searchParams.set('src', source);

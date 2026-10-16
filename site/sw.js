@@ -1,4 +1,4 @@
-const CACHE = 'v6-thngai-nih';
+const CACHE = 'v7-thngai-nih';
 const SHELL = ['./privacy/', './privacy/index.html', './js/privacy.js', './js/day.js', './js/lib/locale.js', './', './index.html', './quiz/', './quiz/index.html', './js/vendor/momentkh.js', './js/lib/khmercal.js', './js/modules/today.js', './data/holidays.json', './data/day-colors.json', './styles.css', './js/config.js', './js/app.js', './js/i18n.js', './js/analytics.js', './js/source.js', './js/modules/quiz.js', './js/modules/content.js', './js/result.js', './quiz/quiz.json', './r/index.json', './i18n/en.json', './i18n/km.json', './assets/fonts/inter-latin-var.woff2', './assets/fonts/kantumruy-khmer-var.woff2', './manifest.webmanifest', './favicon.svg', './icon-192.png', './icon-512.png', './icon-maskable-512.png', './apple-touch-icon.png'];
 self.addEventListener('install', event => {
   event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(SHELL)));

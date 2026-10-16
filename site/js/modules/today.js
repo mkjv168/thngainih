@@ -25,7 +25,7 @@ export async function mount(root,{t,getLang,onLangChange,track,source}) {
     else root.append(el('p',tr('ui.today.11')));
     const actions=el('div','');actions.className='daily-actions';root.append(actions);
     const button=(text,fn)=>{const b=el('button',text);b.type='button';b.onclick=fn;actions.append(b);return b;};
-    const shareURL=new URL(`d/${current}/?src=share`,base),text=`${gregorian(date)} · ${lunarEnglish(k)}`;
+    const shareURL=new URL(`d/${current}/?src=share`,(window.SITE_CONFIG&&window.SITE_CONFIG.siteUrl)||base),text=`${gregorian(date)} · ${lunarEnglish(k)}`;
     const feedback=el('p','');feedback.role='status';
     function fallback(){
       if(actions.querySelector('[data-fallback]'))return;

@@ -1,7 +1,8 @@
 import {getSource} from './source.js';
 const config = window.ANALYTICS_CONFIG || {};
 const blocked = config.provider !== 'goatcounter' || !/^[a-z0-9-]+$/i.test(config.goatcounterCode || '') ||
-  location.protocol === 'file:' || (!config.allowLocal && ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname)) ||
+  location.protocol === 'file:' ||
+  (!config.allowLocal && config.host && location.hostname !== config.host) || (!config.allowLocal && ['localhost', '127.0.0.1', '[::1]'].includes(location.hostname)) ||
   navigator.globalPrivacyControl || [navigator.doNotTrack, window.doNotTrack].some(v => v === '1' || v === 'yes');
 let ready = false, started = false;
 const queue = [];

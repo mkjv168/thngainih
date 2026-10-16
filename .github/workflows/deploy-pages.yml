@@ -31,6 +31,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - uses: actions/configure-pages@v5
         id: pages
       - name: Build quiz pages and shaped cards
@@ -39,7 +42,8 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y libraqm0 libfribidi0 libharfbuzz0b
-          python -m pip install pillow
+          python -m pip install 'pillow>=10'
+          python -c "from PIL import features; assert features.check('raqm'), 'RAQM missing'"
           python tools/build.py
           python tools/build_daily.py
       - uses: actions/upload-pages-artifact@v3
