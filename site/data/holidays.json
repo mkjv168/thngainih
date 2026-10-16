@@ -1,286 +1,355 @@
 {
- "_status": "PLACEHOLDER: unverified draft. 2027 dates are NOT from the official sub-decree (No. 198 ANKr.BK, signed 16 Sep 2026); lunar dates computed with MomentKH, fixed dates from prior-year patterns. Replace with Research Bot's official list before launch. Only entries with verified=true are confirmed.",
- "schemaVersion": 1,
- "source": null,
- "updated": "2026-10-16",
- "schema": {
-  "date": "YYYY-MM-DD (ICT)",
-  "name": {
-   "en": "string",
-   "km": "string"
+  "_status": "OFFICIAL dates from Research (Sub-Decree 167 ANKr.BK for 2026, 198 ANKr.BK for 2027). Names live in site/i18n/en.json + km.json under holiday.<date>; Khmer names km_verified=false.",
+  "meta": {
+    "generated": "2026-10-16",
+    "coverage": "2026-10-16 to 2027-12-31",
+    "legal_basis": {
+      "2026": "Sub-Decree No. 167 ANKr.BK, 5 Sep 2025 (21 days)",
+      "2027": "Sub-Decree No. 198 ANKr.BK, 16 Sep 2026 (22 days)"
+    },
+    "substitute_days": "None. Labour Law Article 162 as amended 5 Oct 2021 removed the day off in lieu when a holiday falls on a Sunday (DFDL https://www.dfdl.com/insights/legal-and-tax-updates/cambodia-amendment-of-the-labour-law/ ; Nop Legal https://noplegal.com/2021/11/26/no-more-day-off-if-public-holiday-falls-on-sunday/). publicholidaycalendar.com also states no 2027 holiday is moved. The government can still add ad-hoc days by notice; re-check news.",
+    "km_names": "No machine-readable official Khmer text was available (the sub-decrees are scanned images/PDFs). All name_km values are km_verified=false and need native-speaker or official-text check.",
+    "counts": {
+      "2026_remaining": 6,
+      "2027": 22
+    },
+    "update_due": "~September 2027, when the 2028 sub-decree is issued",
+    "sources": [
+      "https://www.akp.gov.kh/post/detail/347356",
+      "https://nis.gov.kh/wp-content/uploads/2026/04/Sub-Decree-167-Public-Holiday-2026.pdf",
+      "https://www.timeanddate.com/holidays/cambodia/2026",
+      "https://www.akp.gov.kh/post/detail/374510",
+      "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+      "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+      "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+    ]
   },
-  "kind": "fixed|lunar|solar",
-  "verified": "bool",
-  "lunarRule": "optional",
-  "note": "optional"
- },
- "holidays": [
-  {
-   "date": "2026-10-29",
-   "name": {
-    "en": "Coronation Day of King Norodom Sihamoni",
-    "km": "ព្រះរាជពិធីគ្រងព្រះបរមរាជសម្បត្តិ"
-   },
-   "kind": "fixed",
-   "verified": false
+  "schemaVersion": 2,
+  "schema": {
+    "date": "YYYY-MM-DD (ICT)",
+    "name": "i18n key",
+    "kmVerified": "bool",
+    "sources": "[url]",
+    "note": "optional i18n key"
   },
-  {
-   "date": "2026-11-09",
-   "name": {
-    "en": "Independence Day",
-    "km": "ទិវាបុណ្យឯករាជ្យជាតិ"
-   },
-   "kind": "fixed",
-   "verified": false
-  },
-  {
-   "date": "2026-11-23",
-   "name": {
-    "en": "Water Festival (Day 1)",
-    "km": "ព្រះរាជពិធីបុណ្យអុំទូក (ថ្ងៃទី១)"
-   },
-   "kind": "lunar",
-   "verified": true,
-   "lunarRule": "14 waxing Kadeuk",
-   "note": "Public holiday kept; Phnom Penh celebrations suspended (AKP, 30 Jun 2026, akp.gov.kh/post/detail/374510)"
-  },
-  {
-   "date": "2026-11-24",
-   "name": {
-    "en": "Water Festival (Day 2)",
-    "km": "ព្រះរាជពិធីបុណ្យអុំទូក (ថ្ងៃទី២)"
-   },
-   "kind": "lunar",
-   "verified": true,
-   "lunarRule": "15 waxing Kadeuk",
-   "note": "See Day 1"
-  },
-  {
-   "date": "2026-11-25",
-   "name": {
-    "en": "Water Festival (Day 3)",
-    "km": "ព្រះរាជពិធីបុណ្យអុំទូក (ថ្ងៃទី៣)"
-   },
-   "kind": "lunar",
-   "verified": true,
-   "lunarRule": "1 waning Kadeuk",
-   "note": "See Day 1"
-  },
-  {
-   "date": "2026-12-29",
-   "name": {
-    "en": "Peace Day in Cambodia",
-    "km": "ទិវាសន្តិភាពនៅកម្ពុជា"
-   },
-   "kind": "fixed",
-   "verified": false
-  },
-  {
-   "date": "2027-01-01",
-   "name": {
-    "en": "International New Year's Day",
-    "km": "ទិវាចូលឆ្នាំសកល"
-   },
-   "kind": "fixed",
-   "verified": false
-  },
-  {
-   "date": "2027-01-07",
-   "name": {
-    "en": "Victory over Genocide Day",
-    "km": "ទិវាជ័យជម្នះលើរបបប្រល័យពូជសាសន៍"
-   },
-   "kind": "fixed",
-   "verified": false
-  },
-  {
-   "date": "2027-03-08",
-   "name": {
-    "en": "International Women's Day",
-    "km": "ទិវានារីអន្តរជាតិ"
-   },
-   "kind": "fixed",
-   "verified": false
-  },
-  {
-   "date": "2027-04-14",
-   "name": {
-    "en": "Khmer New Year (Day 1)",
-    "km": "ពិធីបុណ្យចូលឆ្នាំថ្មីប្រពៃណីជាតិ (ថ្ងៃទី១)"
-   },
-   "kind": "solar",
-   "verified": false,
-   "lunarRule": "Moha Songkran per momentkh.getNewYear(2027) = 14 Apr 16:48"
-  },
-  {
-   "date": "2027-04-15",
-   "name": {
-    "en": "Khmer New Year (Day 2)",
-    "km": "ពិធីបុណ្យចូលឆ្នាំថ្មីប្រពៃណីជាតិ (ថ្ងៃទី២)"
-   },
-   "kind": "solar",
-   "verified": false
-  },
-  {
-   "date": "2027-04-16",
-   "name": {
-    "en": "Khmer New Year (Day 3)",
-    "km": "ពិធីបុណ្យចូលឆ្នាំថ្មីប្រពៃណីជាតិ (ថ្ងៃទី៣)"
-   },
-   "kind": "solar",
-   "verified": false
-  },
-  {
-   "date": "2027-05-01",
-   "name": {
-    "en": "International Labour Day",
-    "km": "ទិវាពលកម្មអន្តរជាតិ"
-   },
-   "kind": "fixed",
-   "verified": false
-  },
-  {
-   "date": "2027-05-14",
-   "name": {
-    "en": "King Norodom Sihamoni's Birthday",
-    "km": "ព្រះរាជពិធីបុណ្យចម្រើនព្រះជន្ម ព្រះករុណាព្រះបាទសម្តេចព្រះបរមនាថ នរោត្តម សីហមុនី"
-   },
-   "kind": "fixed",
-   "verified": false
-  },
-  {
-   "date": "2027-05-20",
-   "name": {
-    "en": "Visak Bochea Day",
-    "km": "ពិធីបុណ្យវិសាខបូជា"
-   },
-   "kind": "lunar",
-   "verified": false,
-   "lunarRule": "15 waxing Pisakh"
-  },
-  {
-   "date": "2027-05-24",
-   "name": {
-    "en": "Royal Ploughing Ceremony",
-    "km": "ព្រះរាជពិធីច្រត់ព្រះនង្គ័ល"
-   },
-   "kind": "lunar",
-   "verified": false,
-   "lunarRule": "4 waning Pisakh"
-  },
-  {
-   "date": "2027-06-18",
-   "name": {
-    "en": "Queen Mother Norodom Monineath Sihanouk's Birthday",
-    "km": "ព្រះរាជពិធីបុណ្យចម្រើនព្រះជន្ម សម្តេចព្រះមហាក្សត្រី នរោត្តម មុនិនាថ សីហនុ"
-   },
-   "kind": "fixed",
-   "verified": false
-  },
-  {
-   "date": "2027-09-24",
-   "name": {
-    "en": "Constitution Day",
-    "km": "ទិវាប្រកាសរដ្ឋធម្មនុញ្ញ"
-   },
-   "kind": "fixed",
-   "verified": false
-  },
-  {
-   "date": "2027-09-29",
-   "name": {
-    "en": "Pchum Ben (Day 1)",
-    "km": "ពិធីបុណ្យភ្ជុំបិណ្ឌ (ថ្ងៃទី១)"
-   },
-   "kind": "lunar",
-   "verified": false,
-   "lunarRule": "14 waning Phatrabot"
-  },
-  {
-   "date": "2027-09-30",
-   "name": {
-    "en": "Pchum Ben (Day 2)",
-    "km": "ពិធីបុណ្យភ្ជុំបិណ្ឌ (ថ្ងៃទី២)"
-   },
-   "kind": "lunar",
-   "verified": false,
-   "lunarRule": "15 waning Phatrabot"
-  },
-  {
-   "date": "2027-10-01",
-   "name": {
-    "en": "Pchum Ben (Day 3)",
-    "km": "ពិធីបុណ្យភ្ជុំបិណ្ឌ (ថ្ងៃទី៣)"
-   },
-   "kind": "lunar",
-   "verified": false,
-   "lunarRule": "1 waxing Assoch"
-  },
-  {
-   "date": "2027-10-15",
-   "name": {
-    "en": "Commemoration Day of King Father Norodom Sihanouk",
-    "km": "ទិវាប្រារព្ធពិធីគោរពព្រះវិញ្ញាណក្ខន្ធ ព្រះករុណាព្រះបាទសម្តេចព្រះនរោត្តម សីហនុ"
-   },
-   "kind": "fixed",
-   "verified": false
-  },
-  {
-   "date": "2027-10-29",
-   "name": {
-    "en": "Coronation Day of King Norodom Sihamoni",
-    "km": "ព្រះរាជពិធីគ្រងព្រះបរមរាជសម្បត្តិ"
-   },
-   "kind": "fixed",
-   "verified": false
-  },
-  {
-   "date": "2027-11-09",
-   "name": {
-    "en": "Independence Day",
-    "km": "ទិវាបុណ្យឯករាជ្យជាតិ"
-   },
-   "kind": "fixed",
-   "verified": false
-  },
-  {
-   "date": "2027-11-12",
-   "name": {
-    "en": "Water Festival (Day 1)",
-    "km": "ព្រះរាជពិធីបុណ្យអុំទូក (ថ្ងៃទី១)"
-   },
-   "kind": "lunar",
-   "verified": false,
-   "lunarRule": "14 waxing Kadeuk"
-  },
-  {
-   "date": "2027-11-13",
-   "name": {
-    "en": "Water Festival (Day 2)",
-    "km": "ព្រះរាជពិធីបុណ្យអុំទូក (ថ្ងៃទី២)"
-   },
-   "kind": "lunar",
-   "verified": false,
-   "lunarRule": "15 waxing Kadeuk"
-  },
-  {
-   "date": "2027-11-14",
-   "name": {
-    "en": "Water Festival (Day 3)",
-    "km": "ព្រះរាជពិធីបុណ្យអុំទូក (ថ្ងៃទី៣)"
-   },
-   "kind": "lunar",
-   "verified": false,
-   "lunarRule": "1 waning Kadeuk"
-  },
-  {
-   "date": "2027-12-29",
-   "name": {
-    "en": "Peace Day in Cambodia",
-    "km": "ទិវាសន្តិភាពនៅកម្ពុជា"
-   },
-   "kind": "fixed",
-   "verified": false
-  }
- ]
+  "holidays": [
+    {
+      "date": "2026-10-29",
+      "name": "holiday.2026-10-29",
+      "kmVerified": false,
+      "sources": [
+        "https://www.akp.gov.kh/post/detail/347356",
+        "https://nis.gov.kh/wp-content/uploads/2026/04/Sub-Decree-167-Public-Holiday-2026.pdf",
+        "https://www.timeanddate.com/holidays/cambodia/2026"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2026/10 (khmer-calendar.com, not an official source)"
+    },
+    {
+      "date": "2026-11-09",
+      "name": "holiday.2026-11-09",
+      "kmVerified": false,
+      "sources": [
+        "https://www.akp.gov.kh/post/detail/347356",
+        "https://nis.gov.kh/wp-content/uploads/2026/04/Sub-Decree-167-Public-Holiday-2026.pdf",
+        "https://www.timeanddate.com/holidays/cambodia/2026"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2026/11 (khmer-calendar.com, not an official source)"
+    },
+    {
+      "date": "2026-11-23",
+      "name": "holiday.2026-11-23",
+      "kmVerified": false,
+      "sources": [
+        "https://www.akp.gov.kh/post/detail/347356",
+        "https://nis.gov.kh/wp-content/uploads/2026/04/Sub-Decree-167-Public-Holiday-2026.pdf",
+        "https://www.timeanddate.com/holidays/cambodia/2026",
+        "https://www.akp.gov.kh/post/detail/374510"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2026/11 (khmer-calendar.com, not an official source)",
+      "note": "holiday.2026-11-23.note"
+    },
+    {
+      "date": "2026-11-24",
+      "name": "holiday.2026-11-24",
+      "kmVerified": false,
+      "sources": [
+        "https://www.akp.gov.kh/post/detail/347356",
+        "https://nis.gov.kh/wp-content/uploads/2026/04/Sub-Decree-167-Public-Holiday-2026.pdf",
+        "https://www.timeanddate.com/holidays/cambodia/2026",
+        "https://www.akp.gov.kh/post/detail/374510"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2026/11 (khmer-calendar.com, not an official source)",
+      "note": "holiday.2026-11-24.note"
+    },
+    {
+      "date": "2026-11-25",
+      "name": "holiday.2026-11-25",
+      "kmVerified": false,
+      "sources": [
+        "https://www.akp.gov.kh/post/detail/347356",
+        "https://nis.gov.kh/wp-content/uploads/2026/04/Sub-Decree-167-Public-Holiday-2026.pdf",
+        "https://www.timeanddate.com/holidays/cambodia/2026",
+        "https://www.akp.gov.kh/post/detail/374510"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2026/11 (khmer-calendar.com, not an official source)",
+      "note": "holiday.2026-11-25.note"
+    },
+    {
+      "date": "2026-12-29",
+      "name": "holiday.2026-12-29",
+      "kmVerified": false,
+      "sources": [
+        "https://www.akp.gov.kh/post/detail/347356",
+        "https://nis.gov.kh/wp-content/uploads/2026/04/Sub-Decree-167-Public-Holiday-2026.pdf",
+        "https://www.timeanddate.com/holidays/cambodia/2026"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2026/12 (khmer-calendar.com, not an official source)"
+    },
+    {
+      "date": "2027-01-01",
+      "name": "holiday.2027-01-01",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2027/01 (khmer-calendar.com, not an official source)"
+    },
+    {
+      "date": "2027-01-07",
+      "name": "holiday.2027-01-07",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2027/01 (khmer-calendar.com, not an official source)"
+    },
+    {
+      "date": "2027-03-08",
+      "name": "holiday.2027-03-08",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "data.holidays.holidays.8.kmSource"
+    },
+    {
+      "date": "2027-04-14",
+      "name": "holiday.2027-04-14",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "data.holidays.holidays.9.kmSource",
+      "_internalNote": "Day 1 entry time per khmer-calendar.com: 4:48 PM (unverified)"
+    },
+    {
+      "date": "2027-04-15",
+      "name": "holiday.2027-04-15",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "data.holidays.holidays.10.kmSource"
+    },
+    {
+      "date": "2027-04-16",
+      "name": "holiday.2027-04-16",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "data.holidays.holidays.11.kmSource"
+    },
+    {
+      "date": "2027-05-01",
+      "name": "holiday.2027-05-01",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "data.holidays.holidays.12.kmSource",
+      "_internalNote": "Falls on a Saturday; no substitute day (see meta)."
+    },
+    {
+      "date": "2027-05-14",
+      "name": "holiday.2027-05-14",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2027/05 (khmer-calendar.com, not an official source)"
+    },
+    {
+      "date": "2027-05-20",
+      "name": "holiday.2027-05-20",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2027/05 (khmer-calendar.com, not an official source)"
+    },
+    {
+      "date": "2027-05-24",
+      "name": "holiday.2027-05-24",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "data.holidays.holidays.15.kmSource"
+    },
+    {
+      "date": "2027-06-18",
+      "name": "holiday.2027-06-18",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "khmer-calendar.com gives the phrase without the name; name added [I]"
+    },
+    {
+      "date": "2027-09-24",
+      "name": "holiday.2027-09-24",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2027/09 (khmer-calendar.com, not an official source)"
+    },
+    {
+      "date": "2027-09-29",
+      "name": "holiday.2027-09-29",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "data.holidays.holidays.18.kmSource"
+    },
+    {
+      "date": "2027-09-30",
+      "name": "holiday.2027-09-30",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "data.holidays.holidays.19.kmSource"
+    },
+    {
+      "date": "2027-10-01",
+      "name": "holiday.2027-10-01",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "data.holidays.holidays.20.kmSource"
+    },
+    {
+      "date": "2027-10-15",
+      "name": "holiday.2027-10-15",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "data.holidays.holidays.21.kmSource"
+    },
+    {
+      "date": "2027-10-29",
+      "name": "holiday.2027-10-29",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2027/10 (khmer-calendar.com, not an official source)"
+    },
+    {
+      "date": "2027-11-09",
+      "name": "holiday.2027-11-09",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2027/11 (khmer-calendar.com, not an official source)"
+    },
+    {
+      "date": "2027-11-12",
+      "name": "holiday.2027-11-12",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2027/11 (khmer-calendar.com, not an official source)"
+    },
+    {
+      "date": "2027-11-13",
+      "name": "holiday.2027-11-13",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2027/11 (khmer-calendar.com, not an official source)",
+      "_internalNote": "Falls on a Saturday; no substitute day (see meta)."
+    },
+    {
+      "date": "2027-11-14",
+      "name": "holiday.2027-11-14",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2027/11 (khmer-calendar.com, not an official source)",
+      "_internalNote": "Falls on a Sunday; no substitute day (see meta)."
+    },
+    {
+      "date": "2027-12-29",
+      "name": "holiday.2027-12-29",
+      "kmVerified": false,
+      "sources": [
+        "https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/",
+        "https://www.cambodianess.com/article/cambodia-has-22-public-holidays-in-2027",
+        "https://www.publicholidaycalendar.com/public-holidays-in-cambodia-for-2027/"
+      ],
+      "kmSource": "https://khmer-calendar.com/km/2027/12 (khmer-calendar.com, not an official source)"
+    }
+  ]
 }

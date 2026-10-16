@@ -1,1 +1,5 @@
-{"siteUrl":"https://example.github.io/REPO/","name":{"en":"Seed","km":"Seed"}}
+{
+  "slug": "thngainih",
+  "origin": "https://example.github.io",
+  "nameKey": "name"
+}

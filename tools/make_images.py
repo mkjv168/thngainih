@@ -1,16 +1,19 @@
 #!/usr/bin/env python3
 """Generate share art and install icons. Requires Pillow only at authoring time."""
 import argparse
+import json
+from siteconfig import local
 from pathlib import Path
+KM = json.loads((Path(__file__).resolve().parent.parent / "site/i18n/km.json").read_text())
 from PIL import Image, ImageDraw, ImageFont, features
 
 ROOT = Path(__file__).resolve().parents[1]
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--name', default='Seed')
-    parser.add_argument('--tagline', default='Start something good.')
-    parser.add_argument('--tagline-km', default='ចាប់ផ្តើមអ្វីដែលល្អ។')
+    parser.add_argument('--name', default=local('name'))
+    parser.add_argument('--tagline', default=local('daily.features'))
+    parser.add_argument('--tagline-km', default=local('name','km'))
     parser.add_argument('--color', default='#123d35')
     parser.add_argument('--font-en', default='/usr/share/fonts/truetype/sand-box/google/Inter/Inter-VariableFont_opsz,wght.ttf')
     parser.add_argument('--font-km', default='/home/box/.local/share/fonts/KantumruyPro[wght].ttf')

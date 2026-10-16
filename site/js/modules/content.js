@@ -15,7 +15,7 @@ function render() {
     try { url = new URL(item.url, location.href); } catch { /* Render plain text. */ }
     const element = document.createElement(url && ['http:', 'https:'].includes(url.protocol) ? 'a' : 'span');
     if (element.tagName === 'A') element.href = url.href;
-    element.textContent = getLang() === 'km' ? item.title_km || item.title : item.title;
+    element.textContent = getLang() === 'km' ? t(item.title_km || item.title) : item.title;
     li.append(element);
     list.append(li);
   }

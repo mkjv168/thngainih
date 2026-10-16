@@ -1,4 +1,4 @@
-import {initI18n, getLang, setLang, onLangChange} from './i18n.js';
+import {initI18n, t, getLang, setLang, onLangChange} from './i18n.js';
 import {pageview, track} from './analytics.js';
 import {getSource} from './source.js';
 const base = new URL('../', import.meta.url);
@@ -17,21 +17,26 @@ if (source) retake.searchParams.set('src', source);
 const vs = new URLSearchParams(location.search).get('vs');
 if (vs) retake.searchParams.set('vs', vs);
 document.querySelector('#retake').href = retake.href;
-const word = (en, km) => getLang() === 'km' ? km : en;
+  const tr=(key,...args)=>t(key).replace(/\{(\d+)\}/g,(_,i)=>args[i]);
+const local=v=>typeof v==='string'?t(v):v?.[getLang()] || v?.en || '';
 let result, results;
 function render() {
   if (!result) return;
   const lang = getLang();
-  document.title = word(`I'm ${result.name.en}`, `ខ្ញុំជា ${result.name.km}`);
+  document.title = t('quiz.resultHeadline').replace('{dish}',local(result.name));
   document.querySelectorAll('[data-name]').forEach(node => node.classList.toggle('current', node.dataset.name === lang));
-  for (const key of ['tagline', 'description']) document.querySelector('#'+key).textContent = result[key][lang];
-  document.querySelector('#native-share').textContent = word('Share', 'ចែករំលែក');
-  document.querySelector('#copy-link').textContent = word('Copy link', 'ចម្លងតំណ');
-  document.querySelector('#retake').textContent = word('Take the quiz / Retake', 'លេងកម្រងសំណួរ / លេងម្ដងទៀត');
+  document.querySelector('#tagline').textContent=local(result.blurb || result.tagline);
+  document.querySelector('#description').textContent=local(result.fact || result.description);
+  document.querySelector('#today-link').textContent=t('quiz.bridge');
+  const text=local(result.share || `quiz.r.${id}.share`).replace('{dish}',local(result.name));
+  document.querySelector('#telegram').href='https://t.me/share/url?'+new URLSearchParams({url:shareURL.href,text});
+  document.querySelector('#native-share').textContent = local(result.cta || 'quiz.shareButton');
+  document.querySelector('#copy-link').textContent = tr('ui.result.3');
+  document.querySelector('#retake').textContent = tr('ui.result.4');
   const friend = results.find(item => item.id === vs && item.id !== id);
   const comparison = document.querySelector('#comparison');
   comparison.hidden = !friend;
-  if (friend) comparison.textContent = word(`You: ${result.name.en} · Friend: ${friend.name.en}`, `អ្នក៖ ${result.name.km} · មិត្ត៖ ${friend.name.km}`);
+  if (friend) comparison.textContent = tr('ui.result.5',local(result.name),local(friend.name));
 }
 onLangChange(render);
 document.querySelector('#language-toggle').onclick = () => setLang(getLang() === 'km' ? 'en' : 'km').catch(() => {});
@@ -43,9 +48,9 @@ async function copy() {
     const area = document.createElement('textarea');
     area.value = shareURL.href; document.body.append(area); area.select();
     const copied = document.execCommand('copy'); area.remove();
-    if (!copied) { window.prompt(word('Copy this link', 'ចម្លងតំណនេះ'), shareURL.href); return; }
+    if (!copied) { window.prompt(tr('ui.result.6'), shareURL.href); return; }
   }
-  document.querySelector('#feedback').textContent = word('Link copied!', 'បានចម្លងតំណ!');
+  document.querySelector('#feedback').textContent = tr('ui.result.7');
 }
 document.querySelector('#copy-link').onclick = copy;
 for (const link of document.querySelectorAll('[data-channel]')) {
@@ -61,7 +66,7 @@ if (navigator.share) {
   const native = document.querySelector('#native-share'); native.hidden = false;
   native.onclick = async () => {
     track('share_tapped', {channel: 'native'});
-    try { await navigator.share({title: document.title, url: shareURL.href}); }
+    try { await navigator.share({title: document.title, url: shareURL.href,text:local(result.share || `quiz.r.${id}.share`).replace('{dish}',local(result.name))}); }
     catch (error) { if (error.name !== 'AbortError') await copy(); }
   };
 }

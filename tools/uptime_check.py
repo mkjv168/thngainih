@@ -16,7 +16,7 @@ def main():
     results = []
     for url in urls:
         try:
-            with urlopen(Request(url, headers={'User-Agent': 'Seed-uptime/1.0'}), timeout=20) as response:
+            with urlopen(Request(url, headers={'User-Agent': 'Thngai Nih-uptime/1.0'}), timeout=20) as response:
                 status = response.status
                 body = response.read().decode('utf-8', errors='replace') if args.expected_text else ''
             results.append({'url': url, 'status': status, 'ok': status == 200 and (not args.expected_text or args.expected_text in body)})

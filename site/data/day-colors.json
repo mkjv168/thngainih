@@ -1,118 +1,57 @@
 {
- "_note": "FOLK CONVENTION: traditional Khmer dress colour of the day, not a guarantee of luck. Values from Research rules.json (2026-10-16), sources: km.wikipedia.org/wiki/ពណ៌តាមថ្ងៃ, km.wikipedia.org/wiki/សំលៀកបំពាក់ខ្មែរ_តំណាងថ្ងៃ, khmernokor.com, cambolist.com, thebettercambodia.com/the-seven-colors-of-cambodian-tradition, leisurecambodia.com/news/detail.php?id=182. Differs from khmer-calendar.com's astrology 'lucky colour' by design.",
- "weekdays": [
-  {
-   "dow": 0,
-   "day": {
-    "en": "Sunday",
-    "km": "ថ្ងៃអាទិត្យ"
-   },
-   "color": {
-    "en": "Red",
-    "km": "ពណ៌ក្រហម"
-   },
-   "hex": "#FF0000",
-   "alt_en": [],
-   "needsNativeCheck": false
-  },
-  {
-   "dow": 1,
-   "day": {
-    "en": "Monday",
-    "km": "ថ្ងៃច័ន្ទ"
-   },
-   "color": {
-    "en": "Yellow-orange",
-    "km": "ពណ៌លឿងទុំ"
-   },
-   "hex": "#FFAA1D",
-   "alt_en": [
-    "yellow",
-    "dark orange"
-   ],
-   "needsNativeCheck": false
-  },
-  {
-   "dow": 2,
-   "day": {
-    "en": "Tuesday",
-    "km": "ថ្ងៃអង្គារ"
-   },
-   "color": {
-    "en": "Purple",
-    "km": "ពណ៌ស្វាយ"
-   },
-   "hex": "#7851A9",
-   "alt_en": [],
-   "needsNativeCheck": false
-  },
-  {
-   "dow": 3,
-   "day": {
-    "en": "Wednesday",
-    "km": "ថ្ងៃពុធ"
-   },
-   "color": {
-    "en": "Olive green",
-    "km": "ពណ៌ស៊ីលៀប"
-   },
-   "hex": "#808000",
-   "alt_en": [
-    "light green"
-   ],
-   "needsNativeCheck": true
-  },
-  {
-   "dow": 4,
-   "day": {
-    "en": "Thursday",
-    "km": "ថ្ងៃព្រហស្បតិ៍"
-   },
-   "color": {
-    "en": "Green",
-    "km": "ពណ៌បៃតង"
-   },
-   "hex": "#008000",
-   "alt_en": [
-    "dark green"
-   ],
-   "needsNativeCheck": true
-  },
-  {
-   "dow": 5,
-   "day": {
-    "en": "Friday",
-    "km": "ថ្ងៃសុក្រ"
-   },
-   "color": {
-    "en": "Blue",
-    "km": "ពណ៌ខៀវ"
-   },
-   "hex": "#0000A0",
-   "alt_en": [],
-   "needsNativeCheck": false
-  },
-  {
-   "dow": 6,
-   "day": {
-    "en": "Saturday",
-    "km": "ថ្ងៃសៅរ៍"
-   },
-   "color": {
-    "en": "Dark purple (plum)",
-    "km": "ពណ៌ព្រីងទុំ"
-   },
-   "hex": "#301934",
-   "alt_en": [
-    "black",
-    "indigo",
-    "dark brown"
-   ],
-   "needsNativeCheck": true
-  }
- ],
- "disclaimer": {
-  "en": "Traditional dress colour of the day. A custom, not a guarantee of luck.",
-  "km": "ពណ៌សម្លៀកបំពាក់តាមថ្ងៃ តាមទំនៀមទម្លាប់ មិនមែនជាការធានាសំណាងទេ។"
- }
+  "weekdays": [
+    {
+      "dow": 0,
+      "day": "weekday.day.0",
+      "color": "weekday.color.0",
+      "hex": "#FF0000",
+      "needsNativeCheck": false
+    },
+    {
+      "dow": 1,
+      "day": "weekday.day.1",
+      "color": "weekday.color.1",
+      "hex": "#FFAA1D",
+      "needsNativeCheck": false
+    },
+    {
+      "dow": 2,
+      "day": "weekday.day.2",
+      "color": "weekday.color.2",
+      "hex": "#7851A9",
+      "needsNativeCheck": false
+    },
+    {
+      "dow": 3,
+      "day": "weekday.day.3",
+      "color": "weekday.color.3",
+      "hex": "#808000",
+      "needsNativeCheck": true
+    },
+    {
+      "dow": 4,
+      "day": "weekday.day.4",
+      "color": "weekday.color.4",
+      "hex": "#008000",
+      "needsNativeCheck": true
+    },
+    {
+      "dow": 5,
+      "day": "weekday.day.5",
+      "color": "weekday.color.5",
+      "hex": "#0000A0",
+      "needsNativeCheck": false
+    },
+    {
+      "dow": 6,
+      "day": "weekday.day.6",
+      "color": "weekday.color.6",
+      "hex": "#301934",
+      "needsNativeCheck": true
+    }
+  ],
+  "sources": [
+    "https://thebettercambodia.com/the-seven-colors-of-cambodian-tradition/",
+    "https://www.khmernokor.com/question-answers/5a0472efb1203"
+  ]
 }

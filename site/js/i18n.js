@@ -1,5 +1,6 @@
+import {en,km} from './lib/locale.js';
 import {track} from './analytics.js';
-const dictionaries = {};
+const dictionaries = {en,km};
 const fallback = {loading: 'Loading the latest updates…', empty: 'Nothing here yet. Check back soon.', error: 'Updates could not be loaded. Please try again later.', languageError: 'Language could not be loaded. Please try again.'};
 let lang = 'en';
 const listeners = new Set();

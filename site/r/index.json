@@ -2,54 +2,84 @@
   "results": [
     {
       "id": "amok",
-      "emoji": "🍲",
-      "color": "#236659",
-      "name": {
-        "en": "Fish Amok",
-        "km": "អាម៉ុកត្រី"
-      },
-      "tagline": {
-        "en": "Calm, warm, and quietly creative.",
-        "km": "ស្ងប់ស្ងាត់ កក់ក្ដៅ និងមានគំនិតច្នៃប្រឌិត។"
-      },
-      "description": {
-        "en": "[Example] You bring comfort and a thoughtful touch to your circle.",
-        "km": "អត្ថបទគំរូ៖ អ្នកនាំមកនូវភាពកក់ក្ដៅ និងការយកចិត្តទុកដាក់ដល់មិត្តភក្ដិ។"
-      }
+      "emoji": "🐟",
+      "color": "#2F6B4F",
+      "name": "quiz.r.amok.name",
+      "blurb": "quiz.r.amok.blurb",
+      "fact": "quiz.r.amok.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.amok.share"
     },
     {
       "id": "lok-lak",
       "emoji": "🥩",
-      "color": "#863d34",
-      "name": {
-        "en": "Beef Lok Lak",
-        "km": "ឡុកឡាក់សាច់គោ"
-      },
-      "tagline": {
-        "en": "Bold energy with a generous heart.",
-        "km": "ស្វាហាប់ ក្លាហាន និងមានចិត្តទូលាយ។"
-      },
-      "description": {
-        "en": "[Example] You jump into new adventures and bring friends along.",
-        "km": "អត្ថបទគំរូ៖ អ្នកចូលចិត្តសាកល្បងអ្វីថ្មីៗ ហើយតែងហៅមិត្តភក្ដិទៅជាមួយ។"
-      }
+      "color": "#9A3B26",
+      "name": "quiz.r.lok-lak.name",
+      "blurb": "quiz.r.lok-lak.blurb",
+      "fact": "quiz.r.lok-lak.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.lok-lak.share"
     },
     {
       "id": "num-banh-chok",
+      "emoji": "🌿",
+      "color": "#3E6E8E",
+      "name": "quiz.r.num-banh-chok.name",
+      "blurb": "quiz.r.num-banh-chok.blurb",
+      "fact": "quiz.r.num-banh-chok.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.num-banh-chok.share"
+    },
+    {
+      "id": "kuy-teav",
       "emoji": "🍜",
-      "color": "#385d87",
-      "name": {
-        "en": "Num Banh Chok",
-        "km": "នំបញ្ចុក"
-      },
-      "tagline": {
-        "en": "Fresh ideas and easy company.",
-        "km": "គំនិតថ្មីៗ និងភាពរួសរាយរាក់ទាក់។"
-      },
-      "description": {
-        "en": "[Example] You connect people and find joy in everyday moments.",
-        "km": "អត្ថបទគំរូ៖ អ្នកចូលចិត្តភ្ជាប់ទំនាក់ទំនង និងរកឃើញភាពរីករាយក្នុងជីវិតប្រចាំថ្ងៃ។"
-      }
+      "color": "#8A6D1F",
+      "name": "quiz.r.kuy-teav.name",
+      "blurb": "quiz.r.kuy-teav.blurb",
+      "fact": "quiz.r.kuy-teav.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.kuy-teav.share"
+    },
+    {
+      "id": "samlor-korko",
+      "emoji": "🥘",
+      "color": "#4F6B2A",
+      "name": "quiz.r.samlor-korko.name",
+      "blurb": "quiz.r.samlor-korko.blurb",
+      "fact": "quiz.r.samlor-korko.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.samlor-korko.share"
+    },
+    {
+      "id": "bai-sach-chrouk",
+      "emoji": "🍚",
+      "color": "#A0522D",
+      "name": "quiz.r.bai-sach-chrouk.name",
+      "blurb": "quiz.r.bai-sach-chrouk.blurb",
+      "fact": "quiz.r.bai-sach-chrouk.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.bai-sach-chrouk.share"
+    },
+    {
+      "id": "kralan",
+      "emoji": "🌾",
+      "color": "#7A5C2E",
+      "name": "quiz.r.kralan.name",
+      "blurb": "quiz.r.kralan.blurb",
+      "fact": "quiz.r.kralan.fact",
+      "kmNameVerified": true,
+      "copyTodo": "Draft blurb by CTO; replace with Marketer copy (fact-check swap nom krok -> kralan)",
+      "share": "quiz.r.kralan.share"
+    },
+    {
+      "id": "prahok-ktis",
+      "emoji": "🥬",
+      "color": "#6B3E5E",
+      "name": "quiz.r.prahok-ktis.name",
+      "blurb": "quiz.r.prahok-ktis.blurb",
+      "fact": "quiz.r.prahok-ktis.fact",
+      "kmNameVerified": true,
+      "share": "quiz.r.prahok-ktis.share"
     }
   ]
 }

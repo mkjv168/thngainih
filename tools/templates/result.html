@@ -12,20 +12,20 @@
 <link rel="stylesheet" href="../../styles.css"><link rel="icon" href="../../favicon.svg">
 <script src="../../js/config.js" defer></script><script type="module" src="../../js/result.js"></script>
 </head><body>
-<header class="container"><a class="brand" href="../../">$site_name</a><button id="language-toggle" type="button" aria-pressed="false">EN / ខ្មែរ</button></header>
+<header class="container"><a class="brand" href="../../">$site_name</a><button id="language-toggle" type="button" aria-pressed="false">{{km:html.templates.result.1}}</button></header>
 <main class="container result" data-result="$id">
 <p class="emoji" aria-hidden="true">$emoji</p>
 <h1 class="names"><span lang="en" class="current" data-name="en">$name_en</span><span lang="km" data-name="km">$name_km</span></h1>
 <p id="tagline">$tagline</p><p id="description">$description</p><p id="comparison" hidden></p>
 <img src="og.png" width="1200" height="630" alt="$alt">
-<p id="save-hint">Long-press the card to save it. / ចុចឱ្យជាប់លើរូបភាពដើម្បីរក្សាទុក។</p>
+<p data-i18n="result.saveHint" id="save-hint">{{km:html.templates.result.2}}</p>
 <div class="actions">
-<button id="native-share" hidden>Share</button>
+<button data-i18n="quiz.shareButton" id="native-share" hidden>Share</button>
 <a id="facebook" data-channel="facebook" target="_blank" rel="noopener" href="$facebook">Facebook</a>
 <a id="messenger" data-channel="messenger" hidden href="fb-messenger://share/?link=$encoded">Messenger</a>
 <a id="telegram" data-channel="telegram" target="_blank" rel="noopener" href="$telegram">Telegram</a>
 <button id="copy-link">Copy link</button>
 </div><p class="feedback" id="feedback" role="status"></p>
-<a class="primary" id="retake" href="../../quiz/">Take the quiz / លេងកម្រងសំណួរ</a>
-<p><a class="primary" id="today-link" href="../../">See today in Khmer: lunar date, holy day &amp; your colour</a></p>
-</main></body></html>
+<a class="primary" id="retake" href="../../quiz/">{{en:html.templates.result.3}}</a>
+<p><a class="primary" data-i18n="quiz.bridge" id="today-link" href="../../">{{en:quiz.bridge}}</a></p>
+</main><footer class="container"><a href="../../privacy/" data-i18n="privacy">Privacy</a></footer></body></html>

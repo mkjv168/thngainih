@@ -1,287 +1,66 @@
-# Seed
+# Thngai Nih / ថ្ងៃនេះ
 
-A reusable, mobile-first English/Khmer static starter. Serve `site/` directly:
-plain HTML, CSS, and JavaScript, with a quiz build step and no runtime npm dependencies.
-Includes privacy-friendly optional analytics, offline shell caching, content
-refresh automation, share art, install icons, and uptime monitoring.
+A mobile-first, static Khmer daily card and five-question dish quiz. No account, sign-up or ads. Runtime assets live in `site/`, offline build tools in `tools/`, and tests in `tests/`. Nothing requires a server-side database.
 
-## Layout
+## Local build and slug
 
-- `site/`: public document root; `assets/fonts/`, `i18n/`, `data/`, `js/`, and `sw.js`.
-- `tools/`: local server, static checks, image generator, feed normalizer, uptime checks.
-- `.github/workflows/`: future Pages publishing, six-hour refresh, half-hour uptime.
+Change slug: edit **only `tools/site.json`**, then run:
 
-## Fork for a new idea
+```sh
+python3 tools/build.py && python3 tools/build_daily.py
+bash tests/run.sh
+```
 
-1. Rename the app and URL in `site/js/config.js` and both `site/i18n/*.json` files.
-2. Update static English HTML, description, canonical/OG URLs, manifest, 404 links,
-   theme colors and favicon. Replace every `SITE_URL` placeholder with the final
-   hostname plus any project path. OG image URLs must be absolute.
-3. Run `python3 tools/make_images.py --name 'Your app' --tagline 'Your idea' --tagline-km 'គំនិតរបស់អ្នក' --color '#123d35'`.
-4. Edit `site/data/content.json`. Schema: `updated` is an ISO UTC timestamp;
-   `items` contains `title`, `title_km`, and `url`. Update the normalizer and
-   renderer together when changing the schema. URLs are rendered as links only
-   for HTTP(S); data is inserted with `textContent`.
-5. Bump `CACHE` in `site/sw.js` after changing cached assets. Close old tabs to
-   let a new worker activate; DevTools can unregister workers during development.
+`build.py` generates `site/js/config.js`, the manifest scope/start URL, home/quiz/404/privacy HTML, eight result pages and their cards. `build_daily.py` generates the rolling daily window. Edit HTML sources in `tools/templates/`; generated HTML may contain Khmer. `tools/siteconfig.py` derives the default Pages base URL from `origin` + `slug`. Pages-host overrides also use that slug; an explicit `SITE_URL` supports a local server or custom domain base. Workflows call these same build tools, with no separate slug setting. Canonical/OG URLs use that base; browser links and service-worker registration resolve relative to the installed site, including a Pages subpath. Do not hand-edit generated config or hard-code a Pages path.
 
-## Local development
+Pillow with RAQM, HarfBuzz and FriBidi is required for shaped 1200×630 Khmer PNG cards. Builds fail without RAQM. Fonts are bundled under `tools/fonts/`; runtime fonts are in `site/assets/fonts/`. Node runs the same calendar code used by the browser. `tools/serve.sh` provides local preview when desired. Building and `tests/run.sh` are offline; do not run scrape, uptime, feed fetching or deployment workflows during offline work.
 
-Run `bash tools/serve.sh`, then open http://localhost:8080. Run
-`bash tools/check.sh` for HTTP resource checks, JSON validation, dictionary parity,
-and size budgets. Exit 77 means the environment prevented local HTTP serving;
-run tools/validate.py for offline checks. Service workers register on localhost and secure origins;
-opening files directly is not supported because modules/fetch need HTTP.
-Static result pages remain usable without JavaScript.
+## Single translation source
 
-Python tools use the standard library except `make_images.py`, which requires
-Pillow on the authoring machine. The generator defaults to Inter and Kantumruy
-TTF paths documented in its `--help`; use `--font-en` and `--font-km` for other
-TTF/OTF locations. WOFF2 is for the browser, not this generator. Khmer uses RAQM
-when available; a warning is printed with BASIC layout because shaping can differ.
+All authored Khmer strings live in **`site/i18n/km.json`**, including UI, privacy, quiz copy, holiday names/notes, weekday colours, lunar months/phases, weekdays, solar months, animal years and calendar formatting. English lives in `site/i18n/en.json`; both files have matching keys. JSON data refers to translation keys. Templates resolve `{{km:key}}` at build time; runtime UI uses the same dictionaries. `locale.js` loads those dictionaries in both the browser and Node, without an extra calendar translation file.
 
-## Analytics
+The 14 lunar month names initially follow MomentKH, with **កត្តិក** corrected (not កត្ដិក). Edit `lunar.month.11` to change it; display helpers override vendor strings. Pathamasath and Tutiyasath are separate translation keys. Vendor MomentKH is exempt from the embedded-Khmer check. `validate.py` fails on Khmer in authored code/data/templates, with exceptions for dictionaries, vendor and explicitly generated HTML/result/day output.
 
-Sign up at [GoatCounter](https://www.goatcounter.com/), then set
-`provider: 'goatcounter'` and your `goatcounterCode` in `site/js/config.js`.
-Default is `none`. No script loads with an empty code, on localhost/127.0.0.1,
-on file URLs, or with GPC. DNT is always respected. Set `debug` to log suppressed calls locally. Do not put personal data in events.
+## Quiz
 
-Pageviews feed GoatCounter's visitor counts; unique visitors are derived from
-pageviews. Custom events appear as named paths flagged as events, not extra
-pageviews. `track('cta_click')`, `track('lang_switch', {to: 'km'})`, and delegated
-`data-track="event_name"` clicks are supported. Events queue until the lazy
-script loads. Pageview is sent once by the app with automatic onload counting off.
+The phase 2 content contains amok, lok-lak, num-banh-chok, kuy-teav, samlor-korko, bai-sach-chrouk, kralan and prahok-ktis. The generic engine accepts translation keys or inline language objects and supports legacy ordered ties plus `latest-answer` with a fallback order. Ties are narrowed by answer scores from newest to oldest, then fallback order. Every result is reachable. Result names, blurbs, facts, share lines, CTA and daily-card bridge use dictionary keys. Each result links home and carries its incoming source tag; shares link directly to the result and preserve the comparison ID.
 
-## Publishing (ONLY after sativa approves)
+TODO from supplied copy: all Khmer needs native review; Kralan's EN/KM blurb is a draft pending final marketer copy. Missing Khmer dish facts currently fall back to the supplied English facts. These editorial notes belong here/data, never in the UI.
 
-No deployment has been performed. After approval:
+## Calendar and data sources
 
-1. Placeholder: choose a hosting destination, set final URLs and rerun checks.
-2. Placeholder: configure a remote and publish the repository only when authorized.
-3. Placeholder: for GitHub Pages, select GitHub Actions as the source, configure
-   the `github-pages` environment and required repository permissions, then run
-   the Pages workflow. These workflows assume the `main` branch.
+Thngai Sil is the 8th and 15th waxing day, the 8th waning day and **the last waning day**, which is 14 in a 29-day month or 15 in a 30-day month. The code detects the next day's transition to 1 waxing. Sources supplied in the local research:
 
-The workflows are definitions only locally. Once placed on GitHub, pushes to
-`main` affecting `site/**` can deploy automatically; enable them only after approval.
+- [Cambodia Handbook: Khmer calendar](https://cambodiahandbook.com/khmer-calendar/)
+- [Sila day and eight precepts](https://www.sam-inspire.com/sila-day-8-precepts-in-khmer-english/)
+- [Khmer Calendar holy-day guide](https://khmer-calendar.com/en/guides/buddhist-holy-days)
 
-## Scheduled content and uptime
+`site/data/holidays.json` schemaVersion 2 contains **28 official dated entries** spanning the remaining 2026 holidays and 2027, from Sub-Decrees **167/198 ANKr.BK**. Source links and legal basis are retained in its metadata/entries. Consecutive days with the same base holiday name form one countdown, targeting the first day. Optional holiday notes are translated and shown, including the 2026 Water Festival suspension of Phnom Penh riverside celebrations. Holiday dates are official; **Khmer name unverified** is an editorial/data hint only. Review 2028 dates when the next sub-decree arrives (around September 2027).
 
-`CONTENT_SOURCE_URL` (repository variable in Actions, environment variable locally)
-accepts JSON with an `items` list, a JSON list, RSS, or Atom. Refresh normalizes up
-to 100 items; missing Khmer titles fall back to English. Unchanged fetched items
-keep their prior timestamp and produce no commit. With no source, deterministic
-sample items are written with the current UTC timestamp. Failed fetches leave
-existing content untouched and fail the job. Run `python3 tools/refresh_content.py`.
+- [2026 Sub-Decree 167 PDF](https://nis.gov.kh/wp-content/uploads/2026/04/Sub-Decree-167-Public-Holiday-2026.pdf)
+- [2027 Sub-Decree publication](https://commerce-cambodia.com/2026/10/06/sub-decree-on-public-holiday-for-civil-servants-workers-and-employees-for-2027-kh-en/)
+- [AKP Water Festival notice](https://www.akp.gov.kh/post/detail/374510)
 
-The manual refresh workflow commits changed content as
-`github-actions[bot]`. Branch protection must permit that bot commit. A token's
-push does **not** start other workflows, so a second job explicitly calls the
-reusable Pages workflow with the new commit SHA. A keepalive reminder step notes
-the inactivity rule; it does not guarantee GitHub considers a bot commit activity.
+The label is **Traditional weekday colour / ពណ៌ប្រចាំថ្ងៃតាមប្រពៃណី**. Values follow `/home/box/research/24h-data/rules.json` and `thngai-sil-and-colours.md`: red, yellow-orange, purple, olive green, green, blue, dark purple (plum). Saturday mentions black/indigo/dark brown alternatives. Wednesday and some colour spellings still need native review. This is the traditional dress convention; khmer-calendar.com astrology colours are a different system and are informational in comparison tests.
 
-Uptime runs every 30 minutes. Configure comma-separated `UPTIME_URLS` as a
-repository variable, or run `python3 tools/uptime_check.py URL [URL...]`.
-`--expected-text 'text'` (or `UPTIME_EXPECTED_TEXT`) adds a body check. Only HTTP
-200 passes. Missing URLs fail clearly. JSON results go to stdout, and failure
-returns nonzero so Actions marks downtime; notification emails depend on account settings.
+Research sources:
 
-GitHub Actions schedules have a minimum interval of five minutes and may be
-delayed or dropped under load. They run on the default branch. Public repository
-schedules disable after 60 days of no repository activity: monitor and manually
-re-enable them when needed. Standard GitHub-hosted runners have unlimited free
-minutes in public repositories; private repositories have plan limits. These are
-best-effort checks, not a guaranteed monitoring service.
+- [Khmer Wikipedia: weekday colours](https://km.wikipedia.org/wiki/ពណ៌តាមថ្ងៃ)
+- [Khmer Wikipedia: traditional weekday clothing](https://km.wikipedia.org/wiki/សំលៀកបំពាក់ខ្មែរ_តំណាងថ្ងៃ)
+- [Khmer Nokor](https://www.khmernokor.com/question-answers/5a0472efb1203)
+- [Cambolist](https://www.cambolist.com/detail/N3qUJK9M)
+- [The Better Cambodia: seven traditional colours](https://thebettercambodia.com/the-seven-colors-of-cambodian-tradition/)
 
-## i18n and accessibility
+## Privacy and analytics
 
-Use matching keys in both dictionaries. `data-i18n="key"` sets `textContent`;
-`data-i18n-attr="aria-label:key"` sets an attribute (semicolon-separated bindings
-are supported). Never store markup in translation strings. English is default;
-a valid `?lang=km` or `?lang=en` takes precedence over saved `localStorage.lang`.
-The toggle updates the root language, title, date formatting, labels and pressed
-state, and persists the choice. Content titles use `title_km` with English fallback.
-Khmer has its own font range and 1.7 line height. Focus outlines, 44px controls,
-a skip link, live status, dark mode, safe-area padding and reduced motion are included.
+`site/privacy/index.html` has the same bilingual toggle as the rest of the site and is precached. Home, quiz, result and daily pages link to it. There are no cookies or accounts; we store no IP addresses or personal data. Language preference stays in local storage on the device. Calendar and holiday lookup happen on the device.
 
-## Performance and offline behavior
+Generated analytics configuration defaults to `provider: 'none'` until deployment. The GoatCounter code is left empty until deploy (planned code: `thngainih`). If enabled, GoatCounter counts page views and named events (`quiz_started`, `quiz_finished`, `share_tapped`, plus daily-card/install interactions) without cookies. GoatCounter computes a short-lived hash of IP + User-Agent for unique visitors and does not store IP addresses: [provider privacy details](https://www.goatcounter.com/help/privacy). DNT/GPC and local-host protections remain enabled.
 
-Initial HTML + CSS + all app JS + preloaded Inter font must be <=170,000 bytes.
-The quiz module must stay below 6,000 bytes. Checks use
-uncompressed file sizes, so the budget is conservative. Only Inter is preloaded;
-Khmer is not preloaded; the offline worker caches both fonts after registration. Share art and icons are outside the initial-page budget.
-The worker is versioned `v3-today`: precached shell, network-first navigation,
-and stale-while-revalidate holiday and colour data.
-Browser UI and live GoatCounter integration require manual verification before publishing.
+`?s=` records only the channel a link came from. The existing `src`, `utm_source`, and `ref` aliases are supported; internal navigation carries the normalized source, and share URLs set `share`. No personal values belong in source tags.
 
-## Font licenses
+## Offline tests and byte budget
 
-Inter and Kantumruy Pro are SIL OFL 1.1 fonts; see `LICENSE-fonts.txt` and the
-upstream notices linked there. Font licensing does not license this starter's
-code. Choose a code license before redistributing a fork.
+`bash tests/run.sh` runs all `*.test.mjs` files and `tools/validate.py`. Checks cover the 2026–2028 Sil rule, the holy-day window, every JSON fixture under `tests/fixtures/khmer-calendar-com/`, generic latest-answer ties, all eight reachable results, holiday grouping/notes, dictionary keys, corrected month display, result/day metadata, 1200×630 PNGs, privacy links/precache, JSON and embedded Khmer. Fixture output reports field counts separately per file. Month aliases include Mikh/Migasir, Jais/Jesth, Srapon/Srap and Asadh/Asath/Pathamasath/Tutiyasath. All fixtures present are tested, including leap-month and 2027 New Year fixtures. Daily animal-year labels use the whole civil New Year date, independently of the Buddhist-year rollover, avoiding a vendor double increment on the Visakha boundary.
 
-## Quiz module
-
-`/quiz/` selects the generic five-question bilingual quiz; home defaults to `today`.
-Replace example copy before launch. Scores sum across answers; ties use the
-`tiebreak` order. Back changes answers, and language changes preserve progress.
-Finish waits at most 300ms for counting before navigating; GoatCounter uses its
-beacon transport when available. Runtime links derive from module URLs and work
-under a Pages project subpath without a base tag.
-
-## Data schema
-
-`site/quiz/quiz.json` has `_note`, `id`, `version`, bilingual `title` and `intro`,
-`questions`, `results`, and `tiebreak`. Bilingual values have `en` and `km` keys.
-Questions contain `id`, `text`, and `answers`; answers contain `id`, `text`, and
-`scores` mapping result IDs to numeric points. Missing scores contribute zero.
-Results contain unique URL-safe slug `id`, `emoji`, hex `color`, and bilingual
-`name`, `tagline`, `description`. List every result exactly once in `tiebreak`,
-highest priority first. Descriptions are marked example copy. The build validates
-result slugs, tiebreak, score references, and colors.
-
-## Result pages & OG cards (Khmer shaping requires RAQM)
-
-Install Pillow, then run `python3 tools/build.py`. It reads quiz data,
-`tools/site.json`, and `tools/templates/result.html`; writes `site/r/<id>/index.html`,
-`og.png`, `site/r/index.json`, and `site/og-image.png`; and rewrites index OG tags
-between `<!-- og:start -->` and `<!-- og:end -->`. Keep those markers.
-Set the absolute base URL, including project path and trailing slash, in both
-`tools/site.json` and `SITE_CONFIG.siteUrl`. Environment `SITE_URL` overrides the
-build setting. Builds are deterministic; remove obsolete result directories when
-removing result IDs. Generated pages and PNGs may be committed.
-
-The build requires `PIL.features.check('raqm')`; without it Khmer shaping would
-break, so it fails instead of using BASIC. Linux needs libraqm, FriBidi, HarfBuzz,
-and a RAQM-enabled Pillow. Pages installs these before building with its base URL.
-Self-contained TTF fonts and the Noto OFL notice live in `tools/fonts/`; Noto Sans
-Khmer supplies Khmer and Latin. Inter licensing is documented in LICENSE-fonts.txt.
-Cards use a letter badge rather than unreliable emoji fonts, fitted Khmer text,
-and a background darkened for white-text contrast.
-
-Run `python3 tools/preview_cards.py` for `/tmp/cards-preview.png` visual QA.
-`bash tools/check.sh` builds for its temporary HTTP server and validates resources;
-rerun the build with the intended URL afterward. Where sockets are forbidden, run
-build and `python3 tools/validate.py` with matching SITE_URL instead. Validate JS
-with `node --input-type=module --check < file.js`. The initial page budget stays
-170KB; the quiz module stays below 6KB. The previous 10KB total-JS limit is replaced
-by these budgets. The worker version is `v3-today` and precaches home and quiz modules/data.
-
-Result pages remain readable without JS and offer plain Facebook/Telegram links.
-JS adds native sharing, mobile Messenger, clipboard fallback, bilingual display,
-and friend comparison for a different valid `?vs=`. Desktop Messenger is hidden
-because its web dialog needs an app ID. Take the quiz preserves the challenge.
-
-## Source tags (?src=)
-
-Use `fb-own`, `fb-group-<x>`, `tg`, `msgr`, `tiktok`, `rd-webgames`,
-`rd-sideproject`, or `share`. Aliases `s`, `utm_source`, and `ref` follow `src`
-in precedence. Values are lowercased, restricted to `[a-z0-9_-]`, and truncated
-to 40 characters. `getSource()` uses sessionStorage only, never cookies or
-localStorage. New query attribution replaces the tab's saved source; untagged
-navigation preserves it. Quiz/result navigation explicitly carries source.
-Every result share URL targets that result page with `?src=share&vs=<resultId>`.
-
-## Events
-
-`quiz_started`, `quiz_finished`, `share_tapped/<channel>` and pageviews carry
-GoatCounter referrer `src:<value>`, or document.referrer if untagged. Channels are
-`native`, `facebook`, `messenger`, `telegram`, `copy`. `track(name, {channel})`
-emits path `name/channel`, title `name`, event true; without channel the path is
-just `name` (replacing the earlier `evt-*` convention). GPC and DNT always block
-analytics, overriding the legacy respectDNT setting. Local counting requires
-`allowLocal: true`, which sets GoatCounter `allow_local`. Default remains disabled.
-
-In GoatCounter, Paths lists events, Visitors represents unique cookieless sessions,
-and Referrers on a path gives source breakdown. Open quiz_finished then Referrers
-to compare finishes per source. Use GoatCounter API/CSV export for reporting.
-Keep personal data out of source tags. Live delivery and mobile sharing require
-browser QA; shared recipients are intentionally attributed to `share`.
-
-## Adding another module (daily game / utility)
-
-Create `site/js/modules/<name>.js` exporting `async function mount(rootEl, ctx)`.
-The shell dynamically imports the configured name and supplies
-`{t, getLang, onLangChange, track, source}`. Render inside rootEl, use textContent
-for data, and subscribe to onLangChange without resetting game progress.
-Use lowercase letters, digits, and hyphens for module names. Set SITE_CONFIG.module,
-add assets to the worker precache, and bump CACHE. `content` preserves the old
-content.json feed renderer and SITE_CONFIG.contentUrl. Card building is quiz-specific;
-a daily game or utility can replace that build stage while reusing the shell.
-
-## Today in Khmer (home)
-
-The home page is a daily bilingual card; the generic dish quiz lives at `/quiz/`.
-Pages select their module with `data-module`. Result pages link to both the quiz
-and home, preserving source attribution. `?date=2026-10-17` overrides the home
-card for QA. Normal dates use Asia/Phnom_Penh regardless of the device timezone;
-open tabs check for rollover every minute and when becoming visible.
-
-## Lunar calendar: MomentKH v3.0.3 (MIT, vendored, notice in site/js/vendor/momentkh.LICENSE.txt)
-
-`site/js/lib/khmercal.js` wraps the existing UMD library for browsers and Node.
-No calendar service or runtime package installation is needed. Load the classic
-vendor script before the home module. `tools/daily_data.mjs` uses the same wrapper.
-
-## Thngai Sil rule
-
-Holy days are 8 waxing, 15 waxing, 8 waning, and the last waning day. The last
-waning day is 14 in a 29-day month and 15 in a 30-day month. We detect it by
-checking whether tomorrow is 1 waxing, without hardcoded month lengths.
-The rule is cross-checked against khmer-calendar.com fixtures by
-`tests/compare_khmer_calendar.test.mjs`; unknown names and every mismatch are
-reported, and mismatches fail the test. Missing fixtures skip explicitly.
-The current 60-day fixture has four holy-day flags inconsistent with this rule
-and five unknown `Mikh` month names; these remain visible failures pending review.
-`tests/sil_rule.test.mjs` checks every complete lunar half across 2026–2028.
-
-## Weekday colours
-
-`site/data/day-colors.json` stores traditional Khmer weekday dress colours,
-with approximate display hex values and source notes. Sources include
-[Leisure Cambodia: A Color For Each Day](https://leisurecambodia.com/news/detail.php?id=182)
-and [The Better Cambodia: The Seven Colors of Cambodian Tradition](https://thebettercambodia.com/the-seven-colors-of-cambodian-tradition/).
-These folk conventions can differ from astrology lucky colours. Fixture colour
-comparisons are informational and never fail the calendar test.
-
-## Holidays data (placeholder; how to drop in the official list)
-
-Replace `site/data/holidays.json` with the official list using the same schema:
-`holidays` is an array of `{date: "YYYY-MM-DD", name: {en, km}, kind, verified}`.
-Set `verified=true` only for confirmed dates; provide the official citation in
-`source` and update `updated`. Unverified entries have a visible bilingual marker.
-The UI handles dates beyond the available list without inventing holidays.
-
-## Daily cards & cron
-
-Run `python3 tools/build.py` then `python3 tools/build_daily.py`. The latter defaults
-to ICT yesterday through today+7; `--start YYYY-MM-DD --days N` selects a window.
-It calls Node, renders RAQM-shaped 1200×630 PNGs and readable pages under
-`site/d/YYYY-MM-DD/`, updates `d/latest.json` and `og-today.png` when today is in
-the window, and prunes folders older than 14 days before ICT today.
-`SITE_URL` overrides `tools/site.json` for absolute OG URLs. Home always advertises
-the generic `og-image.png`; the share button uses the dated URL with `src=share`.
-Both Python builders use `tools/cardlib.py`; quiz card metrics remain unchanged.
-
-The daily workflow calls reusable Pages deployment at 00:05 ICT and 05:35 ICT;
-each deployment runs both builders with Node 20. It generates artifacts without
-committing daily images. A monthly heartbeat job updates `site/data/heartbeat.json`
-on the first UTC day of the month; monitor GitHub schedule inactivity and delays.
-The old content refresh schedule is disabled; its manual workflow remains.
-These workflow files are definitions only: this local task does not publish them.
-
-## PWA install
-
-The manifest identifies Today in Khmer and opens `./?src=pwa`. Supported browsers
-show the install button after `beforeinstallprompt`; iOS Safari gets a Share →
-Add to Home Screen hint. Standalone installs hide the prompt. Worker `v3-today`
-precaches home, quiz, calendar, data and fonts; navigation is network-first and
-weekday colours/holidays use stale-while-revalidate. Native sharing and install
-prompts still require device/browser QA.
-
-Offline verification: `bash tests/run.sh` runs calendar tests and the validator;
-run `node --input-type=module --check < path.js` for JS syntax. HTTP checks in
-`tools/check.sh` also build daily pages but require local sockets. The current
-initial transfer budget, including MomentKH, is 170,000 uncompressed bytes;
-quiz engine remains below 6,000 bytes. No push, deploy or commit is needed locally.
+The initial source-asset ceiling is **190,000 bytes** (previously 170,000); the **6,000-byte** quiz-engine ceiling is unchanged. The check now includes both translation dictionaries and the Khmer font, which the previous accounting omitted. Centralized bilingual content is loaded by the shared browser/Node calendar helpers, and the Khmer font is used on the initial bilingual card, so including them gives a more honest budget. The expanded asset total stays below 190 KB. Service worker cache version is bumped for this release. Add new runtime modules to the precache list when introducing them.

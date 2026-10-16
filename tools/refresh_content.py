@@ -4,6 +4,7 @@ import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
+KM = json.loads((Path(__file__).resolve().parent.parent / "site/i18n/km.json").read_text())
 from urllib.request import Request, urlopen
 import xml.etree.ElementTree as ET
 
@@ -21,7 +22,7 @@ def normalize(raw):
 def main():
     source = os.environ.get('CONTENT_SOURCE_URL', '').strip()
     if source:
-        with urlopen(Request(source, headers={'User-Agent': 'Seed-content/1.0'}), timeout=30) as response:
+        with urlopen(Request(source, headers={'User-Agent': 'Thngai Nih-content/1.0'}), timeout=30) as response:
             body = response.read(2_000_001)
         if len(body) > 2_000_000:
             raise ValueError('Source exceeds 2 MB')
@@ -39,7 +40,20 @@ def main():
                              'url': (link.get('href') or link.text or '') if link is not None else ''})
             items = normalize(rows)
     else:
-        items = [{'title': 'A place for your next idea', 'title_km': 'កន្លែងសម្រាប់គំនិតថ្មីរបស់អ្នក', 'url': 'https://example.com/'}]
+        items = []
+    # Khmer feed copy belongs to km.json; content stores translation keys.
+    dictionary_path=TARGET.parent.parent/'i18n/km.json'
+    dictionary=json.loads(dictionary_path.read_text())
+    for index,item in enumerate(items):
+        if item.get('title_km'):
+            key=f'content.item.{index}'
+            dictionary[key]=item['title_km'];item['title_km']=key
+    if dictionary != json.loads(dictionary_path.read_text()):
+        dictionary_path.write_text(json.dumps(dictionary,ensure_ascii=False,indent=2)+'\n')
+        en_path=dictionary_path.with_name('en.json');en=json.loads(en_path.read_text())
+        for index,item in enumerate(items):
+            if item.get('title_km'):en[item['title_km']]=item['title']
+        en_path.write_text(json.dumps(en,ensure_ascii=False,indent=2)+'\n')
     previous = json.loads(TARGET.read_text()) if TARGET.exists() else {}
     # Preserve the timestamp on unchanged fetched feeds; sample mode demonstrates the cron heartbeat.
     if source and previous.get('items') == items:
