@@ -1,0 +1,7 @@
+{
+  "limit_bytes": 250000,
+  "runtime": {
+    "/": ["js/modules/today.js", "js/lib/khmercal.js", "i18n/en.json", "i18n/km.json", "data/holidays.json", "data/day-colors.json", "icon-192.png", "favicon.svg"],
+    "/quiz/": ["js/modules/quiz.js", "i18n/en.json", "i18n/km.json", "quiz/quiz.json", "icon-192.png"]
+  }
+}

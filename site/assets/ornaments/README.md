@@ -1,0 +1,1 @@
+Optional reskin assets: kbach-border.svg (border image), kbach-divider.svg (header/footer divider), kbach-corner.svg (corner decoration), card-bg.webp (card background). Add files here and activate the corresponding ornament tokens in site/css/theme.css. URLs are relative to site/styles.css; defaults are none. No assets are required.

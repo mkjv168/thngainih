@@ -1,0 +1,21 @@
+/* Palette (light) */
+:root{--bg:#f5f4ed;--ink:#123d35;--muted:#52675f;--line:#cbd2c7;--card:#e9eddf;--transparent:transparent;}
+/* Palette (dark) */
+@media(prefers-color-scheme:dark){:root{--bg:#102923;--ink:#edf2df;--muted:#b7c8bd;--line:#3b554a;--card:#203c32}}
+/* Typography */
+/* Activate slots by prepending 'Thngai KM Body', to --font-body-khmer and
+   'Thngai KM Display', to --font-display-khmer. No slot family is active yet. */
+:root{--font-body-latin:'Inter','Kantumruy Pro',system-ui,sans-serif;--leading-body:1.6;--font-body-khmer:'Kantumruy Pro','Inter',sans-serif;--leading-khmer:1.7;--text-underline-offset:.25em;--weight-brand:800;--font-size-brand:1.45rem;--tracking-eyebrow:.12em;--font-size-eyebrow:.75rem;--weight-eyebrow:700;--font-size-hero:clamp(3.3rem,9vw,7rem);--leading-hero:1.06;--tracking-hero:-.065em;--weight-heading:600;--leading-heading:1.4;--tracking-khmer:0;--font-size-hero-khmer:clamp(2.7rem,7vw,5rem);--font-size-intro:clamp(1.05rem,2vw,1.25rem);--font-size-note:.8rem;--font-size-heading:1.35rem;--tracking-heading:-.03em;--font-size-content-heading:clamp(2rem,6vw,3.6rem);--font-size-emoji:5rem;--font-size-name:1.2rem;--font-size-today-date:clamp(1.6rem,5vw,2.4rem);--font-size-lunar:1.5rem;--leading-lunar:1.8;--font-display-khmer:'Kantumruy Pro','Inter',sans-serif;}
+/* Spacing */
+:root{--s1:.5rem;--s2:1rem;--s3:1.5rem;--s4:2rem;--s5:4rem;--s6:6rem;--safe-area-padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);--button-padding:.65rem 1.1rem;--control-min-height:44px;--container-width:min(100% - 2.5rem,1080px);--section-padding:var(--s3);--brand-gap:.65rem;--mark-width:36px;--mark-height:36px;--hero-padding:var(--s5);--hero-max-width:800px;--heading-margin:var(--s3) 0;--intro-max-width:540px;--control-margin-top:var(--s3);--primary-padding:.9rem 1.5rem;--content-padding:var(--s4) var(--s5);--content-scroll-margin:2rem;--list-gap:var(--s2);--answer-min-height:64px;--skip-hidden-top:-100px;--panel-padding:1rem;--hero-desktop-padding:var(--s6);--footer-gap:2rem;--content-max-width:760px;--content-min-height:55vh;--answer-padding:1rem 1.25rem;--answer-margin:.8rem 0;--result-padding:2rem;--actions-gap:.75rem;--actions-margin:1.5rem 0;--feedback-min-height:1.6em;--today-min-height:760px;--today-max-width:640px;--swatch-width:32px;--swatch-height:32px;--swatch-margin-right:.75rem;--daily-actions-gap:1rem;--daily-actions-margin-top:1.5rem;--daily-link-padding:.6rem;--primary-link-margin:.5rem 0;}
+/* Radii */
+:root{--radius-pill:100px;--radius-circle:50%;--radius-panel:12px;--radius-answer:14px;--radius-card-image:20px;}
+/* Borders */
+:root{--border-width:1px;--focus-width:3px;--border:var(--border-width) solid var(--line);--outline:var(--focus-width) solid var(--ink);--outline-offset:5px;--border-none:0;--border-top:var(--border-width) solid var(--line);}
+/* Shadows */
+:root{--shadow-card:none;--shadow-button:none;}
+/* Ornaments: e.g. --ornament-divider:url('./assets/ornaments/kbach-divider.svg');
+   URLs resolve from generated site/styles.css. */
+:root{--ornament-border-image:none;--ornament-border-slice:100%;--ornament-border-width:1;--ornament-divider:none;--ornament-corner:none;--ornament-card-bg:none;--ornament-repeat:no-repeat;--ornament-position:center;}
+/* Meta colours */
+:root{--meta-theme-color:#123d35;--meta-background-color:#f5f4ed;}

@@ -19,10 +19,10 @@ export async function mount(root, {t,getLang, onLangChange, track, source}) {
   const answers = [];
   const vs = new URLSearchParams(location.search).get('vs');
   const local = value => typeof value==='string'?t(value):value[getLang()] || value.en;
-  const el = (tag, text) => { const node = document.createElement(tag); node.textContent = text; return node; };
-  function button(text, action, primary = false) {
+  const el = (tag, text, cls) => { const node = document.createElement(tag); node.textContent = text; if(cls)node.className=cls; return node; };
+  function button(text, action, primary = false, cls = 'quiz-option') {
     const node = el('button', text);
-    node.type = 'button'; node.className = primary ? 'primary' : 'answer';
+    node.type = 'button'; node.className = primary ? 'primary quiz-start' : 'answer '+cls;
     node.onclick = action; root.append(node);
   }
   async function finish() {
@@ -43,21 +43,21 @@ export async function mount(root, {t,getLang, onLangChange, track, source}) {
     root.replaceChildren();
     if (step < 0) {
       const friend = quiz.results.find(result => result.id === vs);
-      if (friend) root.append(el('p', tr('ui.quiz.1',local(friend.name))));
-      root.append(el('h1', local(quiz.title)), el('p', local(quiz.intro)));
+      if (friend) root.append(el('p', tr('ui.quiz.1',local(friend.name)),'quiz-friend'));
+      root.append(el('h1', local(quiz.title),'quiz-title'), el('p', local(quiz.intro),'quiz-intro'));
       button(local(quiz.start || 'quiz.start'), () => { track('quiz_started'); step = 0; render(true); }, true);
     } else {
       const question = quiz.questions[step];
-      root.append(el('p', `${step + 1} / ${quiz.questions.length}`));
-      const progress = document.createElement('progress'); progress.max = quiz.questions.length; progress.value = step + 1;
+      root.append(el('p', `${step + 1} / ${quiz.questions.length}`,'quiz-counter'));
+      const progress = document.createElement('progress'); progress.className='quiz-progress'; progress.max = quiz.questions.length; progress.value = step + 1;
       progress.setAttribute('aria-label', tr('ui.quiz.3')); root.append(progress);
-      root.append(el('h2', local(question.text)));
+      root.append(el('h2', local(question.text),'quiz-question'));
       question.answers.forEach(answer => button(local(answer.text), () => {
         answers[step] = answer;
         if (step + 1 === quiz.questions.length) finish();
         else { step++; render(true); }
       }));
-      button(tr('ui.quiz.4'), () => { step--; render(true); });
+      button(tr('ui.quiz.4'), () => { step--; render(true); }, false, 'quiz-back');
     }
     const heading = root.querySelector('h1,h2');
     if (focus && heading) { heading.tabIndex = -1; heading.focus(); }

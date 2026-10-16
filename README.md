@@ -69,3 +69,22 @@ The initial source-asset ceiling is **190,000 bytes** (previously 170,000); the 
 - **Machine-translated, unverified:** `quiz.r.*.fact` for all 8 dishes in `site/i18n/km.json` (amok, lok-lak, num-banh-chok, kuy-teav, samlor-korko, bai-sach-chrouk, kralan, prahok-ktis). I translated them from the English facts and added no new claims. Also listed in `tools/km_review.json`.
 - **Verbatim from Marketer's launch kit (still marked [needs native check] there):** all quiz/UI Khmer, including `quiz.r.kralan.blurb`.
 - **Holiday names:** `km_verified=false` (Research Bot).
+
+## Reskin
+
+Edit `site/css/theme.css` for palette, typography, spacing, borders, shadows, ornament and meta-colour tokens. Edit `site/css/fonts.css` for self-hosted faces. The inactive Khmer slots are activated by prepending `'Thngai KM Body',` to `--font-body-khmer` and `'Thngai KM Display',` to `--font-display-khmer`, after adding the files. Subset a display font with:
+
+```sh
+pyftsubset in.ttf --unicodes=U+1780-17FF,U+19E0-19FF,U+200B-200D,U+25CC --flavor=woff2 --layout-features='*' --output-file=site/assets/fonts/km-display.woff2
+```
+
+Use the same command with `km-body.woff2` for the body slot. Ornament filenames are documented in `site/assets/ornaments/README.md`; activate their URLs in the theme tokens. Edit `site/css/layout.css` for layout rules; its opening comment lists the semantic hooks. `tools/build_css.py` concatenates `CSS_ORDER` into the single generated `site/styles.css`; add extra CSS files to that constant when needed. Font and ornament URLs resolve from `site/`, not `site/css/`.
+
+```sh
+python3 tools/build.py
+bash tests/run.sh
+python3 tools/size_budget.py
+tools/bump-sw.sh
+```
+
+`tools/budget.json` records per-page runtime fetches and the 250,000-byte first-load limit. The budget command reports deduplicated raw and gzip totals (`--json` is available). Both totals must fit; GitHub Pages serves gzip. Keep runtime lists current when adding dynamic resources. The bump script increments the cache version in `tools/site.json` and rebuilds; existing CSS URL assets are automatically appended to the service-worker shell.
