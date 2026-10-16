@@ -80,3 +80,6 @@ a{color:inherit;text-decoration:none}button{cursor:pointer;font-family:inherit}b
 .today-silk .band{height:22px}.result-card .band{height:18px}.feedback{text-align:center;margin:8px 16px}.feedback:empty,.today-feedback:empty{display:none}:focus-visible{outline:2px solid var(--accent);outline-offset:3px}.quiz-progress{gap:10px}.pips{flex-shrink:0}@media(max-width:370px){.quiz-progress{gap:6px;padding-left:16px;padding-right:16px}.pips{gap:4px}.quiz-back{font-size:12px}.today-colour{font-size:40px}}
 
 .today-silk{width:calc(100% - 24px);max-width:366px;margin:4px auto 0}
+
+/* Language-specific static copy (day pages): show only the active language. */
+html[lang=km] .only-en,html:not([lang=km]) .only-km{display:none}

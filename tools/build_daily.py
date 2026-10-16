@@ -26,7 +26,8 @@ def holiday_line(record,lang='en'):
     key='ui.today.8' if n==0 else 'ui.today.9'
     text=local(key,lang)
     for i,v in enumerate([local(h['name'],lang),n,h['date']]):text=text.replace('{'+str(i)+'}',str(v))
-    return text+(' · '+local(h['note'],lang) if h.get('note') else '')
+    text=text+(' · '+local(h['note'],lang) if h.get('note') else '')
+    return text.translate(str.maketrans('0123456789',''.join(chr(0x17E0+i) for i in range(10)))) if lang=='km' else text
 
 def render(path, record, base):
     weekdays = json.loads((SITE/'data/day-colors.json').read_text())['weekdays']
@@ -43,7 +44,7 @@ def render(path, record, base):
         fields.update(dow=dow, day=day, month_year=month_year,
                       weekday=local(palette['day'],'km'), formatted_km=record['formattedKm'],
                       colour_short=local(palette['colorShort'],'km'), is_sil=record['isSil'],
-                      sil_label=local('static.build_daily.2','km'))
+                      sil_label=local('ui.today.3','km'))
     render_card('daily_og' if record else 'default_og', fields, path)
 
 def build():
@@ -58,7 +59,7 @@ def build():
     for r in records:
         folder=SITE/'d'/r['date'];folder.mkdir(parents=True,exist_ok=True)
         url=base+'d/'+r['date']+'/'
-        fields=dict(title=r['gregorianEn']+' — '+r['formattedKm'],url=url,image=url+'og.png',gregorian_en=r['gregorianEn'],gregorian_km=r['gregorianKm'],lunar_km=r['formattedKm'],lunar_en=r['lunarEn'],sil=KM['static.build_daily.6'] if r['isSil'] else '',colour=local('colour.label')+': '+local(r['colour']['color'])+' / '+local(r['colour']['color'],'km'),holiday=holiday_line(r),holiday_km=holiday_line(r,'km'))
+        fields=dict(title=r['gregorianEn']+' — '+r['formattedKm'],url=url,image=url+'og.png',gregorian_en=r['gregorianEn'],gregorian_km=r['gregorianKm'],lunar_km=r['formattedKm'],lunar_en=r['lunarEn'],sil_en=local('ui.today.3') if r['isSil'] else '',sil_km=local('ui.today.3','km') if r['isSil'] else '',colour_en=local('colour.label')+': '+local(r['colour']['color']),colour_km=local('colour.label','km')+': '+local(r['colour']['color'],'km'),holiday=holiday_line(r),holiday_km=holiday_line(r,'km'))
         (folder/'index.html').write_text(page_template.substitute({k:html.escape(v,quote=True) for k,v in fields.items()}))
         render(folder/'og.png',r,base)
     daily=SITE/'d';daily.mkdir(exist_ok=True)

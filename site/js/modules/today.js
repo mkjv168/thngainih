@@ -59,7 +59,7 @@ export async function mount(root,{t,getLang,onLangChange,track,source}) {
     const quiz=el('a',tr('ui.today.16'),'today-quiz');const q=new URL('quiz/',base);if(source)q.searchParams.set('src',source);quiz.href=q.href;quiz.onclick=()=>track('quiz_cta');actions.append(quiz);
     const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone;
     if(!standalone){if(installEvent)button(tr('ui.today.17'),async()=>{track('install_prompt');const e=installEvent;installEvent=null;await e.prompt();if((await e.userChoice).outcome==='accepted')track('install_accepted');render();}).classList.add('today-install');else if(/iPhone|iPad|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1))root.append(el('p',tr('ui.today.18'),'today-install-note'));}
-    const credit=el('small','','today-credit');const citation=el('a','Sub-Decree 167/198 ANKr.BK','today-citation');citation.href=holidays.holidays[0].sources[1];credit.append(citation);root.append(feedback,credit);
+    const credit=el('small','','today-credit');const citation=el('a',t('holiday.citation'),'today-citation');citation.href=holidays.holidays[0].sources[1];credit.append(citation);root.append(feedback,credit);
   }
   onLangChange(render);window.addEventListener('install-ready',render);window.addEventListener('appinstalled',render);
   const rollover=()=>{if(!override&&isoDate(ictToday())!==current)render();};document.addEventListener('visibilitychange',rollover);setInterval(rollover,60000);
